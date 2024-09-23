@@ -4,28 +4,32 @@ import { useAnimation, useScroll, useTransform } from 'framer-motion';
 interface HeaderAnimationsProps {
   controls: ReturnType<typeof useAnimation>;
   heightControls: ReturnType<typeof useAnimation>;
+  onScrollChange: (scrolled: boolean) => void;
 }
 
-export default function HeaderAnimations({ controls, heightControls }: HeaderAnimationsProps) {
+export default function HeaderAnimations({ controls, heightControls, onScrollChange }: HeaderAnimationsProps) {
   const { scrollY } = useScroll();
   const scrollThreshold = 100;
   const isScrolled = useTransform(scrollY, [0, scrollThreshold], [false, true]);
 
   useEffect(() => {
     const handleResizeOrScroll = () => {
-      const isMobile = window.innerWidth <= 610;
+      const isMobile = window.innerWidth <= 639;
       const scrolled = isScrolled.get();
 
       controls.start({
         y: isMobile ? -75 : scrolled ? -75 : 0,
         // x: isMobile ? 0 : scrolled ? 0 : 0,
         // scale: isMobile ? 1 : scrolled ? 1 : 1,
-        width: isMobile ? "100%" : scrolled ? "60%" : "100%",
+        width: isMobile ? "100%" : scrolled ? "70%" : "100%",
+        maxWidth: isMobile ? "100%" : scrolled ? "50%" : "70%",
       });
 
       heightControls.start({
         height: isMobile ? "80px" : (scrolled ? "80px" : "160px"),
       });
+
+      onScrollChange(scrolled)
     };
 
     handleResizeOrScroll();
