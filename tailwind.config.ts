@@ -9,6 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
+        '1-sm': '610px',
+        '1-md': '815px',
         '1-lg': '1095px',
       },
       spacing: {

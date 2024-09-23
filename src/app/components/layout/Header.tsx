@@ -21,13 +21,17 @@ export default function Header() {
 
   useEffect(() => {
     const unsubscribe = isScrolled.on("change", (scrolled) => {
+      const isMobile = window.innerWidth <= 640; // Set your threshold width here
+
       controls.start({
-        y: scrolled ? -75 : 0,
-        scale: scrolled ? 0.80 : 1,
+        y: isMobile ? -75 : scrolled ? -75 : 0,
+        x: isMobile ? 60 : scrolled ? 60 : 0,
+        scale: isMobile ? 0.80 : scrolled ? 0.80 : 1,
+        width: isMobile ? "90%" : scrolled ? "90%" : "100%",
       });
 
       heightControls.start({
-        height: scrolled ? "80px" : "160px",
+        height: isMobile ? "80px" : (scrolled ? "80px" : "160px"),
       });
     });
 
@@ -43,7 +47,7 @@ export default function Header() {
       <Container>
         {/* Top header row */}
         <div className="flex flex-row justify-between h-20">
-          <div className="hidden 1-lg:block relative h-[90%] w-32 overflow-hidden ml-0">
+          <div className="hidden sm:block relative h-[90%] w-32 overflow-hidden ml-0">
             <Image
               src={logoRed}
               alt="logo"
@@ -61,23 +65,24 @@ export default function Header() {
           transition={{ duration: animationDuration, ease: "easeOut" }}
         >
           <div className="shadow-custom border border-custom-grey rounded-[32px] w-full max-w-[860px] h-16 relative">
-
-            <div className="md:hidden h-full flex flex-col px-7 justify-center">
+            <div className="1-md:hidden h-full flex flex-col px-7 justify-center">
               <b>Vart ska du?</b>
               <div className="flex flex-row space-x-2">
                 <p className="dot-separator whitespace-nowrap text-ellipsis overflow-hidden ...">Vart som helst</p>
                 <p className="dot-separator whitespace-nowrap overflow-hidden text-ellipsis">Vilken vecka som helst</p>
                 <p className="dot-separator whitespace-nowrap overflow-hidden text-ellipsis">När som helst</p>
               </div>
-
+              <div className="hidden 1-sm:block absolute right-2 top-1/2 transform -translate-y-1/2">
+                  <div className="w-12 h-12 bg-header-brand rounded-full border"></div>
+                </div>
             </div>
 
 
 
-            <div className="hidden md:flex md:items-center h-full ">
-              <div className="flex-grow pr-5 pl-7 hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full h-[60%] flex flex-col text-left justify-center">
+            <div className="hidden 1-md:flex md:items-center h-full ">
+              <div className="flex-grow pr-5 pl-7 hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full flex flex-col text-left justify-center">
                 <b>Plats</b>
-                <p>Sök destinationer</p>
+                <p className="whitespace-nowrap overflow-hidden text-ellipsis">Sök destinationer</p>
               </div>
 
               <div className="flex-grow-0.5 border-l border-custom-grey pl-6 pr-6 hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full h-[60%] flex items-center">
@@ -97,7 +102,7 @@ export default function Header() {
               <div className="flex-grow pr-15 pl-6 border-l border-custom-grey hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full h-[60%] flex items-center relative">
                 <div>
                   <b>Vem</b>
-                  <p>Lägg till gäster</p>
+                  <p className="whitespace-nowrap overflow-hidden text-ellipsis">Lägg till gäster</p>
                 </div>
                 <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
                   <div className="w-12 h-12 bg-header-brand rounded-full border"></div>
