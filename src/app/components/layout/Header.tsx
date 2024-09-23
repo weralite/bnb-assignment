@@ -20,22 +20,35 @@ export default function Header() {
   const isScrolled = useTransform(scrollY, [0, scrollThreshold], [false, true]);
 
   useEffect(() => {
-    const unsubscribe = isScrolled.on("change", (scrolled) => {
-      const isMobile = window.innerWidth <= 640; // Set your threshold width here
-
+    const handleResizeOrScroll = () => {
+      const isMobile = window.innerWidth <= 610; // Set your threshold width here
+      const scrolled = isScrolled.get(); // Get the current scroll state
+  
       controls.start({
         y: isMobile ? -75 : scrolled ? -75 : 0,
-        x: isMobile ? 60 : scrolled ? 60 : 0,
-        scale: isMobile ? 0.80 : scrolled ? 0.80 : 1,
-        width: isMobile ? "90%" : scrolled ? "90%" : "100%",
+        x: isMobile ? 0 : scrolled ? 80 : 0,
+        scale: isMobile ? 1 : scrolled ? 0.80 : 1,
+        width: isMobile ? "100%" : scrolled ? "85%" : "100%",
       });
-
+  
       heightControls.start({
         height: isMobile ? "80px" : (scrolled ? "80px" : "160px"),
       });
-    });
-
-    return () => unsubscribe();
+    };
+  
+    // Initial call to set the correct state
+    handleResizeOrScroll();
+  
+    // Subscribe to scroll changes
+    const unsubscribe = isScrolled.on("change", handleResizeOrScroll);
+  
+    // Add resize event listener
+    window.addEventListener("resize", handleResizeOrScroll);
+  
+    return () => {
+      unsubscribe();
+      window.removeEventListener("resize", handleResizeOrScroll);
+    };
   }, [controls, isScrolled, heightControls]);
 
   return (
