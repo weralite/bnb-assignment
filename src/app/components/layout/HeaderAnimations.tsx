@@ -18,8 +18,8 @@ export default function HeaderAnimations({ controls, heightControls }: HeaderAni
 
       controls.start({
         y: isMobile ? -75 : scrolled ? -75 : 0,
-        x: isMobile ? 0 : scrolled ? 0 : 0,
-        scale: isMobile ? 1 : scrolled ? 1 : 1,
+        // x: isMobile ? 0 : scrolled ? 0 : 0,
+        // scale: isMobile ? 1 : scrolled ? 1 : 1,
         width: isMobile ? "100%" : scrolled ? "60%" : "100%",
       });
 

@@ -5,6 +5,7 @@ import { motion, useAnimation } from 'framer-motion';
 import LogoColor from '@/app/assets/logo-color.svg';
 import Image from 'next/image';
 import HeaderAnimations from './HeaderAnimations';
+import DesktopMenu from "../navigation/DesktopMenu";
 
 export default function Header() {
   const controls = useAnimation();
@@ -14,13 +15,15 @@ export default function Header() {
 
   return (
     <motion.header
-      className="border-b border-custom-grey sticky top-0 bg-white z-50 w-full"
+      className="border-b border-custom-grey sticky top-0 bg-white w-full"
       animate={heightControls}
       transition={{ duration: animationDuration, ease: "easeOut" }}
     >
-
       <HeaderAnimations controls={controls} heightControls={heightControls} />
-      <Container>
+
+      <div className="px-5 md:px-10 lg:px-20 xl:px-30 2xl:px-40 w-full flex flex-col justify-center items-center">
+
+
 
         <div className="flex flex-row justify-between w-full h-20">
           <div className="hidden sm:block relative h-[90%] w-32 overflow-hidden ml-0">
@@ -32,11 +35,25 @@ export default function Header() {
               className="clip-path-custom"
             />
           </div>
+          <div className="flex flex-row">
+          <DesktopMenu />
+          <DesktopMenu />
+          <DesktopMenu />
+          <div className="hidden sm:block relative h-[90%] w-32 overflow-hidden ml-0">
+            <Image
+              src={logoRed}
+              alt="logo"
+              fill
+              style={{ objectFit: 'cover' }}
+              className="clip-path-custom"
+            />
+          </div>
+          </div>
         </div>
 
 
         <motion.div
-          className="flex flex-row justify-center items-center w-full max-w-[860px]"
+          className="flex flex-row justify-center items-center w-860 max-w-[860px]"
           animate={controls}
           transition={{ duration: animationDuration, ease: "easeOut" }}
         >
@@ -88,7 +105,7 @@ export default function Header() {
             </div>
           </div>
         </motion.div>
-      </Container>
+      </div>
     </motion.header>
   );
 }
