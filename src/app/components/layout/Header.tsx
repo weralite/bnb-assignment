@@ -43,7 +43,7 @@ export default function Header() {
       <Container>
         {/* Top header row */}
         <div className="flex flex-row justify-between h-20">
-          <div className="relative h-[90%] w-32 overflow-hidden ml-0">
+          <div className="hidden 1-lg:block relative h-[90%] w-32 overflow-hidden ml-0">
             <Image
               src={logoRed}
               alt="logo"

@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        '1-lg': '1095px',
+      },
       spacing: {
         '15': '3.75rem',
         '30': '7.5rem',
