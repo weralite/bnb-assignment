@@ -1,8 +1,8 @@
 "use client";
 
 import Container from "@/app/components/layout/Container";
-import { useEffect, useState } from 'react';
-import { motion, useAnimation, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
+import { useEffect } from 'react';
+import { motion, useAnimation, useScroll, useTransform } from 'framer-motion';
 import LogoColor from '@/app/assets/logo-color.svg';
 import Image from 'next/image';
 
@@ -21,8 +21,8 @@ export default function Header() {
 
   useEffect(() => {
     const handleResizeOrScroll = () => {
-      const isMobile = window.innerWidth <= 610; // Set your threshold width here
-      const scrolled = isScrolled.get(); // Get the current scroll state
+      const isMobile = window.innerWidth <= 610;
+      const scrolled = isScrolled.get(); 
   
       controls.start({
         y: isMobile ? -75 : scrolled ? -75 : 0,
@@ -36,13 +36,10 @@ export default function Header() {
       });
     };
   
-    // Initial call to set the correct state
+
     handleResizeOrScroll();
   
-    // Subscribe to scroll changes
     const unsubscribe = isScrolled.on("change", handleResizeOrScroll);
-  
-    // Add resize event listener
     window.addEventListener("resize", handleResizeOrScroll);
   
     return () => {
