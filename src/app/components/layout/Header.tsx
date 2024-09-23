@@ -15,7 +15,7 @@ export default function Header() {
 
 
   const scrollThreshold = 100;
-  const animationDuration = 0.3; 
+  const animationDuration = 0.1;
 
   const isScrolled = useTransform(scrollY, [0, scrollThreshold], [false, true]);
 
@@ -27,7 +27,7 @@ export default function Header() {
       });
 
       heightControls.start({
-        height: scrolled ? "100px" : "200px", 
+        height: scrolled ? "80px" : "160px",
       });
     });
 
@@ -43,13 +43,13 @@ export default function Header() {
       <Container>
         {/* Top header row */}
         <div className="flex flex-row justify-between h-20">
-        <div className="relative h-[90%] w-32 overflow-hidden ml-0">
+          <div className="relative h-[90%] w-32 overflow-hidden ml-0">
             <Image
               src={logoRed}
               alt="logo"
               fill
-              style={{ objectFit: 'cover' }} 
-              className="clip-path-custom" 
+              style={{ objectFit: 'cover' }}
+              className="clip-path-custom"
             />
           </div>
         </div>
@@ -58,19 +58,26 @@ export default function Header() {
         <motion.div
           className="flex justify-center"
           animate={controls}
-          transition={{ duration: animationDuration, ease: "easeOut" }} 
+          transition={{ duration: animationDuration, ease: "easeOut" }}
         >
-          <div className="shadow-custom border border-custom-grey rounded-[32px] min-w-[860px] max-w-[860px] h-16 relative">
-            <div className="flex items-center h-full">
+          <div className="shadow-custom border border-custom-grey rounded-[32px] w-full max-w-[860px] h-16 relative">
 
-    
+            <div className="md:hidden h-full flex flex-col px-7 justify-center">
+              <b>Vart ska du?</b>
+              <div className="flex flex-row space-x-2">
+                <p className="dot-separator whitespace-nowrap text-ellipsis overflow-hidden ...">Vart som helst</p>
+                <p className="dot-separator whitespace-nowrap overflow-hidden text-ellipsis">Vilken vecka som helst</p>
+                <p className="dot-separator whitespace-nowrap overflow-hidden text-ellipsis">När som helst</p>
+              </div>
+
+            </div>
+
+
+
+            <div className="hidden md:flex md:items-center h-full ">
               <div className="flex-grow pr-5 pl-7 hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full h-[60%] flex flex-col text-left justify-center">
-                <b>
-                  {isScrolled  ? 'Plats' : 'Var'}
-                </b>
-                <p>
-                  {isScrolled  ? 'Destination Vald' : 'Sök Destinationer'} 
-                </p>
+                <b>Plats</b>
+                <p>Sök destinationer</p>
               </div>
 
               <div className="flex-grow-0.5 border-l border-custom-grey pl-6 pr-6 hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full h-[60%] flex items-center">
