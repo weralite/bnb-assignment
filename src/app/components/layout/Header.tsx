@@ -48,6 +48,7 @@ export default function Header() {
     };
   }, [controls, isScrolled, heightControls]);
 
+
   return (
     <motion.header
       className="flex flex-col border-b border-custom-grey sticky top-0 bg-white z-50"
