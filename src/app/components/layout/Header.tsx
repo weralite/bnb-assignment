@@ -1,84 +1,75 @@
 "use client";
 
 import Container from "@/app/components/layout/Container";
-import { motion, useAnimation } from 'framer-motion';
 import { useEffect, useState } from 'react';
-
+import { motion, useAnimation, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import LogoColor from '@/app/assets/logo-color.svg';
 import Image from 'next/image';
 
 export default function Header() {
   const controls = useAnimation();
-  const [scrolled, setScrolled] = useState(false);
+  const heightControls = useAnimation();
+  const { scrollY } = useScroll();
 
   const logoRed = LogoColor;
 
-  const scrollThreshold = 0.2; // When to trigger the animations
-  const animationDuration = 0.2; // Duration for the animations
+
+  const scrollThreshold = 100;
+  const animationDuration = 0.3; 
+
+  const isScrolled = useTransform(scrollY, [0, scrollThreshold], [false, true]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY || window.pageYOffset;
-      const isScrolled = scrollY > scrollThreshold;
+    const unsubscribe = isScrolled.on("change", (scrolled) => {
+      controls.start({
+        y: scrolled ? -75 : 0,
+        scale: scrolled ? 0.80 : 1,
+      });
 
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled); // Update scroll state
+      heightControls.start({
+        height: scrolled ? "100px" : "200px", 
+      });
+    });
 
-        if (isScrolled) {
-          controls.start({
-            y: -75, // Moves the bottom row up
-            scale: 0.85, // Shrinks the row
-          });
-        } else {
-          controls.start({
-            y: 0,
-            scale: 1,
-          });
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [controls, scrolled]);
+    return () => unsubscribe();
+  }, [controls, isScrolled, heightControls]);
 
   return (
     <motion.header
       className="flex flex-col border-b border-custom-grey sticky top-0 bg-white z-50"
-      initial={{ height: "200px" }} // Initial full header height
-      animate={{ height: scrolled ? "80px" : "200px" }} // Adjust only header height on scroll
-      transition={{ duration: animationDuration, ease: "easeOut" }} // Unified transition settings
+      animate={heightControls}
+      transition={{ duration: animationDuration, ease: "easeOut" }}
     >
       <Container>
         {/* Top header row */}
         <div className="flex flex-row justify-between h-20">
-        <div className="relative h-[90%] w-32 overflow-hidden ml-0"> {/* Adjust the height and width for the parent container */}
+        <div className="relative h-[90%] w-32 overflow-hidden ml-0">
             <Image
               src={logoRed}
               alt="logo"
-              fill // Use fill attribute to make the image fill the parent container
-              style={{ objectFit: 'cover' }} // Ensure the image covers the entire container
-              className="clip-path-custom" // Apply custom clip-path
+              fill
+              style={{ objectFit: 'cover' }} 
+              className="clip-path-custom" 
             />
           </div>
         </div>
 
-        {/* Bottom row */}
+
         <motion.div
           className="flex justify-center"
           animate={controls}
-          transition={{ duration: animationDuration, ease: "easeOut" }} // Same transition settings
+          transition={{ duration: animationDuration, ease: "easeOut" }} 
         >
           <div className="shadow-custom border border-custom-grey rounded-[32px] min-w-[860px] max-w-[860px] h-16 relative">
             <div className="flex items-center h-full">
 
-              {/* Adjust contents based on scroll state */}
+    
               <div className="flex-grow pr-5 pl-7 hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full h-[60%] flex flex-col text-left justify-center">
                 <b>
-                  {scrolled ? 'Plats' : 'Var'} {/* Change text on scroll */}
+                  {isScrolled  ? 'Plats' : 'Var'}
                 </b>
                 <p>
-                  {scrolled ? 'Destination Vald' : 'Sök Destinationer'} {/* Change text on scroll */}
+                  {isScrolled  ? 'Destination Vald' : 'Sök Destinationer'} 
                 </p>
               </div>
 
