@@ -7,9 +7,10 @@ interface ModalProps {
   size: "sm" | "md" | "lg";
   content: ReactNode;
   toggleButtonRef: React.RefObject<HTMLDivElement>;
+  className?: string;
 }
 
-export default function Modal({ open, onClose, size, content, toggleButtonRef }: ModalProps) {
+export default function Modal({ open, onClose, size, content, toggleButtonRef, className }: ModalProps) {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -43,7 +44,7 @@ export default function Modal({ open, onClose, size, content, toggleButtonRef }:
     <AnimatePresence>
       {open && (
         <motion.div
-          className="absolute top-full right-0 mt-2"
+          className={`absolute ${className || ''}`}
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}

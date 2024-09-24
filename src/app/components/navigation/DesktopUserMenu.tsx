@@ -6,10 +6,10 @@ import Modal from "../common/Modal";
 
 export default function DesktopMenu() {
   const [openModal, setModal] = useState<boolean>(false);
-  const toggleButtonRef = useRef<HTMLDivElement | null>(null); 
+  const toggleButtonRef = useRef<HTMLDivElement | null>(null);
 
   const handleModal = () => {
-    setModal((prev) => !prev); 
+    setModal((prev) => !prev);
   };
 
   const menuContent = (
@@ -24,17 +24,18 @@ export default function DesktopMenu() {
       <div
         onClick={handleModal}
         className="hidden sm:flex gap-4 items-center px-4 shadow-custom border hover:shadow-hover transition-shadow duration-300 border-custom-grey rounded-[32px] h-14 relative z-10 cursor-pointer"
-        ref={toggleButtonRef} 
+        ref={toggleButtonRef}
       >
         <HamburgerIcon />
         <Image src={profilePic} alt="profile picture" width={40} height={40} className="rounded-full" />
 
         <Modal
           open={openModal}
-          onClose={handleModal} 
+          onClose={handleModal}
           size="sm"
           content={menuContent}
-          toggleButtonRef={toggleButtonRef} 
+          toggleButtonRef={toggleButtonRef}
+          className="absolute top-full right-0 mt-2"
         />
       </div>
     </>

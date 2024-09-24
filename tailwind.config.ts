@@ -17,8 +17,12 @@ const config: Config = {
       },
       spacing: {
         '15': '3.75rem',
+        '18': '4.5rem',
         '30': '7.5rem',
         '40': '10rem',
+        '50': '12.5rem',
+        '72': '18rem',
+        '80': '20rem',
       },
       boxShadow: {
         'modal': '0 4px 15px -3px rgba(0, 0, 0, 0.2)',

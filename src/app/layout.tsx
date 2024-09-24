@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/app/components/layout/Header";
 import Container from "@/app/components/layout/Container";
 import MobileUserMenu from "@/app/components/navigation/MobileUserMenu"
+import { FilterProvider } from "@/app/context/FilterContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,13 +32,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <FilterProvider>
         <Header />
         <Container>
           {children}
-          </Container>
-          <MobileUserMenu />
+        </Container>
+        <MobileUserMenu />
+      </FilterProvider>
 
-      </body>
-    </html>
+    </body>
+    </html >
   );
 }

@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import HeaderAnimations from './HeaderAnimations';
 import DesktopUserMenu from "../navigation/DesktopUserMenu";
-import MobileContent from "./headerContent/MobileContent"
-import ScrolledContent from './headerContent/ScrolledContent';
-import NonScrolledContent from './headerContent/NonScrolledContent';
-import HeaderLogo from './headerContent/HeaderLogo';
+import MobileContent from "./MobileContent"
+import ScrolledContent from './ScrolledContent';
+import NonScrolledContent from './NonScrolledContent';
+import HeaderLogo from './HeaderLogo';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);

@@ -1,10 +1,9 @@
+import SearchDestination from "../common/SearchDestination";
+
 const NonScrolledContent = () => {
     return (
       <div className="hidden 1-md:flex md:items-center h-full">
-        <div className="flex-grow pr-5 pl-7 hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full flex flex-col text-left justify-center">
-          <b>Where</b>
-          <p className="whitespace-nowrap overflow-hidden text-ellipsis">Search destinations</p>
-        </div>
+        <SearchDestination />
         <div className="flex-grow-0.5 border-l border-custom-grey pl-6 pr-6 hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full h-[60%] flex items-center">
           <div>
             <b>Check in</b>
