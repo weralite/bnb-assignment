@@ -14,8 +14,8 @@ export default function DesktopMenu() {
 
   const menuContent = (
     <ul className="text-md font-medium text-gray-700">
-      <li className="pl-5 pr-15 py-2 border-b border-gray-300 hover:bg-gray-300 block">Login</li>
-      <li className="pl-5 pr-15 py-2 hover:bg-gray-300 block">Register</li>
+      <li className="pl-5 pr-15 py-2 border-b border-custom-grey hover:bg-custom-grey block">Login</li>
+      <li className="pl-5 pr-15 py-2 hover:bg-custom-grey block">Register</li>
     </ul>
   );
 
