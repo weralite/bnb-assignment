@@ -4,16 +4,19 @@ import { useState } from "react";
 import Datepicker, { DateValueType } from "react-tailwindcss-datepicker"; // Corrected type import
 
 export default function Calender() {
+    const [selectedCheckIn, setSelectedCheckIn] = useState<Date | null>(null);
     const [value, setValue] = useState<DateValueType>({
         startDate: null,
         endDate: null
     });
 
-    console.log(value);
 
-    // Handle Datepicker change
+
     const handleDateChange = (newValue: DateValueType) => {
-        setValue(newValue); // Update state with new date values
+        setValue(newValue); 
+        if (newValue && typeof newValue === 'object' && 'startDate' in newValue) {
+            setSelectedCheckIn(newValue.startDate ? new Date(newValue.startDate) : null);
+        }
     };
 
     return (
