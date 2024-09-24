@@ -43,25 +43,32 @@ export default function Header() {
           transition={{ duration: animationDuration, ease: "easeOut" }}
         >
           <div className="shadow-custom border border-custom-grey rounded-[32px] w-full h-16 relative">
+
             <div className="1-md:hidden h-full flex flex-col px-7 justify-center">
-              <b>Vart ska du?</b>
-              <div className="flex flex-row space-x-2">
-                <p className="dot-separator whitespace-nowrap text-ellipsis overflow-hidden ...">Vart som helst</p>
-                <p className="dot-separator whitespace-nowrap overflow-hidden text-ellipsis">Vilken vecka som helst</p>
-                <p className="dot-separator whitespace-nowrap overflow-hidden text-ellipsis">När som helst</p>
+              <b>Where are you going?</b>
+              <div className="hidden 1-xs:flex flex-row space-x-2">
+                <p className="dot-separator whitespace-nowrap text-ellipsis overflow-hidden ...">Anywhere</p>
+                <p className="dot-separator whitespace-nowrap overflow-hidden text-ellipsis">Anytime</p>
+                <p className="dot-separator whitespace-nowrap overflow-hidden text-ellipsis">Guests</p>
               </div>
-              {/* <div className="hidden 1-sm:block absolute right-2 top-1/2 transform -translate-y-1/2">
+              <div className="1-xs:hidden flex flex-row space-x-2">
+                <p className="dot-separator whitespace-nowrap text-ellipsis overflow-hidden ...">Anywhere</p>
+                <p className="dot-separator whitespace-nowrap overflow-hidden text-ellipsis">Anytime</p>
+                <p className="hidden xxs:block dot-separator whitespace-nowrap overflow-hidden text-ellipsis">Guests</p>
+              </div>
+
+              <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
                 <div className="w-12 h-12 bg-header-brand rounded-full border"></div>
-              </div> */}
+              </div>
             </div>
 
 
             {scrolled ? (
               <div className="hidden 1-md:flex flex-col h-full px-7 justify-center">
                 <div className="flex flex-row justify-center space-x-2 pr-5">
-                  <b className="pr-6 grey whitespace-nowrap overflow-hidden text-ellipsis">Vart som helst</b>
-                  <b className="border-l pl-6 pr-6 border-custom-grey whitespace-nowrap overflow-hidden text-ellipsis">Vilken vecka som helst</b>
-                  <b className="border-l pl-6 pr-6 border-custom-grey whitespace-nowrap overflow-hidden text-ellipsis">När som helst</b>
+                  <b className="text-xl pr-6 grey whitespace-nowrap overflow-hidden text-ellipsis">Anywhere</b>
+                  <b className="text-xl border-l pl-6 pr-6 border-custom-grey whitespace-nowrap overflow-hidden text-ellipsis">Anytime</b>
+                  <b className="text-xl border-l pl-6 pr-6 border-custom-grey whitespace-nowrap overflow-hidden text-ellipsis">Guests</b>
                 </div>
                 <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
                   <div className="w-12 h-12 bg-header-brand rounded-full border"></div>
@@ -71,25 +78,25 @@ export default function Header() {
               <div className="hidden 1-md:flex md:items-center h-full">
                 {/* Content for non-scrolled state */}
                 <div className="flex-grow pr-5 pl-7 hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full flex flex-col text-left justify-center">
-                  <b>Plats</b>
-                  <p className="whitespace-nowrap overflow-hidden text-ellipsis">Sök destinationer</p>
+                  <b>Where</b>
+                  <p className="whitespace-nowrap overflow-hidden text-ellipsis">Search destinations</p>
                 </div>
                 <div className="flex-grow-0.5 border-l border-custom-grey pl-6 pr-6 hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full h-[60%] flex items-center">
                   <div>
-                    <b>Incheckning</b>
-                    <p>Ange datum</p>
+                    <b>Check in</b>
+                    <p>Add dates</p>
                   </div>
                 </div>
                 <div className="flex-grow-0.5 border-l border-custom-grey pl-6 pr-6 hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full h-[60%] flex items-center">
                   <div>
-                    <b>Utcheckning</b>
-                    <p>Ange datum</p>
+                    <b>Check out</b>
+                    <p>Add dates</p>
                   </div>
                 </div>
                 <div className="flex-grow pr-15 pl-6 border-l border-custom-grey hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full h-[60%] flex items-center relative">
                   <div>
-                    <b>Vem</b>
-                    <p className="whitespace-nowrap overflow-hidden text-ellipsis">Lägg till gäster</p>
+                    <b>Who</b>
+                    <p className="whitespace-nowrap overflow-hidden text-ellipsis">Add guests</p>
                   </div>
                   <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
                     <div className="w-12 h-12 bg-header-brand rounded-full border"></div>
