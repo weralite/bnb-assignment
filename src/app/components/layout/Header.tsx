@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import HeaderAnimations from './HeaderAnimations';
-import DesktopMenu from "../navigation/DesktopMenu";
+import DesktopUserMenu from "../navigation/DesktopUserMenu";
 import MobileContent from "./headerContent/MobileContent"
 import ScrolledContent from './headerContent/ScrolledContent';
 import NonScrolledContent from './headerContent/NonScrolledContent';
@@ -26,7 +26,7 @@ export default function Header() {
 
         <div className="flex flex-row justify-between w-full h-20 py-2">
           <HeaderLogo />
-          <DesktopMenu />
+          <DesktopUserMenu />
         </div>
 
 
