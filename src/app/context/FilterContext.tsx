@@ -5,16 +5,20 @@ import { createContext, useContext, useState, ReactNode } from "react";
 interface FilterContextProps {
     selectedCountry: string | null;
     setSelectedCountry: (value: string | null) => void;
+    selectedDates: Date[] | null;
+    setSelectedDates: (value: Date[] | null) => void;
 }
 
 const FilterContext = createContext<FilterContextProps | undefined>(undefined);
 
 export const FilterProvider = ({ children }: { children: ReactNode }) => {
     const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+    const [selectedDates, setSelectedDates] = useState<Date[] | null>(null);
 
     return (
         <FilterContext.Provider value={{
-            selectedCountry, setSelectedCountry
+            selectedCountry, setSelectedCountry,
+            selectedDates, setSelectedDates
         }}>
             {children}
         </FilterContext.Provider>

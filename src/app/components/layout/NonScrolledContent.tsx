@@ -1,15 +1,11 @@
 import SearchDestination from "../common/SearchDestination";
+import Calender from "../common/Calender";
 
 const NonScrolledContent = () => {
     return (
       <div className="hidden 1-md:flex md:items-center h-full">
         <SearchDestination />
-        <div className="flex-grow-0.5 border-l border-custom-grey pl-6 pr-6 hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full h-[60%] flex items-center">
-          <div>
-            <b>Check in</b>
-            <p>Add dates</p>
-          </div>
-        </div>
+        <Calender />
         <div className="flex-grow-0.5 border-l border-custom-grey pl-6 pr-6 hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full h-[60%] flex items-center">
           <div>
             <b>Check out</b>

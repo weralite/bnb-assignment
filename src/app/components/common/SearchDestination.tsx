@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useRef } from "react";
 import Modal from "@/app/components/common/Modal";
 import { useFilter } from "@/app/context/FilterContext";
@@ -18,7 +20,7 @@ export default function SearchDestination() {
 
     const destinations = ["Sweden", "Malawi"]; // Array of values
 
-    const menuContent = (
+    const modalContent = (
         <ul className="text-md font-medium text-gray-700 w-full">
             {destinations.map((destination, index) => (
                 <li
@@ -37,9 +39,9 @@ export default function SearchDestination() {
             <div
                 ref={toggleButtonRef}
                 onClick={handleModal}
-                className={`flex-grow min-w-0 pr-5 pl-7 flex flex-col text-left justify-center cursor-pointer 
-    ${openModal ? 'bg-custom-grey rounded-[32px] border-transparent h-full' : 'hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full'}`}
-                style={{ maxWidth: '250px' }}  // Restrict the width of the parent container
+                className={`flex-grow min-w-0 max-w-64 pr-5 pl-7 flex flex-col text-left justify-center cursor-pointer 
+        ${openModal ? 'header-item-active' : 'header-modal-hover'}`}
+
             >
                 <b>Where</b>
                 <p className="whitespace-nowrap overflow-hidden text-ellipsis">
@@ -51,7 +53,7 @@ export default function SearchDestination() {
                 open={openModal}
                 onClose={handleModal}
                 size="lg"
-                content={menuContent}
+                content={modalContent}
                 toggleButtonRef={toggleButtonRef}
                 className="absolute top-full left-5 mt-2 w-72"
             />

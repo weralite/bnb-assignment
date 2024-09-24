@@ -6,3 +6,15 @@
     content: '•'; /* Dot character */
     margin-right: 0.5rem; /* Adjust spacing as needed */
   }
+
+
+/* Modal Hover*/
+
+.header-item-hover {
+  @apply hover:bg-custom-grey hover:rounded-[32px] hover:border-transparent hover:h-full;
+}
+
+/* Header */
+.header-item-active {
+  @apply bg-custom-grey rounded-[32px] border-transparent h-full;
+}
