@@ -7,15 +7,15 @@ interface HeaderAnimationsProps {
   onScrollChange: (scrolled: boolean) => void;
 }
 
-
 export default function HeaderAnimations({ controls, heightControls, onScrollChange }: HeaderAnimationsProps) {
   const { scrollY } = useScroll();
   const scrollThreshold = 200;
   const isScrolled = useTransform(scrollY, [0, scrollThreshold], [false, true]);
-  
-  const [lastScrolled, setLastScrolled] = useState(false); // Track last scroll state
 
-  console.log(isScrolled.get());
+  const [lastScrolled, setLastScrolled] = useState(false); // Track last scroll state
+  const [throttleTimeout, setThrottleTimeout] = useState<NodeJS.Timeout | null>(null); // Track timeout
+
+console.log(isScrolled.get());
 
   useEffect(() => {
     const handleResizeOrScroll = () => {
@@ -24,11 +24,15 @@ export default function HeaderAnimations({ controls, heightControls, onScrollCha
 
       // Update only if the scroll state has changed
       if (scrolled !== lastScrolled) {
+        // If a throttle timeout is already active, do not update
+        if (throttleTimeout) return;
+
         setLastScrolled(scrolled);
 
+        // Start animations
         controls.start({
           y: isMobile ? -75 : scrolled ? -75 : 0,
-          scale: isMobile ? 1 : scrolled ? 0.80 : 1,
+          scale: isMobile ? 1 : scrolled ? 0.8 : 1,
           width: isMobile ? "100%" : scrolled ? "70%" : "100%",
           maxWidth: isMobile ? "860px" : scrolled ? "600px" : "860px",
           transition: { duration: 0.3 }, // Control transition timing
@@ -40,19 +44,27 @@ export default function HeaderAnimations({ controls, heightControls, onScrollCha
         });
 
         onScrollChange(scrolled);
+
+        // Set a throttle timeout for 1 second
+        const timeout = setTimeout(() => {
+          setThrottleTimeout(null); // Clear the throttle timeout after 1 second
+        }, 200);
+
+        setThrottleTimeout(timeout); // Store the timeout ID
       }
     };
 
-    handleResizeOrScroll();
+    handleResizeOrScroll(); // Initial call to set state based on current scroll position
 
-    const unsubscribe = isScrolled.on("change", handleResizeOrScroll);
-    window.addEventListener("resize", handleResizeOrScroll);
+    const unsubscribe = isScrolled.on("change", handleResizeOrScroll); // Subscribe to scroll changes
+    window.addEventListener("resize", handleResizeOrScroll); // Handle window resize
 
     return () => {
-      unsubscribe();
-      window.removeEventListener("resize", handleResizeOrScroll);
+      unsubscribe(); // Clean up subscription
+      window.removeEventListener("resize", handleResizeOrScroll); // Clean up resize listener
+      if (throttleTimeout) clearTimeout(throttleTimeout); // Clean up throttle timeout
     };
-  }, [controls, isScrolled, heightControls, lastScrolled]);
+  }, [controls, isScrolled, heightControls, lastScrolled, throttleTimeout]);
 
   return null;
 }
