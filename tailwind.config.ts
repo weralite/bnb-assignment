@@ -21,6 +21,7 @@ const config: Config = {
         '40': '10rem',
       },
       boxShadow: {
+        'modal': '0 4px 15px -3px rgba(0, 0, 0, 0.2)',
         'custom': '0 3px 12px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.08)',
       },
       colors: {
