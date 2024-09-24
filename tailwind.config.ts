@@ -23,6 +23,7 @@ const config: Config = {
       boxShadow: {
         'modal': '0 4px 15px -3px rgba(0, 0, 0, 0.2)',
         'custom': '0 3px 12px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.08)',
+        'hover': '0 5px 15px 0 rgba(0,0,0,0.15), 0 2px 4px 0 rgba(0,0,0,0.1)',
       },
       colors: {
         background: "var(--background)",

@@ -14,7 +14,7 @@ export default function DesktopMenu() {
 
   const menuContent = (
     <ul className="text-md font-medium text-gray-700">
-      <li className="pl-5 pr-15 py-2 border-b border-custom-grey hover:bg-custom-grey block">Login</li>
+      <li className="pl-5 pr-15 py-2 border-b border-custom-grey hover:bg-custom-grey block ">Login</li>
       <li className="pl-5 pr-15 py-2 hover:bg-custom-grey block">Register</li>
     </ul>
   );
@@ -23,7 +23,7 @@ export default function DesktopMenu() {
     <>
       <div
         onClick={handleModal}
-        className="hidden sm:flex gap-4 items-center px-4 shadow-custom border border-custom-grey rounded-[32px] h-14 relative z-10 cursor-pointer"
+        className="hidden sm:flex gap-4 items-center px-4 shadow-custom border hover:shadow-hover transition-shadow duration-300 border-custom-grey rounded-[32px] h-14 relative z-10 cursor-pointer"
         ref={toggleButtonRef} 
       >
         <HamburgerIcon />
