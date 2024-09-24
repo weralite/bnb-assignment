@@ -6,7 +6,7 @@ interface ModalProps {
   onClose: () => void;
   size: "sm" | "md" | "lg";
   content: ReactNode;
-  toggleButtonRef: React.RefObject<HTMLDivElement>; 
+  toggleButtonRef: React.RefObject<HTMLDivElement>;
 }
 
 export default function Modal({ open, onClose, size, content, toggleButtonRef }: ModalProps) {
@@ -17,9 +17,9 @@ export default function Modal({ open, onClose, size, content, toggleButtonRef }:
       modalRef.current &&
       !modalRef.current.contains(event.target as Node) &&
       toggleButtonRef.current &&
-      !toggleButtonRef.current.contains(event.target as Node) 
+      !toggleButtonRef.current.contains(event.target as Node)
     ) {
-      onClose(); 
+      onClose();
     }
   };
 
@@ -31,7 +31,7 @@ export default function Modal({ open, onClose, size, content, toggleButtonRef }:
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [open]); 
+  }, [open]);
 
   const sizeClasses = {
     sm: "max-w-[160px]",
@@ -53,7 +53,7 @@ export default function Modal({ open, onClose, size, content, toggleButtonRef }:
             className={`${sizeClasses[size]} w-full bg-white shadow-modal py-4 rounded-lg`}
             ref={modalRef}
           >
-            <div className="px-5 pb-4">{content}</div>
+            {content}
           </div>
         </motion.div>
       )}
