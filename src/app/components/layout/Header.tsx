@@ -24,7 +24,7 @@ export default function Header() {
 
       <div className="px-5 md:px-10 lg:px-20 xl:px-30 2xl:px-40 w-full flex flex-col justify-center items-center">
 
-        <div className="flex flex-row justify-between w-full h-20 py-2 pr-5">
+        <div className="flex flex-row justify-between w-full h-20 py-2">
           <HeaderLogo />
           <DesktopMenu />
         </div>
