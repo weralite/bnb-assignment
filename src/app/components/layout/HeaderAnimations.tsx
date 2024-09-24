@@ -22,7 +22,7 @@ export default function HeaderAnimations({ controls, heightControls, onScrollCha
         // x: isMobile ? 0 : scrolled ? 0 : 0,
         scale: isMobile ? 1 : scrolled ? 0.80 : 1,
         width: isMobile ? "100%" : scrolled ? "70%" : "100%",
-        maxWidth: isMobile ? "100%" : scrolled ? "50%" : "90%",
+        maxWidth: isMobile ? "860px" : scrolled ? "600px" : "860px",
       });
 
       heightControls.start({
