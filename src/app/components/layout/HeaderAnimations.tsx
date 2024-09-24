@@ -20,9 +20,9 @@ export default function HeaderAnimations({ controls, heightControls, onScrollCha
       controls.start({
         y: isMobile ? -75 : scrolled ? -75 : 0,
         // x: isMobile ? 0 : scrolled ? 0 : 0,
-        // scale: isMobile ? 1 : scrolled ? 1 : 1,
+        scale: isMobile ? 1 : scrolled ? 0.80 : 1,
         width: isMobile ? "100%" : scrolled ? "70%" : "100%",
-        maxWidth: isMobile ? "100%" : scrolled ? "50%" : "70%",
+        maxWidth: isMobile ? "100%" : scrolled ? "50%" : "90%",
       });
 
       heightControls.start({

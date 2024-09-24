@@ -1,6 +1,4 @@
 "use client";
-
-import Container from "@/app/components/layout/Container";
 import { useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import LogoColor from '@/app/assets/logo-color.svg';
@@ -60,8 +58,8 @@ export default function Header() {
 
             {scrolled ? (
               <div className="hidden 1-md:flex flex-col h-full px-7 justify-center">
-                <div className="flex flex-row space-x-2 pr-5">
-                  <b className="pr-6 whitespace-nowrap text-ellipsis overflow-hidden ...">Vart som helst</b>
+                <div className="flex flex-row justify-center space-x-2 pr-5">
+                  <b className="pr-6 grey whitespace-nowrap overflow-hidden text-ellipsis">Vart som helst</b>
                   <b className="border-l pl-6 pr-6 border-custom-grey whitespace-nowrap overflow-hidden text-ellipsis">Vilken vecka som helst</b>
                   <b className="border-l pl-6 pr-6 border-custom-grey whitespace-nowrap overflow-hidden text-ellipsis">När som helst</b>
                 </div>
