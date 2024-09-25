@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useFilter } from "@/context/FilterContext";
 import Datepicker, { DateValueType } from "react-tailwindcss-datepicker"; // Corrected type import
 
 export default function Calender() {
-    const [selectedCheckOut, setSelectedCheckOut] = useState<Date | null>(null);
+    const { selectedCheckOut, setSelectedCheckOut } = useFilter();
     const [value, setValue] = useState<DateValueType>({
         startDate: null,
         endDate: null

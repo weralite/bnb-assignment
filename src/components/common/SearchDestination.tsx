@@ -54,7 +54,7 @@ export default function SearchDestination() {
                 size="lg"
                 content={modalContent}
                 toggleButtonRef={toggleButtonRef}
-                className="absolute top-full left-5 mt-2 w-56"
+                className="absolute top-full left-5 mt-2 w-60"
             />
         </>
     );
