@@ -4,7 +4,7 @@ import { ReactNode, useEffect, useRef } from "react";
 interface ModalProps {
   open: boolean;
   onClose: () => void;
-  size: "sm" | "md" | "lg";
+  size: "sm" | "md" | "lg" | "full";
   content: ReactNode;
   toggleButtonRef: React.RefObject<HTMLDivElement>;
   className?: string;
@@ -38,20 +38,22 @@ export default function Modal({ open, onClose, size, content, toggleButtonRef, c
     sm: "max-w-[160px]",
     md: "max-w-[320px]",
     lg: "max-w-[480px]",
+    full: "min-w-full max-w-none", // Full screen modal
+
   };
 
   return (
     <AnimatePresence>
       {open && (
         <motion.div
-          className={`absolute ${className || ''}`}
+          className={`${className || ''}`}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
           transition={{ type: "spring", stiffness: 500, damping: 20 }}
         >
           <div
-            className={`${sizeClasses[size]} w-full bg-white shadow-modal py-4 rounded-lg`}
+            className={`${sizeClasses[size]} w-full bg-white shadow-modal rounded-lg`}
             ref={modalRef}
           >
             {content}
