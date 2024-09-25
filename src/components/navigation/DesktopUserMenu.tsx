@@ -31,13 +31,13 @@ export default function DesktopMenu() {
   const menuContent = (
     <ul className="text-md font-medium text-gray-700">
       <li
-        className="pl-5 pr-15 border-b border-custom-grey hover:bg-custom-grey block cursor-pointer"
+        className="pl-5 pr-15 py-4 border-b border-custom-grey hover:bg-custom-grey block cursor-pointer"
         onClick={openLoginModal}
       >
         Login
       </li>
       <li
-        className="pl-5 pr-15 py-2 hover:bg-custom-grey block cursor-pointer"
+        className="pl-5 pr-15 py-4 hover:bg-custom-grey block cursor-pointer"
         onClick={openRegisterModal}
       >
         Register
@@ -62,7 +62,7 @@ export default function DesktopMenu() {
           size="sm"
           content={menuContent}
           toggleButtonRef={toggleButtonRef} // Passing the reference here
-          className="absolute top-full right-0 z-50"
+          className="absolute top-full right-0 z-50 py-2"
         />
       </div>
 

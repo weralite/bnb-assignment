@@ -25,7 +25,7 @@ export default function SearchDestination() {
             {destinations.map((destination, index) => (
                 <li
                     key={destination}
-                    className={`w-full pl-5 py-2 ${index !== destinations.length - 1 ? 'border-b border-custom-grey' : ''} hover:bg-custom-grey block cursor-pointer`}
+                    className={`w-full pl-5 py-4 ${index !== destinations.length - 1 ? 'border-b border-custom-grey' : ''} hover:bg-custom-grey block cursor-pointer`}
                     onClick={() => handleItemClick(destination)}
                 >
                     {destination}

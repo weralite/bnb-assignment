@@ -4,7 +4,7 @@ import React from "react";
 
 const RegisterForm = () => {
   return (
-    <div>
+    <div className="p-4">
       <h2 className="text-lg font-semibold">Register</h2>
       {/* Registration form fields */}
       <form>

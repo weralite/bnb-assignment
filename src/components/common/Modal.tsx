@@ -50,7 +50,7 @@ export default function Modal({ open, onClose, size, content, toggleButtonRef, c
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
-          transition={{ type: "spring", stiffness: 500, damping: 20 }}
+          transition={{ type: "spring", stiffness: 500, damping: 40 }}
         >
           <div
             className={`${sizeClasses[size]} w-full bg-white shadow-modal rounded-lg`}
