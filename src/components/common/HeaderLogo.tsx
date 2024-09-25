@@ -1,4 +1,4 @@
-import LogoColor from '@/app/assets/logo-color.svg';
+import LogoColor from '@/assets/logo-color.svg';
 import Image from 'next/image';
 
 const logoRed = LogoColor;

@@ -2,10 +2,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "@/app/components/layout/Header";
-import Container from "@/app/components/layout/Container";
-import MobileUserMenu from "@/app/components/navigation/MobileUserMenu"
-import { FilterProvider } from "@/app/context/FilterContext";
+import Header from "@/app/layout/Header";
+import Container from "@/components/common/Container";
+import MobileUserMenu from "@/components/navigation/MobileUserMenu"
+import { FilterProvider } from "@/context/FilterContext";
 
 
 const geistSans = localFont({

@@ -1,10 +1,12 @@
 import { useState, useRef } from "react";
 import HamburgerIcon from "../common/HamburgerIcon";
-import profilePic from "@/app/assets/no-profile.svg";
+import profilePic from "@/assets/no-profile.svg";
 import Image from "next/image";
 import Modal from "../common/Modal";
 
+
 export default function DesktopMenu() {
+
   const [openModal, setModal] = useState<boolean>(false);
   const toggleButtonRef = useRef<HTMLDivElement | null>(null);
 

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useRef } from "react";
-import Modal from "@/app/components/common/Modal";
-import { useFilter } from "@/app/context/FilterContext";
+import Modal from "@/components/common/Modal";
+import { useFilter } from "@/context/FilterContext";
 
 export default function SearchDestination() {
     const { selectedCountry, setSelectedCountry } = useFilter();

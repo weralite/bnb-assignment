@@ -1,4 +1,4 @@
-import { useFilter } from "@/app/context/FilterContext";
+import { useFilter } from "@/context/FilterContext";
 
 const MobileContent = () => {
   const { selectedCountry } = useFilter();
