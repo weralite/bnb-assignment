@@ -39,9 +39,8 @@ export default function SearchDestination() {
             <div
                 ref={toggleButtonRef}
                 onClick={handleModal}
-                className={`flex-grow min-w-0 max-w-64 pr-5 pl-7 flex flex-col text-left justify-center cursor-pointer 
-        ${openModal ? 'header-item-active' : 'header-modal-hover'}`}
-
+                className={`flex-grow min-w-0 max-w-64 pr-5 pl-7 flex flex-col text-left justify-center cursor-pointer
+        ${openModal ? 'header-item-active' : 'header-item-hover'}`}
             >
                 <b>Where</b>
                 <p className="whitespace-nowrap overflow-hidden text-ellipsis">
