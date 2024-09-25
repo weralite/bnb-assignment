@@ -12,8 +12,6 @@ export default function Calender() {
         endDate: null
     });
 
-console.log(selectedCheckIn);
-
 const handleDateChange = (newValue: DateValueType) => {
     setValue(newValue); 
     if (newValue && typeof newValue === 'object' && 'startDate' in newValue) {

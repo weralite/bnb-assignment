@@ -16,7 +16,7 @@ export default function Header() {
 
   return (
     <motion.header
-      className="border-b border-custom-grey sticky top-0 bg-white w-full"
+      className="border-b border-custom-grey sticky top-0 bg-white w-full h-[160px]"
       animate={heightControls}
       transition={{ duration: animationDuration, ease: "easeOut" }}
     >

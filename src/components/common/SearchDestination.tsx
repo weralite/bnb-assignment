@@ -18,7 +18,7 @@ export default function SearchDestination() {
         setModal(false); // Close the modal after selecting a value
     };
 
-    const destinations = ["Sweden", "Malawi"]; // Array of values
+    const destinations = ["Stockholm - Sweden", "Lilongwe - Malawi"]; // Array of values
 
     const modalContent = (
         <ul className="text-md font-medium text-gray-700 w-full">
@@ -39,7 +39,7 @@ export default function SearchDestination() {
             <div
                 ref={toggleButtonRef}
                 onClick={handleModal}
-                className={`flex-grow min-w-0 max-w-64 pr-5 pl-7 flex flex-col text-left justify-center cursor-pointer
+                className={`flex-grow w-40 max-w-64 pr-5 pl-7 flex flex-col text-left justify-center cursor-pointer
         ${openModal ? 'header-item-active' : 'header-item-hover'}`}
             >
                 <b>Where</b>

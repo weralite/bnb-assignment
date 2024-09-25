@@ -5,7 +5,7 @@ import React from "react";
 const LoginForm = () => {
   return (
     <div className="flex flex-col">
-      <h2 className="py-4 text-lg font-semibold border-b text-center">Login</h2>
+      <h2 className="py-4 text-lg font-semibold border-b text-center">Sign in</h2>
 
 
 
