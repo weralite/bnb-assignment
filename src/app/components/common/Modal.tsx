@@ -45,9 +45,9 @@ export default function Modal({ open, onClose, size, content, toggleButtonRef, c
       {open && (
         <motion.div
           className={`absolute ${className || ''}`}
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
+          exit={{ opacity: 0, y: 10 }}
           transition={{ type: "spring", stiffness: 500, damping: 20 }}
         >
           <div
