@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from 'react';
-import { useAnimation, useScroll, useTransform } from 'framer-motion';
+import { useAnimation, useScroll } from 'framer-motion';
 
 interface HeaderAnimationsProps {
   controls: ReturnType<typeof useAnimation>;
@@ -12,13 +12,9 @@ interface HeaderAnimationsProps {
 
 export default function HeaderAnimations({ controls, heightControls, onScrollChange }: HeaderAnimationsProps) {
   const { scrollY } = useScroll();
-  const scrollThreshold = 200;
-  const isScrolled = useTransform(scrollY, [0, scrollThreshold], [false, true]);
   const [lastScrolled, setLastScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [throttleTimeout, setThrottleTimeout] = useState<NodeJS.Timeout | null>(null);
-
-
 
   // Separate function to detect if mobile
   const detectIsMobile = useCallback(() => window.innerWidth <= 639, []);
@@ -51,7 +47,7 @@ export default function HeaderAnimations({ controls, heightControls, onScrollCha
   // Main function handling scroll and resize logic
   const handleResizeOrScroll = useCallback(() => {
     const currentIsMobile = detectIsMobile();
-    const scrolled = isScrolled.get();
+    const scrolled = scrollY.get() > 0; // Always set scrolled to true if scrollY is greater than 0
 
     if (scrolled !== lastScrolled || currentIsMobile !== isMobile) {
       if (throttleTimeout) return;
@@ -64,7 +60,7 @@ export default function HeaderAnimations({ controls, heightControls, onScrollCha
 
       handleThrottle();
     }
-  }, [isScrolled, lastScrolled, isMobile, throttleTimeout, applyAnimations, onScrollChange, handleThrottle]);
+  }, [scrollY, lastScrolled, isMobile, throttleTimeout, applyAnimations, onScrollChange, handleThrottle]);
 
   useEffect(() => {
     setIsMobile(detectIsMobile());
@@ -79,7 +75,7 @@ export default function HeaderAnimations({ controls, heightControls, onScrollCha
 
     handleResizeOrScroll();
 
-    const unsubscribe = isScrolled.on("change", handleScroll);
+    const unsubscribe = scrollY.on("change", handleScroll);
     window.addEventListener("resize", handleResize);
 
     return () => {
@@ -87,7 +83,7 @@ export default function HeaderAnimations({ controls, heightControls, onScrollCha
       window.removeEventListener("resize", handleResize);
       if (throttleTimeout) clearTimeout(throttleTimeout);
     };
-  }, [handleResizeOrScroll, isScrolled, throttleTimeout]);
+  }, [handleResizeOrScroll, scrollY, throttleTimeout]);
 
   return null;
 }
