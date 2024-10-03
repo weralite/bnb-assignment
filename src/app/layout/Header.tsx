@@ -14,6 +14,29 @@ export default function Header() {
   const heightControls = useAnimation();
   const animationDuration = 0.1;
 
+  console.log("Is scrolled?", scrolled);
+  console.log("Controls", controls);
+  console.log("Height controls", heightControls);
+
+  const reverseAnimation = () => {
+    if (scrolled) {
+      setScrolled(false);
+      controls.start({
+        y: 0,
+        scale: 1,
+        width: "100%",
+        maxWidth: "860px",
+        transition: { duration: animationDuration },
+      });
+
+      heightControls.start({
+        height: "160px",
+        transition: { duration: animationDuration },
+      });
+    }
+  }
+
+
   return (
     <motion.header
       className="border-b border-custom-grey sticky top-0 bg-white w-full h-[160px]"
@@ -34,6 +57,7 @@ export default function Header() {
           className="flex flex-row justify-center items-center w-full max-w-[860px]"
           animate={controls}
           transition={{ duration: animationDuration, ease: "easeOut" }}
+          onClick={() => reverseAnimation()}
         >
           <div className="shadow-custom border border-custom-grey rounded-[32px] w-full h-16 relative">
 

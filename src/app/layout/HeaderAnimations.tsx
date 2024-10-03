@@ -18,6 +18,8 @@ export default function HeaderAnimations({ controls, heightControls, onScrollCha
   const [isMobile, setIsMobile] = useState(false);
   const [throttleTimeout, setThrottleTimeout] = useState<NodeJS.Timeout | null>(null);
 
+
+
   // Separate function to detect if mobile
   const detectIsMobile = useCallback(() => window.innerWidth <= 639, []);
 
