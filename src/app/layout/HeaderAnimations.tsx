@@ -7,13 +7,13 @@ interface HeaderAnimationsProps {
   controls: ReturnType<typeof useAnimation>;
   heightControls: ReturnType<typeof useAnimation>;
   onScrollChange: (scrolled: boolean) => void;
+  isMobile: boolean;
 }
 
 export default function HeaderAnimations({ controls, heightControls, onScrollChange }: HeaderAnimationsProps) {
   const { scrollY } = useScroll();
   const scrollThreshold = 200;
   const isScrolled = useTransform(scrollY, [0, scrollThreshold], [false, true]);
-
   const [lastScrolled, setLastScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [throttleTimeout, setThrottleTimeout] = useState<NodeJS.Timeout | null>(null);

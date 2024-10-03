@@ -13,13 +13,14 @@ export default function Header() {
   const controls = useAnimation();
   const heightControls = useAnimation();
   const animationDuration = 0.1;
+  const isMobile = Boolean(window.innerWidth <= 639);
 
   console.log("Is scrolled?", scrolled);
   console.log("Controls", controls);
   console.log("Height controls", heightControls);
 
   const reverseAnimation = () => {
-    if (scrolled) {
+    if (scrolled && !isMobile) {
       setScrolled(false);
       controls.start({
         y: 0,
@@ -43,7 +44,7 @@ export default function Header() {
       animate={heightControls}
       transition={{ duration: animationDuration, ease: "easeOut" }}
     >
-      <HeaderAnimations controls={controls} heightControls={heightControls} onScrollChange={setScrolled} />
+      <HeaderAnimations isMobile={isMobile} controls={controls} heightControls={heightControls} onScrollChange={setScrolled} />
 
       <div className="px-5 md:px-10 lg:px-20 xl:px-30 2xl:px-40 w-full flex flex-col justify-center items-center">
 
