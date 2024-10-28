@@ -1,13 +1,14 @@
-// components/auth/LoginForm.tsx
+"use client";
 
 import { useUser } from "@/context/user";
 import React from "react";
 import { useState, FormEvent } from "react";
 
+
 const LoginForm = () => {
   const user = useUser();
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("hejsan");
+  const [email, setEmail] = useState("test@testor.test");
   const [error, setError] = useState("");
   const [isLogin, setIsLogin] = useState(true);
 
@@ -15,8 +16,12 @@ const LoginForm = () => {
     user.actions.login(
       email,
       password,
-      () => {},
-      () => {}
+      () => {
+        console.log('Login successful');
+      },
+      () => {
+        console.log('Login failed');
+      }
     );
     console.log({
       email,
@@ -25,10 +30,11 @@ const LoginForm = () => {
   };
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('Email:', email);
-    console.log('Password:', password);
       login()
+  }
 
+  if (user.token) {
+    return <button onClick={user.actions.logout}>Logout</button>;
   }
 
   return (
@@ -42,7 +48,7 @@ const LoginForm = () => {
           <div className="border border-gray-300 rounded-lg p-2 flex flex-col space-y-2">
             <input
               type="text"
-              name="email"
+              value={email}
               placeholder="Email"
               className="border-b p-2  focus:outline-none"
               onChange={(e) => setEmail(e.target.value as string)}
@@ -50,7 +56,7 @@ const LoginForm = () => {
 
             <input
               type="password"
-              name="password"
+              value={password}
               placeholder="Password"
               className="border-none rounded-lg p-2  focus:outline-none"
               onChange={(e) => setPassword(e.target.value as string)}

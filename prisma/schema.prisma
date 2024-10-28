@@ -14,30 +14,30 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  firstName String
-  lastName  String
-  email     String    @unique
-  password  String
-  isAdmin   Boolean   @default(false)
-  Booking   Booking[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  firstName         String?
+  lastName          String?
+  email             String    @unique
+  password          String
+  isAdmin           Boolean   @default(false)
+  Booking           Booking[]
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
 }
 
 model Listing {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  description String
-  address     String
-  country     String
-  dailyRate   Float
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  title         String
+  description   String
+  address       String
+  country       String
+  dailyRate     Float
   availableBeds Int
   availableFrom DateTime
   availableTo   DateTime
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  Booking     Booking[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  Booking       Booking[]
 }
 
 model Booking {

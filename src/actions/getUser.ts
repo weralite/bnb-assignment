@@ -11,10 +11,13 @@ export async function getUser(token: string): Promise<SafeUser> {
       Authorization: `Bearer ${token}`,
     },
   });
+
   if (!response.ok) {
     const data = await response.json();
-    // throw new Error(data)
+    console.error("Error fetching user:", data.message); // Log the error message
+    throw new Error(data.message || "Failed to fetch user");
   }
+
   const data = await response.json();
   return data;
 }

@@ -6,6 +6,7 @@ import Header from "@/app/layout/Header";
 import Container from "@/components/common/Container";
 import MobileUserMenu from "@/components/navigation/MobileUserMenu"
 import { FilterProvider } from "@/context/FilterContext";
+import { UserProvider } from "@/context/user";
 
 
 const geistSans = localFont({
@@ -34,7 +35,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-
+<UserProvider>
           <FilterProvider>
             <Header />
             <Container>
@@ -42,7 +43,7 @@ export default function RootLayout({
             </Container>
             <MobileUserMenu />
           </FilterProvider>
-
+</UserProvider>
       </body>
     </html >
   );

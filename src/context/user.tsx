@@ -1,4 +1,5 @@
 "use client";
+
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
 
 import { SafeUser } from "@/types/user";
@@ -71,6 +72,7 @@ function UserProvider({ children }: PropsWithChildren) {
       setToken(token)
       console.log(token)
       LocalStorageKit.set("@library/token", token)
+      onComplete()
     } catch (error: any) {
       console.warn("Error logging in", error.message)
       onError()
@@ -90,9 +92,9 @@ function UserProvider({ children }: PropsWithChildren) {
       if (!token) {
         throw new Error();
       }
-      // return console.log("token", token)
-      const _user = await getUserAction(token)
-      console.log(_user)
+      return console.log("token", token)
+      // const _user = await getUserAction(token)
+      // console.log(_user)
     } catch (error: any) {
       console.log(error)
       logout();
