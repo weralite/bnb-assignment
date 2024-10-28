@@ -16,16 +16,28 @@ const RegisterForm = () => {
           <div className="border border-gray-300 rounded-lg p-2 flex flex-col space-y-2">
             <input
               type="text"
+              name="firstName"
+              placeholder="First Name"
+              className="border-b p-2 focus:outline-none"
+            />
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              className="border-b p-2 focus:outline-none"
+            />
+            <input
+              type="text"
               name="email"
               placeholder="Email"
-              className="border-b p-2"
+              className="border-b p-2 focus:outline-none"
             />
 
             <input
               type="password"
               name="password"
               placeholder="Password"
-              className="border-none rounded-lg p-2"
+              className="border-none rounded-lg p-2 focus:outline-none"
             />
           </div>
         </div>

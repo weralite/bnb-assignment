@@ -1,5 +1,5 @@
 import { useFilter } from "@/context/FilterContext";
-import { formatDate } from "@/components/utils/dateUtils";
+import { formatDate } from "@/utils/dateUtils";
 
 const ScrolledContent = () => {
   const { selectedCountry } = useFilter();

@@ -25,7 +25,6 @@ export default function MobileUserMenu() {
       className="sm:hidden fixed bottom-0 left-0 right-0 bg-white shadow-md p-4 z-50 w-full"
     >
       <ul className="flex justify-around">
-        <li className="font-bold"><a href="/">Home</a></li>
         <li className="font-bold"><a href="/login">Login</a></li>
         <li className="font-bold"><a href="/register">Register</a></li>
       </ul>
