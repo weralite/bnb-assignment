@@ -6,7 +6,7 @@ import { SafeUser } from "@/types/user";
 
 import { login as loginAction } from "@/actions/login"
 import { getUser as getUserAction } from "@/actions/getUser"
-import LocalStorageKit from "@/utils/localStorageKit";
+import CookieKit from "@/utils/cookieKit";
 
 type OnComplete = (response?: any) => void;
 type OnError = (error?: any) => void;
@@ -47,7 +47,7 @@ function UserProvider({ children }: PropsWithChildren) {
 
   useEffect(() => {
     if (!token) {
-      let _token = LocalStorageKit.get("@library/token")
+      let _token = CookieKit.get('token');
       if (_token) {
         setToken(_token)
         return
@@ -71,7 +71,7 @@ function UserProvider({ children }: PropsWithChildren) {
       const token = await loginAction(email, password)
       setToken(token)
       console.log(token)
-      LocalStorageKit.set("@library/token", token)
+      CookieKit.set('token', token, { 'max-age': 60 * 60 * 24 * 7 });
       onComplete()
     } catch (error: any) {
       console.warn("Error logging in", error.message)
@@ -82,7 +82,7 @@ function UserProvider({ children }: PropsWithChildren) {
   const logout = () => {
     setUser(defaultState.user)
     setToken(defaultState.token)
-    LocalStorageKit.remove("@library/token")
+    CookieKit.remove('token');
   };
 
   //TODO: register takes data sets token
