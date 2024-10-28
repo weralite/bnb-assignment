@@ -3,8 +3,8 @@ import HamburgerIcon from "../common/HamburgerIcon";
 import profilePic from "@/assets/no-profile.svg";
 import Image from "next/image";
 import Modal from "../common/Modal";
-import LoginForm from "../forms/LoginForm";
-import RegisterForm from "../forms/RegisterForm";
+import LoginForm from "../auth/LoginForm";
+import RegisterForm from "../auth/RegisterForm";
 
 export default function DesktopMenu() {
   const [openModal, setModal] = useState<boolean>(false);

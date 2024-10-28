@@ -1,5 +1,7 @@
 "use client";
-import { useState } from 'react';
+
+
+import { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import HeaderAnimations from './HeaderAnimations';
 import DesktopUserMenu from "@/components/navigation/DesktopUserMenu";
@@ -8,16 +10,25 @@ import ScrolledContent from "@/components/common/ScrolledContent";
 import NonScrolledContent from "@/components/common/NonScrolledContent";
 import HeaderLogo from "@/components/common/HeaderLogo";
 
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const controls = useAnimation();
   const heightControls = useAnimation();
   const animationDuration = 0.1;
-  const isMobile = Boolean(window.innerWidth <= 639);
+  const [isMobile, setIsMobile] = useState(false);
 
-  console.log("Is scrolled?", scrolled);
-  console.log("Controls", controls);
-  console.log("Height controls", heightControls);
+  useEffect(() => {
+    // Only run on client
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 639);
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const reverseAnimation = () => {
     if (scrolled && !isMobile) {
