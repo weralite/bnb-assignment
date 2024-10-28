@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Modal from "@/components/common/Modal";
 import { useFilter } from "@/context/FilterContext";
 
@@ -8,27 +8,24 @@ export default function SearchGuests() {
     const { selectedGuests, setSelectedGuests } = useFilter();
     const [openModal, setModal] = useState<boolean>(false);
     const toggleButtonRef = useRef<HTMLDivElement | null>(null);
-    const [guestCount, setGuestCount] = useState<number>(selectedGuests ?? 0); 
+    const [guestCount, setGuestCount] = useState<number>(selectedGuests ?? 0);
 
     const handleModal = () => {
         setModal((prev) => !prev);
     };
 
     const increaseGuests = () => {
-        setGuestCount((prev) => {
-            const newCount = prev + 1;
-            setSelectedGuests(newCount); 
-            return newCount; 
-        });
+        setGuestCount((prev) => prev + 1);
     };
 
     const decreaseGuests = () => {
-        setGuestCount((prev) => {
-            const newCount = Math.max(0, prev - 1); 
-            setSelectedGuests(newCount); 
-            return newCount; 
-        });
+        setGuestCount((prev) => Math.max(0, prev - 1));
     };
+
+    // Synchronize guestCount with selectedGuests in FilterProvider
+    useEffect(() => {
+        setSelectedGuests(guestCount);
+    }, [guestCount, setSelectedGuests]);
 
     const modalContent = (
         <div className="flex flex-row justify-center items-center gap-18 p-4">

@@ -70,7 +70,6 @@ function UserProvider({ children }: PropsWithChildren) {
     try {
       const token = await loginAction(email, password)
       setToken(token)
-      console.log(token)
       CookieKit.set('token', token, { 'max-age': 60 * 60 * 24 * 7 });
       onComplete()
     } catch (error: any) {
@@ -94,7 +93,7 @@ function UserProvider({ children }: PropsWithChildren) {
       }
       // return console.log("token", token)
       const _user = await getUserAction(token)
-      console.log(_user)
+      setUser(_user)
     } catch (error: any) {
       console.log(error)
       logout();

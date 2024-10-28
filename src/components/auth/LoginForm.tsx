@@ -5,7 +5,11 @@ import React from "react";
 import { useState, FormEvent } from "react";
 
 
-const LoginForm = () => {
+interface LoginFormProps {
+  onClose: () => void;
+}
+
+const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
   const user = useUser();
   const [password, setPassword] = useState("hejsan");
   const [email, setEmail] = useState("test@testor.test");
@@ -18,6 +22,7 @@ const LoginForm = () => {
       password,
       () => {
         console.log('Login successful');
+        onClose()
       },
       () => {
         console.log('Login failed');
@@ -33,9 +38,6 @@ const LoginForm = () => {
       login()
   }
 
-  if (user.token) {
-    return <button onClick={user.actions.logout}>Logout</button>;
-  }
 
   return (
     <div className="flex flex-col">
