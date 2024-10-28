@@ -92,9 +92,9 @@ function UserProvider({ children }: PropsWithChildren) {
       if (!token) {
         throw new Error();
       }
-      return console.log("token", token)
-      // const _user = await getUserAction(token)
-      // console.log(_user)
+      // return console.log("token", token)
+      const _user = await getUserAction(token)
+      console.log(_user)
     } catch (error: any) {
       console.log(error)
       logout();

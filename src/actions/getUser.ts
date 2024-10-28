@@ -11,7 +11,6 @@ export async function getUser(token: string): Promise<SafeUser> {
       Authorization: `Bearer ${token}`,
     },
   });
-
   if (!response.ok) {
     const data = await response.json();
     console.error("Error fetching user:", data.message); // Log the error message
