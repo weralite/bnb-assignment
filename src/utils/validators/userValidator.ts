@@ -12,10 +12,10 @@ export function userRegistrationValidator(
     errors.password = "Password is required";
   }
   if (!data.firstName) {
-    errors.name = "Name is required";
+    errors.name = "First Name is required";
   }
   if (!data.lastName) {
-    errors.name = "Name is required";
+    errors.name = "Last Name is required";
   }
   const hasErrors = Object.keys(errors).length !== 0;
 
