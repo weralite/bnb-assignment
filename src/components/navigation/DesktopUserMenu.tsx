@@ -36,19 +36,26 @@ export default function DesktopMenu() {
   // Menu content with login and register options
 
   const menuContent = user.token ? (
-   <div>
-    <h1 className="text-md font-light text-gray-400 text-center border-b p-2">{user.user?.firstName} {user.user?.lastName}</h1>
-    <ul className="text-md font-medium text-gray-700">
-      <li
-        className="pl-5 pr-15 py-4 border-b border-custom-grey hover:bg-custom-grey hover:rounded-md block cursor-pointer"
-        onClick={user.actions.logout}
-      >
-        Logout
-      </li>
-    </ul>
+    <div>
+      <h1 className="text-sm font-light text-gray-400 text-center border-b p-2">{user.user?.firstName} {user.user?.lastName}</h1>
+      <ul className="text-sm font-medium text-gray-700">
+      <li className="pl-5 pr-15 py-4 border-b border-custom-grey hover:bg-custom-grey hover:rounded-md block cursor-pointer">
+          Bookings
+        </li>
+
+        <li className="pl-5 pr-15 py-4 border-b border-custom-grey hover:bg-custom-grey hover:rounded-md block cursor-pointer">
+          Listings
+        </li>
+        <li
+          className="pl-5 pr-15 py-4 border-b border-custom-grey hover:bg-custom-grey hover:rounded-md block cursor-pointer"
+          onClick={user.actions.logout}
+        >
+          Logout
+        </li>
+      </ul>
     </div>
   ) : (
-    <ul className="text-md font-medium text-gray-700">
+    <ul className="text-sm font-medium text-gray-700">
       <li
         className="pl-5 pr-15 py-4 border-b border-custom-grey hover:bg-custom-grey block cursor-pointer"
         onClick={openLoginModal}
@@ -89,12 +96,12 @@ export default function DesktopMenu() {
       {/* Login or Register Modal */}
       {modalContent && (
         <Modal
-          open={!!modalContent} 
-          onClose={() => setModalContent(null)} 
+          open={!!modalContent}
+          onClose={() => setModalContent(null)}
           size="lg"
-          content={modalContent === "login" ? <LoginForm onClose={onClose} /> : <RegisterForm />} 
-          toggleButtonRef={toggleButtonRef} 
-           className="absolute w-full h-[100vh] top-0 right-0 bg-black bg-opacity-50 z-50 flex justify-center items-center"
+          content={modalContent === "login" ? <LoginForm onClose={onClose} /> : <RegisterForm />}
+          toggleButtonRef={toggleButtonRef}
+          className="absolute w-full h-[100vh] top-0 right-0 bg-black bg-opacity-50 z-50 flex justify-center items-center"
         />
       )}
     </>

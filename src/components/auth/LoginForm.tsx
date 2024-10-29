@@ -28,10 +28,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
         console.log('Login failed');
       }
     );
-    console.log({
-      email,
-      password,
-    });
   };
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
