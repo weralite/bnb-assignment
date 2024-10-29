@@ -17,6 +17,9 @@ const config: Config = {
         '1-sm': '610px',
         '1-md': '815px',
         '1-lg': '1095px',
+        '1-xl': '1380px',
+        '1-2xl': '1530px',
+
       },
       spacing: {
         '15': '3.75rem',
