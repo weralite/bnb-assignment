@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
                 availableTo: body.availableTo,
                 advertiser: {
                     connect: {
-                        id: body.advertiser.id,
+                        id: userId,
                     },
                 },
             },

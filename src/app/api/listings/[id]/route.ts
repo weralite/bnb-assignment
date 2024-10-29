@@ -50,11 +50,18 @@ export async function GET(request: NextRequest) {
 }
 
 
-export async function PUT(request: NextRequest) {
-    try {
-        const body = await request.json();
-        const { id, ...data } = body;
+export async function PUT(request: NextRequest, options: APIOptions) {
+    const id = options.params.id;
+    const userId = request.headers.get("userId");
 
+    if (!userId) {
+        return NextResponse.json(
+            { message: "Unauthorized: User not authenticated" },
+            { status: 401 }
+        );
+    }
+
+    try {
         if (!id) {
             return NextResponse.json(
                 { message: "Listing ID is required." },
@@ -62,23 +69,55 @@ export async function PUT(request: NextRequest) {
             );
         }
 
+        // Parse the request body to get the updated listing data
+        const { title, description, address, country, dailyRate, availableBeds, availableFrom, availableTo } = await request.json();
+
+        // Fetch the listing to check the advertiserId
+        const listing = await prisma.listing.findUnique({
+            where: { id },
+            select: { advertiserId: true }, // Only select the advertiserId
+        });
+
+        if (!listing) {
+            return NextResponse.json(
+                { message: "Listing not found." },
+                { status: 404 }
+            );
+        }
+
+        // Fetch the user details to check if the user is an admin
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+            select: { isAdmin: true }, // Select only the isAdmin field
+        });
+
+        // Check if the user is the advertiser or an admin
+        if (listing.advertiserId !== userId && !(user && user.isAdmin)) {
+            return NextResponse.json(
+                { message: "Unauthorized: You do not have permission to update this listing." },
+                { status: 403 }
+            );
+        }
+
+        // Proceed to update the listing
         const updatedListing = await prisma.listing.update({
             where: { id },
-            data,
-            include: {
-                advertiser: {
-                    select: {
-                        id: true,
-                        firstName: true,
-                        lastName: true,
-                        email: true,
-                        isAdmin: true,
-                    },
-                },
+            data: {
+                title,
+                description,
+                address,
+                country,
+                dailyRate,
+                availableBeds,
+                availableFrom,
+                availableTo,
             },
         });
 
-        return NextResponse.json(updatedListing, { status: 200 });
+        return NextResponse.json(
+            { message: "Listing updated successfully.", listing: updatedListing },
+            { status: 200 }
+        );
     } catch (error: any) {
         console.warn("Error updating listing: ", error.message);
         return NextResponse.json(
