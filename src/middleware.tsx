@@ -30,6 +30,7 @@ export async function middleware(request: NextRequest) {
       console.log("Authorization -> decrypted", decryptedToken);
       const headers = new Headers(request.headers);
       headers.set("userId", decryptedToken.userId);
+   console.log("userId: ", decryptedToken.userId);
       return NextResponse.next({
         headers,
       });
@@ -54,5 +55,6 @@ export const config = {
     // "/api/books/",
     // "/api/books/:id*",
     "/api/users/me",
+    "/api/users/:id*",
   ],
 };

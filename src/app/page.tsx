@@ -1,4 +1,4 @@
-import ListingGrid from "@/components/listings/listingGrid";
+import ListingGrid from "@/components/listings/ListingGrid";
 
 export default function Home() {
   return (
@@ -6,7 +6,7 @@ export default function Home() {
       <main>
         <ListingGrid />
       </main>
-    
+
     </div>
   );
 }

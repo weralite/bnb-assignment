@@ -1,6 +1,5 @@
 import { getAllListings } from "@/actions/getAllListing";
-import { ListingData } from "@/types/listing";
-import ListingCard from "./listingCard";
+import ListingCard from "./ListingCard";
 
 
 

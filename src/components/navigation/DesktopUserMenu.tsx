@@ -6,7 +6,7 @@ import Modal from "../common/Modal";
 import LoginForm from "../auth/LoginForm";
 import RegisterForm from "../auth/RegisterForm";
 import { useUser } from "@/context/user";
-import AddListingForm from "@/components/listings/addListingForm";
+import ListingModal from "@/components/listings/ListingModal";
 
 export default function DesktopMenu() {
   const user = useUser();
@@ -37,7 +37,7 @@ export default function DesktopMenu() {
   // Open login modal
   const openAddListingModal = () => {
     setModal(true);
-    setModalContent(<AddListingForm onClose={onClose} />);
+    setModalContent(<ListingModal onClose={onClose} />);
   };
 
   // Menu content with login and register options

@@ -2,7 +2,14 @@
 
 import { useState } from "react";
 import { useFilter } from "@/context/FilterContext";
-import Datepicker, { DateValueType } from "react-tailwindcss-datepicker"; // Corrected type import
+import dynamic from "next/dynamic";
+import type { DateValueType } from "react-tailwindcss-datepicker";
+
+const Datepicker = dynamic(() => import("react-tailwindcss-datepicker"), { 
+    ssr: false, 
+    loading: () => null // fallback to prevent SSR rendering
+});
+
 
 export default function Calender() {
     const { selectedCheckOut, setSelectedCheckOut } = useFilter();

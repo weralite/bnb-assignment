@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { ListingWithAdvertiser } from "@/types/listing";
 import listingValidator from "@/utils/validators/listingValidator";
+import { verifyJWT } from "@/utils/jwt";
 
 const prisma = new PrismaClient();
 
@@ -74,31 +75,61 @@ export async function POST(request: NextRequest) {
 
 // Get request to get all listings
 
-export async function GET() {
-    try {
-        const listings = await prisma.listing.findMany({
-            include: {
-                advertiser: {
-                    select: {
-                        id: true,
-                        firstName: true,
-                        lastName: true,
-                        email: true,
-                        isAdmin: true,
-                    },
-                },
-            },
-        });
-        return NextResponse.json(listings, { status: 200 });
-    } catch (error: any) {
-        console.warn("Error Listing Object: ", error.message);
-        return NextResponse.json(
-            {
-                message: "A valid 'ListingData' object has to be sent",
-            },
-            {
-                status: 400,
-            }
-        );
-    }
+export async function GET(request: NextRequest) {
+  const authHeader = request.headers.get("Authorization");
+
+  if (!authHeader) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
+      const token = authHeader.split(" ")[1];
+      const decodedToken = await verifyJWT(token); // Decode token on the server
+      const userId = decodedToken?.userId;
+
+      let listings;
+
+      if (userId) {
+          console.log("Fetching listings for userId:", userId);
+          // Fetch listings with a matching advertiserId
+          listings = await prisma.listing.findMany({
+              where: { advertiserId: userId },
+              include: {
+                  advertiser: {
+                      select: {
+                          id: true,
+                          firstName: true,
+                          lastName: true,
+                          email: true,
+                          isAdmin: true,
+                      },
+                  },
+              },
+          });
+      } else {
+          // Fetch all listings if no specific userId is provided
+          console.log("Fetching all listings");
+          listings = await prisma.listing.findMany({
+              include: {
+                  advertiser: {
+                      select: {
+                          id: true,
+                          firstName: true,
+                          lastName: true,
+                          email: true,
+                          isAdmin: true,
+                      },
+                  },
+              },
+          });
+      }
+      
+      return NextResponse.json(listings, { status: 200 });
+  } catch (error: any) {
+      console.warn("Error fetching listings:", error.message);
+      return NextResponse.json(
+          { message: "An error occurred while fetching listings" },
+          { status: 500 }
+      );
+  }
 }

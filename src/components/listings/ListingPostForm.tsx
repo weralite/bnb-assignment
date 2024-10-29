@@ -63,9 +63,9 @@ const ListingForm: React.FC<AddListingFormProps> = ({ onClose }) => {
     };
 
     return (
-        <div className="flex flex-col">
-            <h2 className="py-4 text-lg font-semibold border-b text-center">Create Listing</h2>
-            <form className="flex flex-col w-full max-w-lg mx-auto p-10 gap-5" onSubmit={handleSubmit}>
+        <div className="my-auto flex flex-col px-10 pb-10">
+            <h2 className="py-4 text-lg font-semibold text-center">Create Listing</h2>
+            <form className="flex flex-col w-full max-w-lg mx-auto gap-5" onSubmit={handleSubmit}>
                 <div className="border border-gray-300 rounded-lg">
                     {Object.keys(formValues).map((key) => {
                         const id = key; // Use the key as the id for the input
