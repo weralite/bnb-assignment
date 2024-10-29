@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import HeaderAnimations from './HeaderAnimations';
 import DesktopUserMenu from "@/components/navigation/DesktopUserMenu";
-import MobileContent from "@/components/common/MobileContent";
-import ScrolledContent from "@/components/common/ScrolledContent";
-import NonScrolledContent from "@/components/common/NonScrolledContent";
-import HeaderLogo from "@/components/common/HeaderLogo";
+import MobileContent from "@/components/header/MobileContent";
+import ScrolledContent from "@/components/header/ScrolledContent";
+import NonScrolledContent from "@/components/header/NonScrolledContent";
+import HeaderLogo from "@/components/header/HeaderLogo";
 
 
 export default function Header() {

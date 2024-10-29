@@ -1,7 +1,7 @@
-import SearchDestination from "../common/SearchDestination";
-import CheckInCalender from "../common/CheckInCalender";
-import CheckOutCalender from "../common/CheckOutCalender";
-import SpecifyGuests from "../common/SpecifyGuests";
+import SearchDestination from "../header/SearchDestination";
+import CheckInCalender from "../header/CheckInCalender";
+import CheckOutCalender from "../header/CheckOutCalender";
+import SpecifyGuests from "../header/SpecifyGuests";
 
 const NonScrolledContent = () => {
     return (
