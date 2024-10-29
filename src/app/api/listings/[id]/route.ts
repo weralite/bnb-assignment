@@ -4,11 +4,9 @@ import { Listing } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function GET(request: NextRequest) {
+export async function GET(request: NextRequest, options: APIOptions) {
     try {
-        // Extract the listing ID from the request's URL
-        const { searchParams } = new URL(request.url);
-        const id = searchParams.get("id");
+        const id = options.params.id;
 
         if (!id) {
             return NextResponse.json(

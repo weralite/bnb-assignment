@@ -10,6 +10,8 @@ const prisma = new PrismaClient();
 export async function POST(request: NextRequest) {
     const userId = request.headers.get("userId");
 
+    console.log("userId: ", userId);
+
     if (!userId) {
       return NextResponse.json(
         { message: "Unauthorized: User not authenticated" },
