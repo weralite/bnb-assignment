@@ -89,11 +89,18 @@ export async function PUT(request: NextRequest) {
 }
 
 
-export async function DELETE(request: NextRequest) {
-    try {
-        const { searchParams } = new URL(request.url);
-        const id = searchParams.get("id");
+export async function DELETE(request: NextRequest, options: APIOptions) {
+    const id = options.params.id;
+    const userId = request.headers.get("userId");
 
+    if (!userId) {
+        return NextResponse.json(
+            { message: "Unauthorized: User not authenticated" },
+            { status: 401 }
+        );
+    }
+
+    try {
         if (!id) {
             return NextResponse.json(
                 { message: "Listing ID is required." },
@@ -101,6 +108,34 @@ export async function DELETE(request: NextRequest) {
             );
         }
 
+        // Fetch the listing to check the advertiserId
+        const listing = await prisma.listing.findUnique({
+            where: { id },
+            select: { advertiserId: true }, // Only select the advertiserId
+        });
+
+        if (!listing) {
+            return NextResponse.json(
+                { message: "Listing not found." },
+                { status: 404 }
+            );
+        }
+
+        // Fetch the user details to check if the user is an admin
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+            select: { isAdmin: true }, // Select only the isAdmin field
+        });
+
+        // Check if the user is the advertiser or an admin
+        if (listing.advertiserId !== userId && !(user && user.isAdmin)) {
+            return NextResponse.json(
+                { message: "Unauthorized: You do not have permission to delete this listing." },
+                { status: 403 }
+            );
+        }
+
+        // Proceed to delete the listing
         await prisma.listing.delete({
             where: { id },
         });

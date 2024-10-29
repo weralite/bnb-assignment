@@ -8,6 +8,14 @@ import listingValidator from "@/utils/validators/listingValidator";
 const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
+    const userId = request.headers.get("userId");
+
+    if (!userId) {
+      return NextResponse.json(
+        { message: "Unauthorized: User not authenticated" },
+        { status: 401 }
+      );
+    }
     try {
         const body: ListingWithAdvertiser = await request.json();
         const [hasErrors, errors] = listingValidator(body);
