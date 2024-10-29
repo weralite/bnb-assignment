@@ -1,0 +1,53 @@
+import { NextRequest, NextResponse } from "next/server";
+
+
+import { PrismaClient } from "@prisma/client";
+import { ListingWithAdvertiser } from "@/types/listing";
+
+const prisma = new PrismaClient();
+
+export async function POST(request: NextRequest) {
+    try {
+        const body: ListingWithAdvertiser = await request.json();
+        let [hasErrors, errors] = [false, {}]; // bookValidator(body);
+        if (hasErrors) {
+            return NextResponse.json(
+                {
+                    errors,
+                },
+                { status: 400 }
+            );
+        }
+        const listing = await prisma.listing.create({
+            data: {
+                title: body.title,
+                description: body.description,
+                address: body.address,
+                country: body.country,
+                dailyRate: body.dailyRate,
+                availableBeds: body.availableBeds,
+                availableFrom: body.availableFrom,
+                availableTo: body.availableTo,
+                advertiser: {
+                    connect: {
+                        id: body.advertiser.id,
+                    },
+                },
+            },
+            include: {
+                advertiser: true,
+            },
+        });
+        return NextResponse.json(listing, { status: 201 });
+    } catch (error: any) {
+        console.warn("Error Listing Object: ", error.message);
+        return NextResponse.json(
+            {
+                message: "A valid 'ListingData' object has to be sent",
+            },
+            {
+                status: 400,
+            }
+        );
+    }
+}
