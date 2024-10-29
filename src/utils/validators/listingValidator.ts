@@ -1,7 +1,8 @@
-import { ListingData, Listing } from "@/types/booking";
+import { ListingData } from "@/types/listing";
+import { Listing } from "@prisma/client";
 
 
-export default function authorValidator(data: ListingData | Listing, id?: string): [boolean, ErrorObject] {
+export default function listingValidator(data: ListingData | Listing, id?: string): [boolean, ErrorObject] {
   let errors: ErrorObject = {};
   if((data as Listing).id !== undefined) {
     if((data as Listing).id !== id) {
