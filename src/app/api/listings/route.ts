@@ -44,8 +44,7 @@ export async function POST(request: NextRequest) {
                         email: true,
                         isAdmin: true,
                     },
-                }
-                
+                },
             },
         });
         return NextResponse.json(listing, { status: 201 });
@@ -69,7 +68,15 @@ export async function GET() {
     try {
         const listings = await prisma.listing.findMany({
             include: {
-                advertiser: true,
+                advertiser: {
+                    select: {
+                        id: true,
+                        firstName: true,
+                        lastName: true,
+                        email: true,
+                        isAdmin: true,
+                    },
+                },
             },
         });
         return NextResponse.json(listings, { status: 200 });
