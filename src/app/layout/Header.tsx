@@ -66,7 +66,7 @@ export default function Header() {
 
 
         <motion.div
-          className="flex flex-row justify-center items-center w-full max-w-[860px]"
+          className="flex flex-row justify-center items-center w-full max-w-[800px]"
           animate={controls}
           transition={{ duration: animationDuration, ease: "easeOut" }}
           onClick={() => reverseAnimation()}
