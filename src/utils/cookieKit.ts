@@ -2,6 +2,8 @@ type CookieKey = "token"; // Define your cookie key types here
 
 class CookieKit {
   static set(key: CookieKey, value: string, options: { [key: string]: any } = {}) {
+
+
     const cookieOptions = {
       path: '/',
       ...options, // Allow passing additional options like maxAge, httpOnly, etc.

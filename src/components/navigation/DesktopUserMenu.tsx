@@ -1,16 +1,17 @@
 import { useState, useRef } from "react";
-import HamburgerIcon from "../common/HamburgerIcon";
+import HamburgerIcon from "../header/HamburgerIcon";
 import profilePic from "@/assets/no-profile.svg";
 import Image from "next/image";
 import Modal from "../common/Modal";
 import LoginForm from "../auth/LoginForm";
 import RegisterForm from "../auth/RegisterForm";
 import { useUser } from "@/context/user";
+import AddListingForm from "@/components/listings/addListingForm";
 
 export default function DesktopMenu() {
   const user = useUser();
   const [openModal, setModal] = useState<boolean>(false);
-  const [modalContent, setModalContent] = useState<string | null>(null); // For determining which content to show
+  const [modalContent, setModalContent] = useState<string | React.ReactNode | null>(null); // For determining which content to show
   const toggleButtonRef = useRef<HTMLDivElement | null>(null);
 
   const handleModal = () => {
@@ -33,17 +34,25 @@ export default function DesktopMenu() {
     setModalContent("register");
   };
 
+  // Open login modal
+  const openAddListingModal = () => {
+    setModal(true);
+    setModalContent(<AddListingForm onClose={onClose} />);
+  };
+
   // Menu content with login and register options
 
   const menuContent = user.token ? (
     <div>
       <h1 className="text-sm font-light text-gray-400 text-center border-b p-2">{user.user?.firstName} {user.user?.lastName}</h1>
       <ul className="text-sm font-medium text-gray-700">
-      <li className="pl-5 pr-15 py-4 border-b border-custom-grey hover:bg-custom-grey hover:rounded-md block cursor-pointer">
+        <li className="pl-5 pr-15 py-4 border-b border-custom-grey hover:bg-custom-grey hover:rounded-md block cursor-pointer">
           Bookings
         </li>
 
-        <li className="pl-5 pr-15 py-4 border-b border-custom-grey hover:bg-custom-grey hover:rounded-md block cursor-pointer">
+        <li className="pl-5 pr-15 py-4 border-b border-custom-grey hover:bg-custom-grey hover:rounded-md block cursor-pointer"
+          onClick={openAddListingModal}
+        >
           Listings
         </li>
         <li
@@ -99,7 +108,7 @@ export default function DesktopMenu() {
           open={!!modalContent}
           onClose={() => setModalContent(null)}
           size="lg"
-          content={modalContent === "login" ? <LoginForm onClose={onClose} /> : <RegisterForm />}
+          content={modalContent === "login" ? <LoginForm onClose={onClose} /> : modalContent === "register" ? <RegisterForm /> : modalContent}
           toggleButtonRef={toggleButtonRef}
           className="absolute w-full h-[100vh] top-0 right-0 bg-black bg-opacity-50 z-50 flex justify-center items-center"
         />
