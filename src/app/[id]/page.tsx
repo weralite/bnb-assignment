@@ -9,7 +9,7 @@ export default async function ListingPage({ params }: { params: { id: string } }
   return (
 <div className="container mx-auto px-4 py-10 space-y-8">
 
-  <div className="relative">
+  <div>
     <img
       className="w-full h-96 object-cover rounded-lg shadow-lg"
       src={listing.imageUrl || "https://via.placeholder.com/800x600"}
