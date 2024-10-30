@@ -1,4 +1,4 @@
-import ListingGrid from "@/components/listings/ListingGrid";
+import ListingGrid from "@/components/listing/ListingGrid";
 
 export default function Home() {
   return (

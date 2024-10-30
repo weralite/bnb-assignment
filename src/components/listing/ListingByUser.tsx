@@ -3,7 +3,7 @@ import { getUserListings } from "@/actions/getUserListings";
 import ListingList from "./ListingList";
 import { Listing } from "@/types/listing"; // Import the Listing interface
 
-const ListingsByUser: React.FC = () => {
+const ListingByUser: React.FC = () => {
   const [listings, setListings] = useState<Listing[]>([]); // Use the Listing interface
 
   useEffect(() => {
@@ -27,4 +27,4 @@ const ListingsByUser: React.FC = () => {
   );
 };
 
-export default ListingsByUser;
+export default ListingByUser;

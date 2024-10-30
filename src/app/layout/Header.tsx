@@ -1,6 +1,5 @@
 "use client";
-
-
+ 
 import { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import HeaderAnimations from './HeaderAnimations';
@@ -9,6 +8,7 @@ import MobileContent from "@/components/header/MobileContent";
 import ScrolledContent from "@/components/header/ScrolledContent";
 import NonScrolledContent from "@/components/header/NonScrolledContent";
 import HeaderLogo from "@/components/header/HeaderLogo";
+import Link from 'next/link';
 
 
 export default function Header() {
@@ -60,7 +60,9 @@ export default function Header() {
       <div className="px-5 md:px-10 lg:px-20 xl:px-30 2xl:px-40 w-full flex flex-col justify-center items-center">
 
         <div className="flex flex-row justify-between w-full h-20 py-2">
+        <Link href={"/"}>
           <HeaderLogo />
+          </Link>
           <DesktopUserMenu />
         </div>
 

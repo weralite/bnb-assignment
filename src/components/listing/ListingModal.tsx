@@ -2,7 +2,7 @@
 
 import { useState, ReactNode } from "react";
 import ListingPostForm from "./ListingPostForm";
-import ListingsByUser from "./ListingsByUser";
+import ListingByUser from "./ListingByUser";
 
 interface Tab {
   label: string;
@@ -11,8 +11,7 @@ interface Tab {
 
 export default function ListingModal({ onClose }: { onClose: () => void }) {
   const tabs: Tab[] = [
-    { label: "Bookings", content: <div>Archived Listings content will go here.</div> },
-    { label: "Active Listings", content: <ListingsByUser /> },
+    { label: "Active Listings", content: <ListingByUser /> },
     { label: "Add Listing", content: <ListingPostForm onClose={onClose} /> },
   ];
 

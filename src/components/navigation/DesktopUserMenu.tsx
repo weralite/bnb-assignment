@@ -6,7 +6,7 @@ import Modal from "../common/Modal";
 import LoginForm from "../auth/LoginForm";
 import RegisterForm from "../auth/RegisterForm";
 import { useUser } from "@/context/user";
-import ListingModal from "@/components/listings/ListingModal";
+import ListingModal from "@/components/listing/ListingModal";
 
 export default function DesktopMenu() {
   const user = useUser();
