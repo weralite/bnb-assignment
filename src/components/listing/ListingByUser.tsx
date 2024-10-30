@@ -17,7 +17,7 @@ const ListingByUser: React.FC = () => {
 
   return (
     <div className="w-full flex flex-col items-center p-4">
-           <div className="text-lg font-semibold mb-4">
+      <div className="text-lg font-semibold mb-4">
         Total Listings: {listings.length}
       </div>
       {listings.map((listing) => (
