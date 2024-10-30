@@ -10,28 +10,28 @@ export default function listingValidator(data: ListingData | Listing, id?: strin
     }
   }
   if (!data.title) {
-    errors.firstName = "First name is required";
+    errors.title = "Title is required";
   }
   if (!data.description) {
-    errors.lastName = "Last name is required";
+    errors.description = "Description is required";
   }
   if (!data.address) {
-    errors.dateOfBirth = "Date of birth is required";
+    errors.address = "Address is required";
   }
   if (!data.country) {
-    errors.dateOfBirth = "Date of birth is required";
+    errors.country = "Country of birth is required";
   }
   if (!data.dailyRate) {
-    errors.dateOfBirth = "Date of birth is required";
+    errors.dailyRate = "Daily Rate of birth is required";
   }
   if (!data.availableBeds) {
-    errors.dateOfBirth = "Date of birth is required";
+    errors.availableBeds = "Available Beds of birth is required";
   }
   if (!data.availableFrom) {
-    errors.dateOfBirth = "Date of birth is required";
+    errors.availableFrom = "Available From of birth is required";
   }
   if (!data.availableTo) {
-    errors.dateOfBirth = "Date of birth is required";
+    errors.availableTo = "Available To of birth is required";
   }
   const hasErrors = Object.keys(errors).length !== 0;
 

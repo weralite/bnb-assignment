@@ -1,4 +1,3 @@
-"use client";
 import { Listing } from "@prisma/client";
 
 import CookieKit from "@/utils/cookieKit";
