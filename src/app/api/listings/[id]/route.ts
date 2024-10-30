@@ -69,7 +69,7 @@ export async function PUT(request: NextRequest, options: APIOptions) {
         }
 
         // Parse the request body to get the updated listing data
-        const { title, description, address, country, dailyRate, availableBeds, availableFrom, availableTo } = await request.json();
+        const { title, description, address, imageUrl, country, dailyRate, availableBeds, availableFrom, availableTo } = await request.json();
 
         // Fetch the listing to check the advertiserId
         const listing = await prisma.listing.findUnique({
@@ -105,6 +105,7 @@ export async function PUT(request: NextRequest, options: APIOptions) {
                 title,
                 description,
                 address,
+                imageUrl,
                 country,
                 dailyRate,
                 availableBeds,

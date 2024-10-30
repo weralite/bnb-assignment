@@ -1,16 +1,18 @@
-import { getAllListings } from "@/actions/getAllListing";
+import { getListings } from "@/actions/getListings";
 import ListingCard from "./ListingCard";
+import Link from "next/link";
 
 
 
-export default async function getListings() {
-    const listings = await getAllListings();
-
+export default async function ListingGrid() {
+    const listings = await getListings();
+console.log(listings)
     return (
         <div className="w-full grid 1-sm:grid-cols-2 1-lg:grid-cols-3 1-xl:grid-cols-4 gap-5">
             {listings.map((listing) => (
-
-                <ListingCard key={listing.id} listing={listing} />
+                <Link key={listing.id} href={`/${listing.id}`}>
+                    <ListingCard listing={listing} />
+                </Link>
             ))}
 
         </div>

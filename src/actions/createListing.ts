@@ -19,6 +19,7 @@ export async function createListing(formData: FormData): Promise<void> {
         description: formData.get("description"),
         address: formData.get("address"),
         country: formData.get("country"),
+        imageUrl: formData.get("imageUrl"),
         dailyRate: parseFloat(formData.get("dailyRate") as string), 
         availableBeds: parseInt(formData.get("availableBeds") as string, 10), 
         availableFrom: formData.get("availableFrom"), 

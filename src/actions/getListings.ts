@@ -2,16 +2,11 @@ import { Listing } from "@prisma/client";
 
 const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
-export async function getAllListings(): Promise<Listing[]> {
+export async function getListings(): Promise<Listing[]> {
     const url = new URL(`${BASE_URL}/api/listings`);
 
     try {
-        const response = await fetch(url, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
+        const response = await fetch(url);
 
         if (!response.ok) {
             throw new Error("Unable to fetch listings");

@@ -54,7 +54,7 @@ model Booking {
   userId       String   @db.ObjectId
   property     Listing  @relation(fields: [propertyId], references: [id])
   propertyId   String   @db.ObjectId
-
+  status       String   @default("PENDING")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

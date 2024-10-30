@@ -36,6 +36,7 @@ export async function POST(request: NextRequest) {
                 description: body.description,
                 address: body.address,
                 country: body.country,
+                imageUrl: body.imageUrl,
                 dailyRate: body.dailyRate,
                 availableBeds: body.availableBeds,
                 availableFrom: body.availableFrom,
@@ -76,60 +77,67 @@ export async function POST(request: NextRequest) {
 // Get request to get all listings
 
 export async function GET(request: NextRequest) {
-  const authHeader = request.headers.get("Authorization");
-
-  if (!authHeader) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-  }
-
-  try {
-      const token = authHeader.split(" ")[1];
-      const decodedToken = await verifyJWT(token); // Decode token on the server
-      const userId = decodedToken?.userId;
-
-      let listings;
-
-      if (userId) {
-          console.log("Fetching listings for userId:", userId);
-          // Fetch listings with a matching advertiserId
-          listings = await prisma.listing.findMany({
-              where: { advertiserId: userId },
-              include: {
-                  advertiser: {
-                      select: {
-                          id: true,
-                          firstName: true,
-                          lastName: true,
-                          email: true,
-                          isAdmin: true,
-                      },
-                  },
-              },
-          });
-      } else {
-          // Fetch all listings if no specific userId is provided
-          console.log("Fetching all listings");
-          listings = await prisma.listing.findMany({
-              include: {
-                  advertiser: {
-                      select: {
-                          id: true,
-                          firstName: true,
-                          lastName: true,
-                          email: true,
-                          isAdmin: true,
-                      },
-                  },
-              },
-          });
+    const authHeader = request.headers.get("Authorization");
+    let userId: string | null = null;
+  
+    if (authHeader) {
+      try {
+        const token = authHeader.split(" ")[1];
+        const decodedToken = await verifyJWT(token); // Decode token on the server
+        userId = decodedToken?.userId;
+      } catch (error: any) {
+        console.warn("Error decoding token:", error.message);
+        return NextResponse.json(
+          { message: "Invalid token" },
+          { status: 401 }
+        );
       }
-      
+    }
+  
+    try {
+      let listings;
+  
+      if (userId) {
+        console.log("Fetching listings for userId:", userId);
+        // Fetch listings with a matching advertiserId
+        listings = await prisma.listing.findMany({
+          where: { advertiserId: userId },
+          include: {
+            advertiser: {
+              select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                email: true,
+                isAdmin: true,
+              },
+            },
+          },
+        });
+      } else {
+        // Fetch all listings if no specific userId is provided
+        console.log("Fetching all listings");
+        listings = await prisma.listing.findMany({
+          include: {
+            advertiser: {
+              select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                email: true,
+                isAdmin: true,
+              },
+            },
+          },
+        });
+      }
+  
       return NextResponse.json(listings, { status: 200 });
-  } catch (error: any) {
+    } catch (error: any) {
       console.warn("Error fetching listings:", error.message);
       return NextResponse.json(
-          { message: "An error occurred while fetching listings" },
-          { status: 500 }
+        { message: "An error occurred while fetching listings" },
+        { status: 500 }
       );
+    }
   }
-}

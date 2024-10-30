@@ -13,6 +13,7 @@ interface ListingFormValues {
     address: string;
     country: string;
     dailyRate: string;
+    imageUrl: string;
     availableBeds: string;
     availableFrom: string;
     availableTo: string;
@@ -27,6 +28,7 @@ const ListingForm: React.FC<AddListingFormProps> = ({ onClose }) => {
         country: "Swevirige",
         dailyRate: "150",
         availableBeds: "2",
+        imageUrl: "",
         availableFrom: "2024-11-01T00:00:00Z",
         availableTo: "2024-12-31T00:00:00Z",
     });
@@ -55,6 +57,7 @@ const ListingForm: React.FC<AddListingFormProps> = ({ onClose }) => {
             address: "",
             country: "",
             dailyRate: "",
+            imageUrl: "",
             availableBeds: "",
             availableFrom: "",
             availableTo: "",

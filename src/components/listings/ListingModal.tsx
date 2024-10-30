@@ -11,9 +11,9 @@ interface Tab {
 
 export default function ListingModal({ onClose }: { onClose: () => void }) {
   const tabs: Tab[] = [
-    { label: "Add Listing", content: <ListingPostForm onClose={onClose} /> },
-    { label: "Active Listings", content: <ListingsByUser /> },
     { label: "Bookings", content: <div>Archived Listings content will go here.</div> },
+    { label: "Active Listings", content: <ListingsByUser /> },
+    { label: "Add Listing", content: <ListingPostForm onClose={onClose} /> },
   ];
 
   const [activeTab, setActiveTab] = useState(0); 
