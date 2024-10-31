@@ -53,7 +53,7 @@ const AddListingForm: React.FC<AddListingFormProps> = ({ onClose }) => {
                 listing={listing}
                 onInputChange={handleInputChange}
             />
-            <div className='w-full flex flex-row justify-between gap-5 p-5'>
+            <div className='w-full flex flex-row justify-between gap-5 py-5'>
                 <button className="bg-green-500 rounded-lg text-white p-2 w-full" onClick={handleSave}>Save</button>
                 <button className="bg-red-500 rounded-lg text-white p-2 w-full" onClick={onClose}>Close</button>
             </div>

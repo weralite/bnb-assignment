@@ -46,17 +46,17 @@ const ListingByUser: React.FC = () => {
               const { name, value } = e.target;
               setSelectedListing((prevListing) => prevListing ? { ...prevListing, [name]: value } : null);
             }}/>
-            <div className='w-full flex flex-row justify-between gap-5 p-5'>
+            <div className='w-full flex flex-row justify-between gap-5 py-5'>
               <button className="bg-green-500 rounded-lg text-white p-2 w-full" onClick={handleSave}>Save</button>
               <button className="bg-red-500 rounded-lg text-white p-2 w-full" onClick={handleCloseForm}>Back</button>
             </div>
         </div>
       ) : (
         <div className='h-full'>
-          <div className="text-lg font-semibold mb-4">
+          <div className="text-lg font-semibold mb-4 text-center">
             Total Listings: {listings.length}
           </div>
-          <div className="overflow-y-scroll h-full relative">
+          <div className="overflow-y-scroll h-150 relative">
           {listings.map((listing) => (
             <div className="w-full p-2" key={listing.id} onClick={() => handleListingClick(listing)}>
               <ListingList listing={listing} />

@@ -18,7 +18,7 @@ export default function ListingModal({ onClose }: { onClose: () => void }) {
   const [activeTab, setActiveTab] = useState(0); 
 
   return (
-    <div className="modal h-175 flex flex-col justify-center">
+    <div className="modal">
       <ul className="flex flex-row justify-evenly border-b p-4">
         {tabs.map((tab, index) => (
           <li
@@ -30,9 +30,7 @@ export default function ListingModal({ onClose }: { onClose: () => void }) {
           </li>
         ))}
       </ul>
-
         {tabs[activeTab].content}
-
     </div>
   );
 }

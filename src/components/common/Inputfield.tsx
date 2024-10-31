@@ -10,7 +10,7 @@ interface InputFieldProps {
 }
 
 const InputField: React.FC<InputFieldProps> = ({ label, name, value, type, onChange }) => (
-    <div className="p-4 flex flex-row gap-4 border-b">
+    <div className="flex flex-col border-b">
         <label htmlFor={name} className="text-gray-500">
             {label}:
         </label>
