@@ -7,7 +7,7 @@ type ListingListProps = {
 
 export default function ListingList({ listing }: ListingListProps) {
   return (
-    <div className="w-full flex flex-row rounded shadow-md transition-all duration-150 hover:scale-110 hover:cursor-pointer">
+    <div className="w-full flex flex-row rounded shadow-md transition-all duration-150 scale-100 hover:scale-90 hover:cursor-pointer">
       <div>
         <img className="hidden sm:block w-24 h-24 object-cover" src={listing.imageUrl} alt={listing.title} />
       </div>

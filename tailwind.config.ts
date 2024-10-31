@@ -21,6 +21,8 @@ const config: Config = {
         '1-2xl': '1530px',
       },
       maxHeight: {
+        '120': '30rem',
+        '150': '37.5rem',
         '175': '43.75rem',
         '200': '50rem',
       },

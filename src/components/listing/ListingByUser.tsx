@@ -56,7 +56,7 @@ const ListingByUser: React.FC = () => {
           <div className="text-lg font-semibold mb-4 text-center">
             Total Listings: {listings.length}
           </div>
-          <div className="overflow-y-scroll h-150 relative">
+          <div className="overflow-y-scroll h-120 relative">
           {listings.map((listing) => (
             <div className="w-full p-2" key={listing.id} onClick={() => handleListingClick(listing)}>
               <ListingList listing={listing} />
