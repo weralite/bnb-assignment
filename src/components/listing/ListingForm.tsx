@@ -6,10 +6,9 @@ import InputField from "@/components/common/Inputfield"; // Import the InputFiel
 interface ListingFormProps {
   listing: ListingData | null;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  onSave: () => void;
 }
 
-const ListingForm: React.FC<ListingFormProps> = ({ listing, onInputChange, onSave }) => {
+const ListingForm: React.FC<ListingFormProps> = ({ listing, onInputChange }) => {
   if (!listing) return null;
 
   return (
@@ -77,11 +76,7 @@ const ListingForm: React.FC<ListingFormProps> = ({ listing, onInputChange, onSav
         value={listing.availableTo.toString()}
         onChange={onInputChange}
       />
-
-      {/* Add additional fields as needed */}
-      <button onClick={onSave} className="bg-blue-500 text-white p-2 mt-4">
-        Save Changes
-      </button>
+      
     </div>
   );
 };

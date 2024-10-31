@@ -20,6 +20,10 @@ const config: Config = {
         '1-xl': '1380px',
         '1-2xl': '1530px',
       },
+      maxHeight: {
+        '175': '43.75rem',
+        '200': '50rem',
+      },
       height: {
         '5': '1.25rem',
         '15': '3.75rem',

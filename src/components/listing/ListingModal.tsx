@@ -30,9 +30,9 @@ export default function ListingModal({ onClose }: { onClose: () => void }) {
           </li>
         ))}
       </ul>
-      <div className="relative h-full overflow-y-auto flex flex-col">
+
         {tabs[activeTab].content}
-      </div>
+
     </div>
   );
 }

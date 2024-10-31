@@ -25,40 +25,45 @@ const ListingByUser: React.FC = () => {
     setSelectedListing(null);
   };
 
+  const handleSave = () => {
+    if (!selectedListing) return;
+    const formData = new FormData();
+    Object.entries(selectedListing).forEach(([key, value]) => {
+      formData.append(key, value.toString());
+    });
+    updateListing(selectedListing.id, formData);
+    handleCloseForm();
+  };
+
   return (
-    <div className="w-full flex flex-col items-center p-4">
+    <div className="my-auto h-full flex flex-col px-10 pb-10">
       {selectedListing ? (
         <div>
-          <button onClick={handleCloseForm} className="mb-4">
-            Back to Listings
-          </button>
+          <div className="p-2 text-lg font-semibold text-center">Edit Listing</div>
           <ListingForm
             listing={selectedListing}
             onInputChange={(e) => {
               const { name, value } = e.target;
               setSelectedListing((prevListing) => prevListing ? { ...prevListing, [name]: value } : null);
-            }}
-            onSave={() => {
-              const formData = new FormData();
-              Object.entries(selectedListing).forEach(([key, value]) => {
-                formData.append(key, value.toString());
-              });
-              updateListing(selectedListing.id, formData);
-              handleCloseForm();
-            }}
-          />
+            }}/>
+            <div className='w-full flex flex-row justify-between gap-5 p-5'>
+              <button className="bg-green-500 rounded-lg text-white p-2 w-full" onClick={handleSave}>Save</button>
+              <button className="bg-red-500 rounded-lg text-white p-2 w-full" onClick={handleCloseForm}>Back</button>
+            </div>
         </div>
       ) : (
-        <>
+        <div className='h-full'>
           <div className="text-lg font-semibold mb-4">
             Total Listings: {listings.length}
           </div>
+          <div className="overflow-y-scroll h-full relative">
           {listings.map((listing) => (
             <div className="w-full p-2" key={listing.id} onClick={() => handleListingClick(listing)}>
               <ListingList listing={listing} />
             </div>
           ))}
-        </>
+          </div>
+        </div>
       )}
     </div>
   );

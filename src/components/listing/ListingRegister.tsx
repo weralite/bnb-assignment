@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { createListing } from "@/actions/createListing"; 
-import ListingForm from "./ListingForm"; 
+import { createListing } from "@/actions/createListing";
+import ListingForm from "./ListingForm";
 import { ListingData } from "@/types/listing";
 
 interface AddListingFormProps {
@@ -37,7 +37,7 @@ const AddListingForm: React.FC<AddListingFormProps> = ({ onClose }) => {
 
     const handleSave = async () => {
         const listingData = new FormData();
-        
+
         Object.entries(listing).forEach(([key, value]) => {
             listingData.append(key, value.toString());
         });
@@ -48,12 +48,15 @@ const AddListingForm: React.FC<AddListingFormProps> = ({ onClose }) => {
 
     return (
         <div className="my-auto flex flex-col px-10 pb-10">
-            <h2 className="py-4 text-lg font-semibold text-center">Create Listing</h2>
+            <div className="p-2 text-lg font-semibold text-center">Add Listing</div>
             <ListingForm
                 listing={listing}
                 onInputChange={handleInputChange}
-                onSave={handleSave}
             />
+            <div className='w-full flex flex-row justify-between gap-5 p-5'>
+                <button className="bg-green-500 rounded-lg text-white p-2 w-full" onClick={handleSave}>Save</button>
+                <button className="bg-red-500 rounded-lg text-white p-2 w-full" onClick={onClose}>Close</button>
+            </div>
         </div>
     );
 };

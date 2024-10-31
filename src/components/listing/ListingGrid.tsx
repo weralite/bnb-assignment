@@ -8,9 +8,7 @@ export default async function ListingGrid() {
     return (
         <div className="grid 1-sm:grid-cols-2 1-md:grid-cols-3 1-lg:grid-cols-4 1-xl:grid-cols-5 gap-5 justify-center">
             {listings.map((listing) => (
-
-                    <ListingCard listing={listing} />
-        
+                <ListingCard key={listing.id} listing={listing} />
             ))}
 
         </div>
