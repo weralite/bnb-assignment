@@ -30,7 +30,6 @@ export async function createListing(formData: FormData): Promise<void> {
         const response = await fetch(url, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`,
             },
             body: JSON.stringify(listingData),

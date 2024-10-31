@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { FormEvent } from "react";
 import { createListing } from "@/actions/createListing"; // Adjust the import path accordingly
+import InputField from "@/components/common/Inputfield"; // Import the InputField component
+import { useForm } from "@/hooks/useForm"; // Import the useForm hook
 
 interface AddListingFormProps {
     onClose: () => void;
@@ -19,49 +21,31 @@ interface ListingFormValues {
     availableTo: string;
 }
 
+const initialFormValues: ListingFormValues = {
+    title: "Hejsan",
+    description: "Tjena",
+    address: "Husvagen",
+    country: "Swevirige",
+    dailyRate: "150",
+    availableBeds: "2",
+    imageUrl: "",
+    availableFrom: "2024-11-01T00:00:00Z",
+    availableTo: "2024-12-31T00:00:00Z",
+};
+
 const ListingForm: React.FC<AddListingFormProps> = ({ onClose }) => {
-    // State for form fields
-    const [formValues, setFormValues] = useState<ListingFormValues>({
-        title: "Hejsan",
-        description: "Tjena",
-        address: "Husvagen",
-        country: "Swevirige",
-        dailyRate: "150",
-        availableBeds: "2",
-        imageUrl: "",
-        availableFrom: "2024-11-01T00:00:00Z",
-        availableTo: "2024-12-31T00:00:00Z",
-    });
+    const { formValues, handleChange, resetForm } = useForm<ListingFormValues>(initialFormValues);
 
-    // Handle input changes
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormValues((prev) => ({ ...prev, [name]: value }));
-    };
-
-    // Handle form submission
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const listingData = new FormData();
-        Object.keys(formValues).forEach((key) => {
-            listingData.append(key, formValues[key as keyof ListingFormValues]);
+        Object.entries(formValues).forEach(([key, value]) => {
+            listingData.append(key, value);
         });
 
         await createListing(listingData);
-
-        // Reset the form
-        setFormValues({
-            title: "",
-            description: "",
-            address: "",
-            country: "",
-            dailyRate: "",
-            imageUrl: "",
-            availableBeds: "",
-            availableFrom: "",
-            availableTo: "",
-        });
+        resetForm(initialFormValues); // Reset to initial values
         onClose();
     };
 
@@ -70,25 +54,16 @@ const ListingForm: React.FC<AddListingFormProps> = ({ onClose }) => {
             <h2 className="py-4 text-lg font-semibold text-center">Create Listing</h2>
             <form className="flex flex-col w-full max-w-lg mx-auto gap-5" onSubmit={handleSubmit}>
                 <div className="border border-gray-300 rounded-lg">
-                    {Object.keys(formValues).map((key) => {
-                        const id = key; // Use the key as the id for the input
-                        return (
-                            <div className="p-4 flex flex-row gap-4 border-b" key={key}>
-                                <p className="text-gray-500">
-                                    <label htmlFor={id}>{key.charAt(0).toUpperCase() + key.slice(1)}:</label>
-                                </p>
-                                <input
-                                    id={id} // Set the id attribute
-                                    className="focus:outline-none"
-                                    type={key.includes("date") ? "date" : key === "dailyRate" || key === "availableBeds" ? "number" : "text"}
-                                    name={key}
-                                    value={formValues[key as keyof ListingFormValues]} // Type assertion
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                        );
-                    })}
+                    {Object.entries(formValues).map(([key, value]) => (
+                        <InputField
+                            key={key}
+                            label={key.charAt(0).toUpperCase() + key.slice(1)}
+                            name={key}
+                            value={value}
+                            type={key.includes("date") ? "date" : key === "dailyRate" || key === "availableBeds" ? "number" : "text"}
+                            onChange={handleChange}
+                        />
+                    ))}
                 </div>
                 <button className="bg-[#ff5a5f] text-white rounded-md py-3" type="submit">Create Listing</button>
             </form>

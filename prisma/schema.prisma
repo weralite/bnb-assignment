@@ -41,7 +41,7 @@ model Listing {
   advertiser    User      @relation(fields: [advertiserId], references: [id])
   advertiserId  String    @db.ObjectId
   Booking       Booking[]
-  imageUrl      String?
+  imageUrl      String
 }
 
 model Booking {

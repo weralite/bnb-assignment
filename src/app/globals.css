@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply overflow-y-scroll;
+}
+
 .dot-separator:not(:first-child)::before {
     content: '•'; /* Dot character */
     margin-right: 0.5rem; /* Adjust spacing as needed */

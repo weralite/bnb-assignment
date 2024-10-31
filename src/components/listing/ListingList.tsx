@@ -7,14 +7,15 @@ type ListingListProps = {
 
 export default function ListingList({ listing }: ListingListProps) {
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg transition-all duration-300 hover:scale-110">
-
+    <div className="w-full flex flex-row rounded overflow-hidden shadow-md transition-all duration-150 hover:scale-110">
+<div>
+        <img className="w-24 h-24" src={listing.imageUrl} alt={listing.title} />
+</div>
       <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{listing.title}</div>
-        <p className="text-gray-700 text-base">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-        </p>
+        <h4 className="font-semibold text-sm mb-2 1-sm:text-md">{listing.title}</h4>
+        <p className="text-gray-700 text-base truncate">{listing.address}</p>
       </div>
+
 
     </div>
   );

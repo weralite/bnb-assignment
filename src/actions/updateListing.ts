@@ -1,4 +1,5 @@
 import CookieKit from "@/utils/cookieKit";
+import { toISODateTime } from "@/utils/dateConverter";
 
 const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
@@ -21,8 +22,8 @@ export async function updateListing(id: string, formData: FormData): Promise<voi
         imageUrl: formData.get("imageUrl"),
         dailyRate: parseFloat(formData.get("dailyRate") as string),
         availableBeds: parseInt(formData.get("availableBeds") as string, 10),
-        availableFrom: formData.get("availableFrom"),
-        availableTo: formData.get("availableTo"),
+        availableFrom: toISODateTime(formData.get("availableFrom") as string),
+        availableTo: toISODateTime(formData.get("availableTo") as string),
     };
 
     console.log("Listing Data:", listingData);

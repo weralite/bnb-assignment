@@ -1,15 +1,8 @@
+import { ListingWithAdvertiser } from "@/types/listing";
 
 
-type Listing = {
-  imageUrl: string | null;
-  title: string;
-  country: string;
-  availableBeds: number;
-  dailyRate: number;
-  description: string;
-}
 
-export default function ListingDetails({ listing }: { listing: Listing }) {
+export default function ListingDetails({ listing }: { listing: ListingWithAdvertiser }) {
   return (
     <div className="container mx-auto px-4 py-10 space-y-8">
 
@@ -23,7 +16,7 @@ export default function ListingDetails({ listing }: { listing: Listing }) {
 
       <div className="md:flex md:justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold">{listing.title}</h1>
+          <h1 className="text-2xl font-bold">{listing.title}</h1>
           <p className="text-gray-600">{listing.country} · {listing.availableBeds} Beds</p>
         </div>
         <div className="mt-4 md:mt-0">
@@ -35,9 +28,14 @@ export default function ListingDetails({ listing }: { listing: Listing }) {
       <div className="md:flex md:space-x-8">
 
         <div className="md:w-2/3 space-y-6">
-          <h2 className="text-2xl font-semibold">About this place</h2>
-          <p className="text-gray-700 leading-relaxed">{listing.description}</p>
-
+        <div className="flex flex-col">
+          <h2 className="text-xl font-semibold">About this place</h2>
+          <p className="text-gray-500 leading-relaxed">{listing.description}</p>
+          </div>
+          <div className="flex flex-col">
+          <h2 className="text-xl font-semibold">Hosted by {listing.advertiser.firstName} {listing.advertiser.lastName}</h2>
+          <p className="text-gray-400 leading-relaxed">Superhost</p>
+          </div>
 
           <div className="space-y-3">
             <h3 className="text-xl font-semibold">Amenities</h3>

@@ -8,5 +8,17 @@ type ListingWithAdvertiser = Listing & {
   advertiser: User; 
 };
 
+type ListingFormValues = Listing & {
+  title: string;
+  description: string;
+  address: string;
+  country: string;
+  dailyRate: string;
+  imageUrl: string;
+  availableBeds: string;
+  availableFrom: string;
+  availableTo: string;
+}
 
-export { UserData, ListingData, ListingWithAdvertiser, Listing };
+
+export { UserData, ListingData, ListingWithAdvertiser, Listing, ListingFormValues };
