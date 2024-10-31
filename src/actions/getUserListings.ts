@@ -7,7 +7,6 @@ const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 export async function getUserListings(): Promise<Listing[]> {
     const url = new URL(`${BASE_URL}/api/listings`);
     const token = CookieKit.get('token');
-    console.log("Token:", token);
 
 
     // Check if token exists
@@ -29,9 +28,8 @@ export async function getUserListings(): Promise<Listing[]> {
         }
 
         const listings: Listing[] = await response.json();
-        console.log("Fetched listings successfully:", listings);
 
-        return listings; // Return the listings data if needed
+        return listings;
     } catch (error: any) {
         console.warn("Error fetching listings (action)", error);
         return[];

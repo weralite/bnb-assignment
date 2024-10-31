@@ -31,7 +31,6 @@ export function userLoginValidator(
   let errors: ErrorObject = {};
   if (!data.email) {
     errors.email = "Email is required";
-    //TODO: Add email validation
   }
   if (!data.password) {
     errors.password = "Password is required";
@@ -47,7 +46,6 @@ export function userResetPasswordValidator(
   let errors: ErrorObject = {};
   if (!data.email) {
     errors.email = "Email is required";
-    //TODO: Add email validation
   }
   if (!data.newPassword) {
     errors.newPassword = "Password is required";

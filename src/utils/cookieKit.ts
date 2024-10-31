@@ -1,4 +1,4 @@
-type CookieKey = "token"; // Define your cookie key types here
+type CookieKey = "token"; 
 
 class CookieKit {
   static set(key: CookieKey, value: string, options: { [key: string]: any } = {}) {
@@ -6,7 +6,7 @@ class CookieKit {
 
     const cookieOptions = {
       path: '/',
-      ...options, // Allow passing additional options like maxAge, httpOnly, etc.
+      ...options, 
     };
 
     const cookieString = `${encodeURIComponent(key)}=${encodeURIComponent(value)}; ${Object.entries(cookieOptions)
@@ -28,7 +28,6 @@ class CookieKit {
   }
 
   static remove(key: CookieKey) {
-    // To remove a cookie, we set its expiration date to the past
     this.set(key, '', { 'max-age': -1 });
   }
 }

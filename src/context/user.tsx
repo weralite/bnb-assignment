@@ -84,14 +84,11 @@ function UserProvider({ children }: PropsWithChildren) {
     CookieKit.remove('token');
   };
 
-  //TODO: register takes data sets token
-
   const getUser = async () => {
     try {
       if (!token) {
         throw new Error();
       }
-      // return console.log("token", token)
       const _user = await getUserAction(token)
       setUser(_user)
     } catch (error: any) {

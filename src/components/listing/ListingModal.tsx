@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, ReactNode } from "react";
-import ListingPostForm from "./ListingPostForm";
+import ListingRegister from "./ListingRegister";
 import ListingByUser from "./ListingByUser";
 
 interface Tab {
@@ -12,7 +12,7 @@ interface Tab {
 export default function ListingModal({ onClose }: { onClose: () => void }) {
   const tabs: Tab[] = [
     { label: "Active Listings", content: <ListingByUser /> },
-    { label: "Add Listing", content: <ListingPostForm onClose={onClose} /> },
+    { label: "Add Listing", content: <ListingRegister onClose={onClose} /> },
   ];
 
   const [activeTab, setActiveTab] = useState(0); 

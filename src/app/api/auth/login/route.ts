@@ -39,7 +39,6 @@ export async function POST(request: NextRequest) {
       token: token,
     });
   } catch (error: any) {
-    console.log("Error: failed to login", error.message);
     return NextResponse.json(
       {
         message: "user matching credentials not found",

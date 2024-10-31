@@ -7,8 +7,7 @@ export async function updateListing(id: string, formData: FormData): Promise<voi
     const url = new URL(`${BASE_URL}/api/listings/${id}`);
 
     const token = CookieKit.get('token');
-
-    // Check if token exists
+    
     if (!token) {
         console.warn("No authentication token found.");
         return;
@@ -26,8 +25,6 @@ export async function updateListing(id: string, formData: FormData): Promise<voi
         availableTo: toISODateTime(formData.get("availableTo") as string),
     };
 
-    console.log("Listing Data:", listingData);
-
     try {
         const response = await fetch(url, {
             method: "PUT",
@@ -43,7 +40,7 @@ export async function updateListing(id: string, formData: FormData): Promise<voi
         }
 
         const updatedListing = await response.json();
-        console.log("Listing updated successfully:", updatedListing);
+
 
         return;
     } catch (error: any) {

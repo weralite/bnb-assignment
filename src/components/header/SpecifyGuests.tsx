@@ -22,7 +22,7 @@ export default function SearchGuests() {
         setGuestCount((prev) => Math.max(0, prev - 1));
     };
 
-    // Synchronize guestCount with selectedGuests in FilterProvider
+ 
     useEffect(() => {
         setSelectedGuests(guestCount);
     }, [guestCount, setSelectedGuests]);

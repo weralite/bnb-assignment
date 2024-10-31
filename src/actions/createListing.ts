@@ -1,4 +1,5 @@
 import CookieKit from "@/utils/cookieKit";
+import { toISODateTime } from "@/utils/dateConverter";
 
 const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
@@ -7,7 +8,6 @@ export async function createListing(formData: FormData): Promise<void> {
 
     const token = CookieKit.get('token'); 
 
-    // Check if token exists
     if (!token) {
         console.warn("No authentication token found.");
         return;
@@ -20,11 +20,9 @@ export async function createListing(formData: FormData): Promise<void> {
         imageUrl: formData.get("imageUrl"),
         dailyRate: parseFloat(formData.get("dailyRate") as string), 
         availableBeds: parseInt(formData.get("availableBeds") as string, 10), 
-        availableFrom: formData.get("availableFrom"), 
-        availableTo: formData.get("availableTo"), 
+        availableFrom: toISODateTime(formData.get("availableFrom") as string),
+        availableTo: toISODateTime(formData.get("availableTo") as string),
     };
-
-    console.log("Listing Data:", listingData);
 
     try {
         const response = await fetch(url, {
@@ -40,7 +38,6 @@ export async function createListing(formData: FormData): Promise<void> {
         }
 
         const createdListing = await response.json();
-        console.log("Listing created successfully:", createdListing);
 
         return;
     } catch (error: any) {

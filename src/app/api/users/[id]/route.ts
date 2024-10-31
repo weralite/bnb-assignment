@@ -6,8 +6,6 @@ const prisma = new PrismaClient();
 export async function GET(request: NextRequest) {
     const userId = request.headers.get("userId");
 
-    console.log("Received userId:", userId);
-
     if (!userId) {
         return NextResponse.json(
             { message: "Unauthorized: User not authenticated" },
@@ -16,7 +14,6 @@ export async function GET(request: NextRequest) {
     }
 
     try {
-        // Fetch listings where the advertiserId matches the userId
         const listings = await prisma.listing.findMany({
             where: { advertiserId: userId },
             include: {

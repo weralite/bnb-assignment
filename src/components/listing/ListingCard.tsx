@@ -7,7 +7,6 @@ type ListingCardProps = {
 }
 
 export default function ListingCard({ listing }:ListingCardProps) {
-  console.log("hej", listing);
   return (
 <div className="rounded overflow-hidden shadow-lg">
 <Link className="w-full" href={`/${listing.id}`}>

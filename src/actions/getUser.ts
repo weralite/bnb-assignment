@@ -13,7 +13,7 @@ export async function getUser(token: string): Promise<SafeUser> {
   });
   if (!response.ok) {
     const data = await response.json();
-    console.error("Error fetching user:", data.message); // Log the error message
+    console.error("Error fetching user:", data.message); 
     throw new Error(data.message || "Failed to fetch user");
   }
 

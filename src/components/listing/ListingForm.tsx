@@ -1,10 +1,10 @@
 // ListingForm.tsx
 import React from "react";
-import { Listing } from "@/types/listing"; // Import the Listing interface
+import { ListingData } from "@/types/listing"; // Import the Listing interface
 import InputField from "@/components/common/Inputfield"; // Import the InputField component
 
 interface ListingFormProps {
-  listing: Listing | null;
+  listing: ListingData | null;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onSave: () => void;
 }

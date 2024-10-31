@@ -15,10 +15,10 @@ export default function SearchDestination() {
 
     const handleItemClick = (value: string) => {
         setSelectedCountry(value);
-        setModal(false); // Close the modal after selecting a value
+        setModal(false); 
     };
 
-    const destinations = ["Stockholm - Sweden", "Lilongwe - Malawi"]; // Array of values
+    const destinations = ["Stockholm - Sweden", "Lilongwe - Malawi"]; 
 
     const modalContent = (
         <ul className="text-md font-medium text-gray-700 w-full">

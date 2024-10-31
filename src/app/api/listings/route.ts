@@ -11,7 +11,6 @@ const prisma = new PrismaClient();
 export async function POST(request: NextRequest) {
   const userId = request.headers.get("userId");
 
-  console.log("userId: ", userId);
 
   if (!userId) {
     return NextResponse.json(
@@ -62,9 +61,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-
-// Get request to get all listings
-
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get("Authorization");
   let userId: string | null = null;
@@ -72,7 +68,7 @@ export async function GET(request: NextRequest) {
   if (authHeader) {
     try {
       const token = authHeader.split(" ")[1];
-      const decodedToken = await verifyJWT(token); // Decode token on the server
+      const decodedToken = await verifyJWT(token);
       userId = decodedToken?.userId;
     } catch (error: any) {
       console.warn("Error decoding token:", error.message);
@@ -87,8 +83,6 @@ export async function GET(request: NextRequest) {
     let listings;
 
     if (userId) {
-      console.log("Fetching listings for userId:", userId);
-      // Fetch listings with a matching advertiserId
       listings = await prisma.listing.findMany({
         where: { advertiserId: userId },
         include: {
@@ -104,8 +98,6 @@ export async function GET(request: NextRequest) {
         },
       });
     } else {
-      // Fetch all listings if no specific userId is provided
-      console.log("Fetching all listings");
       listings = await prisma.listing.findMany({
         include: {
           advertiser: {

@@ -21,7 +21,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
       email,
       password,
       () => {
-        console.log('Login successful');
         onClose()
       },
       () => {

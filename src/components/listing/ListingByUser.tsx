@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getUserListings } from "@/actions/getUserListings";
 import ListingList from "./ListingList";
-import { Listing } from "@/types/listing"; // Import the Listing interface
-import ListingForm from "./ListingForm"; // Import the new ListingForm component
+import { Listing } from "@/types/listing";
+import ListingForm from "./ListingForm";
 import { updateListing } from '@/actions/updateListing';
 
 const ListingByUser: React.FC = () => {
@@ -22,7 +22,7 @@ const ListingByUser: React.FC = () => {
   };
 
   const handleCloseForm = () => {
-    setSelectedListing(null); // Close the edit form
+    setSelectedListing(null);
   };
 
   return (
@@ -33,7 +33,7 @@ const ListingByUser: React.FC = () => {
             Back to Listings
           </button>
           <ListingForm
-            listing={selectedListing} // Pass selected listing for editing
+            listing={selectedListing}
             onInputChange={(e) => {
               const { name, value } = e.target;
               setSelectedListing((prevListing) => prevListing ? { ...prevListing, [name]: value } : null);
@@ -41,9 +41,9 @@ const ListingByUser: React.FC = () => {
             onSave={() => {
               const formData = new FormData();
               Object.entries(selectedListing).forEach(([key, value]) => {
-                formData.append(key, value.toString()); // Convert value to string as needed
+                formData.append(key, value.toString());
               });
-              updateListing(selectedListing.id, formData); // Send the FormData to update
+              updateListing(selectedListing.id, formData);
               handleCloseForm();
             }}
           />
