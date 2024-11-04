@@ -3,14 +3,14 @@ import { toISODateTime } from "@/utils/dateConverter";
 
 const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
-export async function updateListing(id: string, formData: FormData): Promise<void> {
+export async function updateListing(id: string, formData: FormData): Promise<boolean> {
     const url = new URL(`${BASE_URL}/api/listings/${id}`);
 
     const token = CookieKit.get('token');
-    
+
     if (!token) {
         console.warn("No authentication token found.");
-        return;
+        return false;
     }
 
     const listingData = {
@@ -39,12 +39,9 @@ export async function updateListing(id: string, formData: FormData): Promise<voi
             throw new Error("Unable to update listing");
         }
 
-        const updatedListing = await response.json();
-
-
-        return;
+        return true;
     } catch (error: any) {
         console.warn("Error updating listing (action)", error);
-        return;
+        return false;
     }
 }

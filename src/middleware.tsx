@@ -30,7 +30,7 @@ export async function middleware(request: NextRequest) {
       console.log("Authorization -> decrypted", decryptedToken);
       const headers = new Headers(request.headers);
       headers.set("userId", decryptedToken.userId);
-   console.log("userId: ", decryptedToken.userId);
+      console.log("userId: ", decryptedToken.userId);
       return NextResponse.next({
         headers,
       });
@@ -50,10 +50,10 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
+    "/api/bookings/",
+    "/api/books/:id*",
     "/api/listings/",
     "/api/listings/:id*",
-    // "/api/books/",
-    // "/api/books/:id*",
     "/api/users/me",
     "/api/users/:id*",
   ],

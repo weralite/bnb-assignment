@@ -18,6 +18,7 @@ export async function POST(request: NextRequest) {
       { status: 401 }
     );
   }
+  
   try {
     const body: ListingData = await request.json();
     const [hasErrors, errors] = listingValidator(body);
@@ -62,6 +63,9 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
+
+  // Reminder: Middleware ignored get request header, hence extraction and decoding.
+  
   const authHeader = request.headers.get("Authorization");
   let userId: string | null = null;
 
