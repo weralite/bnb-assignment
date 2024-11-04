@@ -1,8 +1,23 @@
 import { ListingWithAdvertiser } from "@/types/listing";
+import BookingForm from "@/components/booking/BookingForm";
 
 
 
 export default function ListingDetails({ listing }: { listing: ListingWithAdvertiser }) {
+
+  const formatAvailableDate = (date: string | Date): string => {
+    if (typeof date === 'string') {
+      return date.split('T')[0]; 
+    } else if (date instanceof Date) {
+      return date.toISOString().split('T')[0]; 
+    }
+    return ''; 
+  };
+
+  const availableFromString = formatAvailableDate(listing.availableFrom);
+  const availableToString = formatAvailableDate(listing.availableTo);
+
+
   return (
     <div className="container mx-auto px-4 py-10 space-y-8">
 
@@ -51,30 +66,11 @@ export default function ListingDetails({ listing }: { listing: ListingWithAdvert
           </div>
         </div>
 
-
-        <form className="md:w-1/3 bg-gray-100 p-6 rounded-lg shadow-lg space-y-4">
-          <div className="flex justify-between items-center">
-            <p className="text-2xl font-bold">{listing.dailyRate} USD</p>
-            <p className="text-gray-600">per night</p>
-          </div>
-
-          <div className="border-t border-b py-4 space-y-2">
-            <div className="flex justify-between">
-              <label className="text-gray-600">Check-in</label>
-              <input type="date" className="border rounded px-3 py-1 w-1/2" />
-            </div>
-            <div className="flex justify-between">
-              <label className="text-gray-600">Check-out</label>
-              <input type="date" className="border rounded px-3 py-1 w-1/2" />
-            </div>
-          </div>
-
-          <button className="w-full bg-red-500 text-white font-semibold py-2 rounded-lg">
-            Reserve
-          </button>
-
-          <p className="text-gray-500 text-center">You won’t be charged yet</p>
-        </form>
+        <BookingForm
+          dailyRate={listing.dailyRate}
+          availableFrom={availableFromString} // Ensure this is an ISO date string
+          availableTo={availableToString}     // Ensure this is an ISO date string
+        />
       </div>
 
 
