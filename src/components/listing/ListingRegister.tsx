@@ -44,7 +44,6 @@ const AddListingForm: React.FC<AddListingFormProps> = ({ onClose }) => {
         });
 
         await createListing(listingData);
-        await getListings()
         onClose();
     };
 

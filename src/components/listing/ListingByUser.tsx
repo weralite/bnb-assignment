@@ -9,12 +9,12 @@ import { updateListing } from '@/actions/updateListing';
 import { deleteListing } from '@/actions/deleteListing'
 
 const ListingByUser: React.FC = () => {
-  const [listings, setListings] = useState<Listing[]>([]);
+  const [userListings, setUserListings] = useState<Listing[]>([]);
   const [selectedListing, setSelectedListing] = useState<Listing | null>(null);
 
   const fetchListings = async () => {
-    const userListing = await getUserListings();
-    setListings(userListing);
+    const data = await getUserListings();
+    setUserListings(data);
   };
 
 
@@ -69,10 +69,10 @@ const ListingByUser: React.FC = () => {
       ) : (
         <div className='h-full'>
           <div className="text-lg font-semibold p-2 text-center">
-            Total Listings: {listings.length}
+            Total Listings: {userListings.length}
           </div>
           <div className="overflow-y-scroll h-120 relative">
-            {listings.map((listing) => (
+            {userListings.map((listing) => (
               <div className="w-full p-2" key={listing.id} onClick={() => handleListingClick(listing)}>
                 <ListingList listing={listing} />
               </div>
