@@ -8,18 +8,15 @@ import { getListings } from "@/actions/getListings";
 
 const ListingGrid: React.FC = () => {
   const { listings, setListings } = useListings();
-
-  // Function to fetch listings from the API
   const fetchListings = async () => {
     try {
       const data = await getListings();
-      setListings(data); // Update the listings in context
+      setListings(data); 
     } catch (error) {
       console.error("Failed to fetch listings:", error);
     }
   };
 
-  // Fetch listings on component mount
   useEffect(() => {
     fetchListings();
   }, []);

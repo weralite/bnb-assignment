@@ -40,8 +40,8 @@ const ListingByUser: React.FC = () => {
       formData.append(key, value.toString());
     });
     await updateListing(selectedListing.id, formData);
-    fetchListings();  // Re-fetch listings
-    const updatedListings = await getListings(); 
+    fetchListings();
+    const updatedListings = await getListings();
     setListings(updatedListings);
     handleCloseForm();
   };
@@ -51,9 +51,10 @@ const ListingByUser: React.FC = () => {
       try {
         const id = selectedListing.id;
         await deleteListing(id);
-        handleCloseForm();
-        const updatedListings = await getListings(); 
+        fetchListings();
+        const updatedListings = await getListings();
         setListings(updatedListings);
+        handleCloseForm();
       } catch (error) {
         console.error("Failed to delete listing:", error);
       }

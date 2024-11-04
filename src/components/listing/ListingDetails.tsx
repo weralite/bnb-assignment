@@ -25,16 +25,16 @@ export default function ListingDetails({ listing }: { listing: ListingWithAdvert
       </div>
 
 
-      <div className="md:flex md:space-x-8">
+      <div className="flex flex-col gap-5 md:flex md:flex-row md:space-x-8">
 
         <div className="md:w-2/3 space-y-6">
-        <div className="flex flex-col">
-          <h2 className="text-xl font-semibold">About this place</h2>
-          <p className="text-gray-500 leading-relaxed">{listing.description}</p>
+          <div className="flex flex-col">
+            <h2 className="text-xl font-semibold">About this place</h2>
+            <p className="text-gray-500 leading-relaxed">{listing.description}</p>
           </div>
           <div className="flex flex-col">
-          <h2 className="text-xl font-semibold">Hosted by {listing.advertiser.firstName} {listing.advertiser.lastName}</h2>
-          <p className="text-gray-400 leading-relaxed">Superhost</p>
+            <h2 className="text-xl font-semibold">Hosted by {listing.advertiser.firstName} {listing.advertiser.lastName}</h2>
+            <p className="text-gray-400 leading-relaxed">Superhost</p>
           </div>
 
           <div className="space-y-3">

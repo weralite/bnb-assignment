@@ -39,18 +39,18 @@ const AddListingForm: React.FC<AddListingFormProps> = ({ onClose }) => {
 
     const handleSave = async () => {
         const listingData = new FormData();
-    
+
         Object.entries(listing).forEach(([key, value]) => {
             listingData.append(key, value.toString());
         });
-    
+
         await createListing(listingData);
 
-        const updatedListings = await getListings(); 
+        const updatedListings = await getListings();
         console.log(updatedListings);
-    
+
         setListings(updatedListings);
-    
+
         onClose();
     };
 
