@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { createListing } from "@/actions/createListing";
 import ListingForm from "./ListingForm";
 import { ListingData } from "@/types/listing";
+import { getListings } from "@/actions/getListings";
 
 interface AddListingFormProps {
     onClose: () => void;
@@ -43,6 +44,7 @@ const AddListingForm: React.FC<AddListingFormProps> = ({ onClose }) => {
         });
 
         await createListing(listingData);
+        await getListings()
         onClose();
     };
 

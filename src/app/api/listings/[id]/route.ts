@@ -68,13 +68,11 @@ export async function PUT(request: NextRequest, options: APIOptions) {
             );
         }
 
-        // Parse the request body to get the updated listing data
         const { title, description, address, imageUrl, country, dailyRate, availableBeds, availableFrom, availableTo } = await request.json();
 
-        // Fetch the listing to check the advertiserId
         const listing = await prisma.listing.findUnique({
             where: { id },
-            select: { advertiserId: true }, // Only select the advertiserId
+            select: { advertiserId: true }, 
         });
 
         if (!listing) {
@@ -84,13 +82,11 @@ export async function PUT(request: NextRequest, options: APIOptions) {
             );
         }
 
-        // Fetch the user details to check if the user is an admin
         const user = await prisma.user.findUnique({
             where: { id: userId },
-            select: { isAdmin: true }, // Select only the isAdmin field
+            select: { isAdmin: true }, 
         });
 
-        // Check if the user is the advertiser or an admin
         if (listing.advertiserId !== userId && !(user && user.isAdmin)) {
             return NextResponse.json(
                 { message: "Unauthorized: You do not have permission to update this listing." },
@@ -98,7 +94,6 @@ export async function PUT(request: NextRequest, options: APIOptions) {
             );
         }
 
-        // Proceed to update the listing
         const updatedListing = await prisma.listing.update({
             where: { id },
             data: {
@@ -147,10 +142,9 @@ export async function DELETE(request: NextRequest, options: APIOptions) {
             );
         }
 
-        // Fetch the listing to check the advertiserId
         const listing = await prisma.listing.findUnique({
             where: { id },
-            select: { advertiserId: true }, // Only select the advertiserId
+            select: { advertiserId: true }, 
         });
 
         if (!listing) {
@@ -160,13 +154,11 @@ export async function DELETE(request: NextRequest, options: APIOptions) {
             );
         }
 
-        // Fetch the user details to check if the user is an admin
         const user = await prisma.user.findUnique({
             where: { id: userId },
-            select: { isAdmin: true }, // Select only the isAdmin field
+            select: { isAdmin: true }, 
         });
 
-        // Check if the user is the advertiser or an admin
         if (listing.advertiserId !== userId && !(user && user.isAdmin)) {
             return NextResponse.json(
                 { message: "Unauthorized: You do not have permission to delete this listing." },
@@ -174,7 +166,6 @@ export async function DELETE(request: NextRequest, options: APIOptions) {
             );
         }
 
-        // Proceed to delete the listing
         await prisma.listing.delete({
             where: { id },
         });

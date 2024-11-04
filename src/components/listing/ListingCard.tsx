@@ -8,7 +8,7 @@ type ListingCardProps = {
 
 export default function ListingCard({ listing }:ListingCardProps) {
   return (
-<div className="rounded overflow-hidden shadow-lg">
+<div className="rounded-xl overflow-hidden shadow-lg">
 <Link className="w-full" href={`/${listing.id}`}>
 <img className="w-full h-50 object-cover" src={listing.imageUrl || "https://via.placeholder.com/150"} alt="Sunset in the mountains" />
 

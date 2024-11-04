@@ -35,7 +35,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-<UserProvider>
+        <UserProvider>
           <FilterProvider>
             <Header />
             <Container>
@@ -43,7 +43,7 @@ export default function RootLayout({
             </Container>
             <MobileUserMenu />
           </FilterProvider>
-</UserProvider>
+        </UserProvider>
       </body>
     </html >
   );

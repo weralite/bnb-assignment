@@ -8,8 +8,6 @@ export async function getUserListings(): Promise<Listing[]> {
     const url = new URL(`${BASE_URL}/api/listings`);
     const token = CookieKit.get('token');
 
-
-    // Check if token exists
     if (!token) {
         console.warn("No authentication token found.");
         return[];
