@@ -2,19 +2,23 @@
 
 import React, { useEffect, useState } from 'react';
 import { getUserListings } from "@/actions/getUserListings";
+import { updateListing } from '@/actions/updateListing';
+import { deleteListing } from '@/actions/deleteListing'
 import ListingList from "./ListingList";
 import { Listing } from "@/types/listing";
 import ListingForm from "./ListingForm";
-import { updateListing } from '@/actions/updateListing';
-import { deleteListing } from '@/actions/deleteListing'
 
 const ListingByUser: React.FC = () => {
   const [userListings, setUserListings] = useState<Listing[]>([]);
   const [selectedListing, setSelectedListing] = useState<Listing | null>(null);
 
   const fetchListings = async () => {
-    const data = await getUserListings();
-    setUserListings(data);
+    try {
+      const data = await getUserListings();
+      setUserListings(data);
+    } catch (error) {
+      console.error("Failed to fetch listings:", error);
+    }
   };
 
 
@@ -26,22 +30,27 @@ const ListingByUser: React.FC = () => {
     setSelectedListing(null);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!selectedListing) return;
     const formData = new FormData();
     Object.entries(selectedListing).forEach(([key, value]) => {
       formData.append(key, value.toString());
     });
-    updateListing(selectedListing.id, formData);
+    await updateListing(selectedListing.id, formData);
+    fetchListings();  // Re-fetch listings
     handleCloseForm();
   };
 
   const handleDelete = async () => {
     if (selectedListing) {
-      const id = selectedListing.id;
-      await deleteListing(id); 
-      handleCloseForm();
-      fetchListings(); 
+      try {
+        const id = selectedListing.id;
+        await deleteListing(id);
+        handleCloseForm();
+        fetchListings();
+      } catch (error) {
+        console.error("Failed to delete listing:", error);
+      }
     }
   };
 

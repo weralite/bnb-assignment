@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { createListing } from "@/actions/createListing";
 import ListingForm from "./ListingForm";
 import { ListingData } from "@/types/listing";
+import { useListings } from "@/context/ListingContext";
 import { getListings } from "@/actions/getListings";
 
 interface AddListingFormProps {
@@ -26,7 +27,7 @@ const initialListingValues: ListingData = {
 
 const AddListingForm: React.FC<AddListingFormProps> = ({ onClose }) => {
     const [listing, setListing] = useState<ListingData>(initialListingValues);
-
+    const { setListings } = useListings();
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setListing(prevListing => ({
@@ -38,12 +39,18 @@ const AddListingForm: React.FC<AddListingFormProps> = ({ onClose }) => {
 
     const handleSave = async () => {
         const listingData = new FormData();
-
+    
         Object.entries(listing).forEach(([key, value]) => {
             listingData.append(key, value.toString());
         });
-
+    
         await createListing(listingData);
+
+        const updatedListings = await getListings(); 
+        console.log(updatedListings);
+    
+        setListings(updatedListings);
+    
         onClose();
     };
 

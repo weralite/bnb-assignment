@@ -1,17 +1,31 @@
-import { getListings } from "@/actions/getListings";
+"use client";
+
+import React, { useEffect } from "react";
+import { ListingWithAdvertiser } from "@/types/listing";
+import { useListings } from "@/context/ListingContext";
 import ListingCard from "./ListingCard";
-import Link from "next/link";
 
-export default async function ListingGrid() {
-    const listings = await getListings();
-
-    return (
-        <div className="grid 1-sm:grid-cols-2 1-md:grid-cols-3 1-lg:grid-cols-4 1-xl:grid-cols-5 gap-5 justify-center">
-            {listings.map((listing) => (
-                <ListingCard key={listing.id} listing={listing} />
-            ))}
-
-        </div>
-    )
+interface ListingGridProps {
+  listings: ListingWithAdvertiser[]; 
 }
 
+const ListingGrid: React.FC<ListingGridProps> = ({ listings }) => {
+  const { setListings } = useListings();
+
+  useEffect(() => {
+    setListings(listings);
+  }, [listings, setListings]);
+
+
+  
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 justify-center">
+      {listings.map((listing) => (
+        <ListingCard key={listing.id} listing={listing} />
+      ))}
+    </div>
+  );
+};
+
+export default ListingGrid;

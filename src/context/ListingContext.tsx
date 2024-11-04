@@ -20,10 +20,10 @@ export const ListingProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useListingContext = () => {
+export const useListings = () => {
   const context = useContext(ListingContext);
   if (!context) {
-    throw new Error("useListingContext must be used within a FilterProvider");
+    throw new Error("useListings must be used within a FilterProvider");
   }
   return context;
 };
