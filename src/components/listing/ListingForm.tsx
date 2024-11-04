@@ -3,6 +3,7 @@ import React from "react";
 import { ListingData } from "@/types/listing"; // Import the Listing interface
 import InputField from "@/components/common/Inputfield"; // Import the InputField component
 
+
 interface ListingFormProps {
   listing: ListingData | null;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
@@ -66,14 +67,14 @@ const ListingForm: React.FC<ListingFormProps> = ({ listing, onInputChange }) => 
         label="Available From"
         type="date"
         name="availableFrom"
-        value={listing.availableFrom.toString()}
+        value={new Date(listing.availableFrom).toISOString().slice(0, 10)}
         onChange={onInputChange}
       />
       <InputField
         label="Available To"
         type="date"
         name="availableTo"
-        value={listing.availableTo.toString()}
+        value={new Date(listing.availableTo).toISOString().slice(0, 10)}
         onChange={onInputChange}
       />
       

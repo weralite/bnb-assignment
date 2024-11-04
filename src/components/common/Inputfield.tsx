@@ -4,7 +4,7 @@ import React, { ChangeEvent } from "react";
 interface InputFieldProps {
     label: string;
     name: string;
-    value: string;
+    value: string | null;
     type: string;
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
@@ -19,7 +19,7 @@ const InputField: React.FC<InputFieldProps> = ({ label, name, value, type, onCha
             className="focus:outline-none"
             type={type}
             name={name}
-            value={value}
+            value={value || ''}
             onChange={onChange}
             required
         />
