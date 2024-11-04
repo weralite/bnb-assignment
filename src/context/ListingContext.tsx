@@ -1,17 +1,18 @@
 "use client";
-import { Listing }from "@/types/listing"
 
-import { createContext, useContext, useState, ReactNode } from "react";
+// ListingContext.tsx
+import React, { createContext, useContext, useState } from 'react';
+import { ListingWithAdvertiser } from "@/types/listing";
 
-interface ListingContextProps {
-  listings: Listing[] | null;
-  setListings: (value: Listing[] | null) => void;
+interface ListingContextType {
+  listings: ListingWithAdvertiser[];
+  setListings: React.Dispatch<React.SetStateAction<ListingWithAdvertiser[]>>;
 }
 
-const ListingContext = createContext<ListingContextProps | undefined>(undefined);
+const ListingContext = createContext<ListingContextType | undefined>(undefined);
 
-export const ListingProvider = ({ children }: { children: ReactNode }) => {
-  const [listings, setListings] = useState<Listing[] | null>(null); 
+export const ListingProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [listings, setListings] = useState<ListingWithAdvertiser[]>([]);
 
   return (
     <ListingContext.Provider value={{ listings, setListings }}>
@@ -23,7 +24,7 @@ export const ListingProvider = ({ children }: { children: ReactNode }) => {
 export const useListings = () => {
   const context = useContext(ListingContext);
   if (!context) {
-    throw new Error("useListings must be used within a FilterProvider");
+    throw new Error("useListings must be used within a ListingProvider");
   }
   return context;
 };

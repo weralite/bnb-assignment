@@ -7,10 +7,13 @@ import { deleteListing } from '@/actions/deleteListing'
 import ListingList from "./ListingList";
 import { Listing } from "@/types/listing";
 import ListingForm from "./ListingForm";
+import { useListings } from "@/context/ListingContext";
+import { getListings } from "@/actions/getListings";
 
 const ListingByUser: React.FC = () => {
   const [userListings, setUserListings] = useState<Listing[]>([]);
   const [selectedListing, setSelectedListing] = useState<Listing | null>(null);
+  const { setListings } = useListings();
 
   const fetchListings = async () => {
     try {
@@ -38,6 +41,8 @@ const ListingByUser: React.FC = () => {
     });
     await updateListing(selectedListing.id, formData);
     fetchListings();  // Re-fetch listings
+    const updatedListings = await getListings(); 
+    setListings(updatedListings);
     handleCloseForm();
   };
 
@@ -47,7 +52,8 @@ const ListingByUser: React.FC = () => {
         const id = selectedListing.id;
         await deleteListing(id);
         handleCloseForm();
-        fetchListings();
+        const updatedListings = await getListings(); 
+        setListings(updatedListings);
       } catch (error) {
         console.error("Failed to delete listing:", error);
       }
