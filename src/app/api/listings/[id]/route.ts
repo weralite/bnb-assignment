@@ -166,12 +166,18 @@ export async function DELETE(request: NextRequest, options: APIOptions) {
             );
         }
 
+        // Find and delete all bookings associated with the listing
+        await prisma.booking.deleteMany({
+            where: { listingId: id },
+        });
+
+        // Delete the listing
         await prisma.listing.delete({
             where: { id },
         });
 
         return NextResponse.json(
-            { message: "Listing deleted successfully." },
+            { message: "Listing and associated bookings deleted successfully." },
             { status: 200 }
         );
     } catch (error: any) {
