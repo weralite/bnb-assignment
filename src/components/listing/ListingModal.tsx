@@ -17,6 +17,7 @@ export default function ListingModal({ onClose }: { onClose: () => void }) {
 
   const [activeTab, setActiveTab] = useState(0); 
 
+  console.log("ListingModal rendered");
   return (
     <div className="modal">
       <ul className="flex flex-row justify-evenly border-b p-4">

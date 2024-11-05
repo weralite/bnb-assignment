@@ -13,7 +13,8 @@ export default function DesktopMenu() {
   const user = useUser();
   const [openModal, setModal] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<string | React.ReactNode | null>(null); // For determining which content to show
-  const toggleButtonRef = useRef<HTMLDivElement>(null);
+  const toggleButtonRef = useRef<HTMLDivElement | null>(null);
+
 
   const handleModal = () => {
     setModal((prev) => !prev);
@@ -42,7 +43,7 @@ export default function DesktopMenu() {
   };
 
   // Menu content with login and register options
-console.log(user);
+
   const menuContent = user.token ? (
     <div>
       <h1 className="text-sm font-light text-gray-400 text-center border-b p-2">{user.user?.firstName} {user.user?.lastName}</h1>
@@ -104,12 +105,17 @@ console.log(user);
       </div>
 
       {/* Login or Register Modal */}
-      <AuthModal
-        open={!!modalContent}
-        onClose={() => setModalContent(null)}
-        modalContent={modalContent}
-        toggleButtonRef={toggleButtonRef} // Pass the reference here
-      />
+      {modalContent && (
+        <Modal
+          open={!!modalContent}
+          onClose={() => setModalContent(null)}
+          size="lg"
+          content={modalContent === "login" ? <LoginForm onClose={onClose} /> : modalContent === "register" ? <RegisterForm onClose={onClose} /> : modalContent}
+          toggleButtonRef={toggleButtonRef}
+          className="absolute w-full h-[100vh] top-0 right-0 bg-black bg-opacity-50 z-50 flex justify-center items-center"
+        />
+      )}
+
     </>
   );
 }

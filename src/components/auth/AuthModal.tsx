@@ -8,6 +8,7 @@ interface AuthModalProps {
     onClose: () => void;
     toggleButtonRef: React.RefObject<HTMLDivElement>;
     onLoginSuccess?: () => void;
+    modalContent: string | React.ReactNode | null;
 }
 
 interface Tab {
