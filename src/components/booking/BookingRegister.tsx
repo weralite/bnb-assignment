@@ -1,56 +1,70 @@
 import { useState, useRef } from "react";
 import { useUser } from "@/context/user";
 import AuthModal from "@/components/auth/AuthModal";
+import BookingForm from "./BookingForm";
 
-interface BookingRegisterProps {
-    formData: {
-        checkInDate: string;
-        checkOutDate: string;
-        dailyRate: number;
-        totalPrice: number;
-        listingId: string;
-    };
-    onSubmitSuccess: () => void;
+interface ListingData {
+  dailyRate: number;
+  id: string;
 }
 
-const BookingRegister: React.FC<BookingRegisterProps> = ({ formData, onSubmitSuccess }) => {
-    const user = useUser();
-    const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
-    const toggleButtonRef = useRef<HTMLDivElement>(null);
+interface BookingRegisterProps {
+  listing: ListingData;
+  availableFrom: string;
+  availableTo: string;
+  onSubmitSuccess: () => void;
+}
 
-    const handleBookingSubmit = async () => {
-        if (!user.token) {
-            setOpenAuthModal(true);
-        } else {
-            await submitBooking(formData);
-            onSubmitSuccess();
-        }
-    };
+const BookingRegister: React.FC<BookingRegisterProps> = ({ listing, availableFrom, availableTo, onSubmitSuccess }) => {
+  const user = useUser();
+  const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
+  const toggleButtonRef = useRef<HTMLDivElement>(null);
 
-    const submitBooking = async (data: typeof formData) => {
-        console.log("Submitting booking data:", data);
-    };
+  // Prepare formData for BookingForm
+  const formData = {
+    checkInDate: availableFrom,
+    checkOutDate: availableTo,
+    dailyRate: listing.dailyRate,
+    totalPrice: 0, // Initial total, will be calculated in BookingForm
+    listingId: listing.id,
+  };
 
-    const handleLoginSuccess = async () => {
-        setOpenAuthModal(false);
-        await submitBooking(formData);
-        onSubmitSuccess();
-    };
+  const handleBookingSubmit = async (data: typeof formData) => {
+    if (!user.token) {
+      setOpenAuthModal(true);
+    } else {
+      await submitBooking(data);
+      onSubmitSuccess();
+    }
+  };
 
-    return (
-        <>
+  const submitBooking = async (data: typeof formData) => {
+    console.log("Submitting booking data:", data);
+  };
 
+  const handleLoginSuccess = async () => {
+    setOpenAuthModal(false);
+    await submitBooking(formData);
+    onSubmitSuccess();
+  };
 
-            {openAuthModal && (
-                <AuthModal
-                    open={openAuthModal}
-                    modalContent="login" // Pass 'login' to render the LoginForm
-                    toggleButtonRef={toggleButtonRef} // Make sure to pass the ref
-                    onClose={() => setOpenAuthModal(false)}
-                />
-            )}
-        </>
-    );
+  return (
+    <>
+      <BookingForm
+        formData={formData}
+        onSubmit={handleBookingSubmit} // Passing handleBookingSubmit as prop to BookingForm
+        submitButtonRef={toggleButtonRef}
+      />
+      {openAuthModal && (
+        <AuthModal
+          open={openAuthModal}
+          modalContent="login"
+          toggleButtonRef={toggleButtonRef}
+          onClose={() => setOpenAuthModal(false)}
+        />
+      )}
+    </>
+  );
 };
 
 export default BookingRegister;

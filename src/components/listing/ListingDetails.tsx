@@ -1,27 +1,19 @@
 "use client"
 
 import { ListingWithAdvertiser } from "@/types/listing";
-import BookingForm from "@/components/booking/BookingForm";
 import BookingRegister from "../booking/BookingRegister";
-import { useState } from "react";
 
 
 
 export default function ListingDetails({ listing }: { listing: ListingWithAdvertiser }) {
-  const [formData, setFormData] = useState({
-    dailyRate: listing.dailyRate,
-    id: listing.id,
-    availableFrom: listing.availableFrom,
-    availableTo: listing.availableTo,
-  });
 
   const formatAvailableDate = (date: string | Date): string => {
     if (typeof date === 'string') {
-      return date.split('T')[0]; 
+      return date.split('T')[0];
     } else if (date instanceof Date) {
-      return date.toISOString().split('T')[0]; 
+      return date.toISOString().split('T')[0];
     }
-    return ''; 
+    return '';
   };
 
   const availableFromString = formatAvailableDate(listing.availableFrom);
@@ -75,16 +67,13 @@ export default function ListingDetails({ listing }: { listing: ListingWithAdvert
             </div>
           </div>
         </div>
+        <BookingRegister
+          listing={listing}
+          availableFrom={availableFromString}
+          availableTo={availableToString}
+          onSubmitSuccess={() => { }}
+         />
 
-        <BookingForm
-          dailyRate={listing.dailyRate}
-          id={listing.id}
-          availableFrom={availableFromString} // Ensure this is an ISO date string
-          availableTo={availableToString} 
-              // Ensure this is an ISO date string
-        />
-        <BookingRegister />
-        
       </div>
 
 
