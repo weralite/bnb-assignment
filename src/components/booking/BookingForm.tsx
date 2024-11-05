@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 
 interface BookingFormProps {
   dailyRate: number;
+  id: string;
   availableFrom: string; 
   availableTo: string;   
 }
 
-const BookingForm: React.FC<BookingFormProps> = ({ dailyRate, availableFrom, availableTo }) => {
+const BookingForm: React.FC<BookingFormProps> = ({ dailyRate, id, availableFrom, availableTo }) => {
   const [checkInDate, setCheckInDate] = useState<string>("");
   const [checkOutDate, setCheckOutDate] = useState<string>("");
   const [totalPrice, setTotalPrice] = useState<number>(0); 
@@ -41,6 +42,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ dailyRate, availableFrom, ava
     formData.append("checkOutDate", checkOutDate);
     formData.append("dailyRate", dailyRate.toString());
     formData.append("totalPrice", totalPrice.toString());
+    formData.append("listingId", id);
 
     // Call your createBooking function or API endpoint
     // Example:
@@ -81,7 +83,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ dailyRate, availableFrom, ava
           />
         </div>
       </div>
-      
+
       <div className="flex justify-between">
         <p className="text-lg font-semibold">Total: {totalPrice} USD</p> 
       </div>

@@ -68,6 +68,7 @@ export default function ListingDetails({ listing }: { listing: ListingWithAdvert
 
         <BookingForm
           dailyRate={listing.dailyRate}
+          id={listing.id}
           availableFrom={availableFromString} // Ensure this is an ISO date string
           availableTo={availableToString}     // Ensure this is an ISO date string
         />
