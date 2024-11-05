@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { useUser } from "@/context/user";
 import AuthModal from "@/components/auth/AuthModal";
 import BookingForm from "./BookingForm";
+import { createBooking } from "@/actions/bookings/createBooking";
 
 interface ListingData {
   dailyRate: number;
@@ -39,6 +40,18 @@ const BookingRegister: React.FC<BookingRegisterProps> = ({ listing, availableFro
 
   const submitBooking = async (data: typeof formData) => {
     console.log("Submitting booking data:", data);
+    const formDataToSubmit = new FormData();
+    formDataToSubmit.append("checkInDate", data.checkInDate);
+    formDataToSubmit.append("checkOutDate", data.checkOutDate);
+    formDataToSubmit.append("totalPrice", data.totalPrice.toString());
+    formDataToSubmit.append("listingId", data.listingId);
+
+    const success = await createBooking(formDataToSubmit);
+    if (success) {
+      console.log("Booking submitted successfully.");
+    } else {
+      console.error("Error submitting booking.");
+    }
 
   };
 

@@ -21,7 +21,7 @@ export default function ListingDetails({ listing }: { listing: ListingWithAdvert
 
 
   return (
-    <div className="container mx-auto px-4 py-10 space-y-8">
+    <div className="md:container mx-auto px-4 py-10 space-y-8">
 
       <div>
         <img
