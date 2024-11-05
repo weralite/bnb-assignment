@@ -19,7 +19,7 @@ export async function getUser(token: string): Promise<{ success: boolean; data?:
     }
 
     const data = await response.json();
-    return { success: true, data }; 
+    return data; 
 
   } catch (error) {
     console.error("Network or server error occurred:", error);

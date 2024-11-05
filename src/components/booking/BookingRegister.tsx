@@ -39,9 +39,7 @@ const BookingRegister: React.FC<BookingRegisterProps> = ({ formData, onSubmitSuc
 
     return (
         <>
-            <button onClick={handleBookingSubmit} className="your-submit-button-class">
-                Submit Booking
-            </button>
+
 
             {openAuthModal && (
                 <AuthModal

@@ -42,7 +42,7 @@ export default function DesktopMenu() {
   };
 
   // Menu content with login and register options
-
+console.log(user);
   const menuContent = user.token ? (
     <div>
       <h1 className="text-sm font-light text-gray-400 text-center border-b p-2">{user.user?.firstName} {user.user?.lastName}</h1>
