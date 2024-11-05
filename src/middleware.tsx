@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
       console.log("Unsafe");
       const Authorization = request.headers.get("Authorization");
       if (!Authorization) {
-        throw new Error("No authrization header");
+        throw new Error("No authorization header");
       }
       const token = Authorization.split(" ")?.[1] || null;
       if (!token) {
@@ -51,7 +51,7 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     "/api/bookings/",
-    "/api/books/:id*",
+    "/api/bookings/:id*",
     "/api/listings/",
     "/api/listings/:id*",
     "/api/users/me",

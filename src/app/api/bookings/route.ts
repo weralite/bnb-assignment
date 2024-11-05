@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { BookingData } from "@/types/booking";
 import { Listing } from "@prisma/client";
+import { User } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -29,7 +30,6 @@ export async function POST(request: NextRequest, options: APIOptions): Promise<N
             );
         }
 
-        // Step 1: Create the booking
         const booking = await prisma.booking.create({
             data: {
                 totalPrice: body.totalPrice,
