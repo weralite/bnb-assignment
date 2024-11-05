@@ -42,7 +42,7 @@ export default function ListingDetails({ listing }: { listing: ListingWithAdvert
       </div>
 
 
-      <div className="flex flex-col gap-5 md:flex md:flex-row md:space-x-8">
+      <div className="flex flex-col gap-5 md:flex md:flex-row">
 
         <div className="md:w-2/3 space-y-6">
           <div className="flex flex-col">

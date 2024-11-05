@@ -1,15 +1,14 @@
 "use client";
 
 import { useUser } from "@/context/user";
-import React from "react";
-import { useState, FormEvent } from "react";
-
+import React, { useState, FormEvent } from "react";
 
 interface LoginFormProps {
   onClose: () => void;
+  onLoginSuccess?: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ onClose, onLoginSuccess }) => {
   const user = useUser();
   const [password, setPassword] = useState("hejsan");
   const [email, setEmail] = useState("test@testor.test");
@@ -21,18 +20,19 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
       email,
       password,
       () => {
-        onClose()
+        onClose();
+        onLoginSuccess?.(); 
       },
       () => {
-        console.log('Login failed');
+        console.log("Login failed");
       }
     );
   };
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-      login()
-  }
 
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    login();
+  };
 
   return (
     <div className="flex flex-col">
@@ -47,15 +47,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
               type="text"
               value={email}
               placeholder="Email"
-              className="border-b p-2  focus:outline-none"
+              className="border-b p-2 focus:outline-none"
               onChange={(e) => setEmail(e.target.value as string)}
             />
-
             <input
               type="password"
               value={password}
               placeholder="Password"
-              className="border-none rounded-lg p-2  focus:outline-none"
+              className="border-none rounded-lg p-2 focus:outline-none"
               onChange={(e) => setPassword(e.target.value as string)}
             />
           </div>

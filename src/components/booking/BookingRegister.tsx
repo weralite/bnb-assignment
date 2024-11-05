@@ -20,31 +20,31 @@ const BookingRegister: React.FC<BookingRegisterProps> = ({ listing, availableFro
   const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
   const toggleButtonRef = useRef<HTMLDivElement>(null);
 
-  // Prepare formData for BookingForm
   const formData = {
     checkInDate: availableFrom,
     checkOutDate: availableTo,
     dailyRate: listing.dailyRate,
-    totalPrice: 0, // Initial total, will be calculated in BookingForm
+    totalPrice: 0, 
     listingId: listing.id,
   };
 
   const handleBookingSubmit = async (data: typeof formData) => {
     if (!user.token) {
-      setOpenAuthModal(true);
+      setOpenAuthModal(true); 
     } else {
-      await submitBooking(data);
+      await submitBooking(data); 
       onSubmitSuccess();
     }
   };
 
   const submitBooking = async (data: typeof formData) => {
     console.log("Submitting booking data:", data);
+
   };
 
   const handleLoginSuccess = async () => {
-    setOpenAuthModal(false);
-    await submitBooking(formData);
+    setOpenAuthModal(false); 
+    await submitBooking(formData); 
     onSubmitSuccess();
   };
 
@@ -52,15 +52,16 @@ const BookingRegister: React.FC<BookingRegisterProps> = ({ listing, availableFro
     <>
       <BookingForm
         formData={formData}
-        onSubmit={handleBookingSubmit} // Passing handleBookingSubmit as prop to BookingForm
+        onSubmit={handleBookingSubmit} 
         submitButtonRef={toggleButtonRef}
       />
       {openAuthModal && (
         <AuthModal
           open={openAuthModal}
-          modalContent="login"
-          toggleButtonRef={toggleButtonRef}
+          modalContent="login" 
+          toggleButtonRef={toggleButtonRef} 
           onClose={() => setOpenAuthModal(false)}
+          onLoginSuccess={handleLoginSuccess} 
         />
       )}
     </>

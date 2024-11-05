@@ -9,17 +9,18 @@ interface AuthModalProps {
     onClose: () => void;
     modalContent: string | React.ReactNode | null;
     toggleButtonRef: React.RefObject<HTMLDivElement>;
+    onLoginSuccess?: () => void;
 }
 
-const AuthModal: React.FC<AuthModalProps> = ({ open, onClose, modalContent, toggleButtonRef }) => {
+const AuthModal: React.FC<AuthModalProps> = ({ open, onClose, modalContent, toggleButtonRef, onLoginSuccess  }) => {
     return (
         <Modal
             open={open}
             onClose={onClose}
             size="lg"
-            content={modalContent === "login" ? <LoginForm onClose={onClose} /> : modalContent === "register" ? <RegisterForm /> : modalContent}
-            toggleButtonRef={toggleButtonRef} // Pass it down here
-            className="absolute w-full h-[100vh] top-0 right-0 bg-black bg-opacity-50 z-50 flex justify-center items-center"
+            content={modalContent === "login" ? <LoginForm onClose={onClose} onLoginSuccess={onLoginSuccess} /> : modalContent === "register" ? <RegisterForm /> : modalContent}
+            toggleButtonRef={toggleButtonRef}
+            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center"
         />
     );
 };
