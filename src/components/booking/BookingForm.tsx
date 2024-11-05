@@ -6,33 +6,35 @@ import BookingSubmitHandler from "./BookingRegister";
 interface BookingFormProps {
   dailyRate: number;
   id: string;
-  availableFrom: string; 
-  availableTo: string;   
+  availableFrom: string;
+  availableTo: string;
 }
 
 const BookingForm: React.FC<BookingFormProps> = ({ dailyRate, id, availableFrom, availableTo }) => {
-  const [checkInDate, setCheckInDate] = useState<string>("");
-  const [checkOutDate, setCheckOutDate] = useState<string>("");
-  const [totalPrice, setTotalPrice] = useState<number>(0); 
+  const [checkInDate, setCheckInDate] = useState<string>(`${availableFrom}`);
+  const [checkOutDate, setCheckOutDate] = useState<string>(`${availableTo}`);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [nights, setNights] = useState<number>(0);
 
   useEffect(() => {
     const calculateTotalPrice = () => {
       if (checkInDate && checkOutDate) {
         const checkIn = new Date(checkInDate);
         const checkOut = new Date(checkOutDate);
-        const nights = Math.ceil((checkOut.getTime() - checkIn.getTime()) / (1000 * 3600 * 24)); 
+        const nights = Math.ceil((checkOut.getTime() - checkIn.getTime()) / (1000 * 3600 * 24) );
+        setNights(nights);
         if (nights > 0) {
-          setTotalPrice(nights * dailyRate); 
+          setTotalPrice(nights * dailyRate);
         } else {
-          setTotalPrice(0); 
+          setTotalPrice(0);
         }
       } else {
-        setTotalPrice(0); 
+        setTotalPrice(0);
       }
     };
 
     calculateTotalPrice();
-  }, [checkInDate, checkOutDate, dailyRate]); 
+  }, [checkInDate, checkOutDate, dailyRate]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -53,7 +55,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ dailyRate, id, availableFrom,
 
   return (
     <form className="md:w-1/3 bg-gray-100 p-6 rounded-lg shadow-lg space-y-4" onSubmit={handleSubmit}>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-evenly items-center">
         <p className="text-2xl font-bold">{dailyRate} USD</p>
         <p className="text-gray-600">per night</p>
       </div>
@@ -66,8 +68,8 @@ const BookingForm: React.FC<BookingFormProps> = ({ dailyRate, id, availableFrom,
             className="border rounded px-3 py-1 w-1/2"
             value={checkInDate}
             onChange={(e) => setCheckInDate(e.target.value)}
-            min={availableFrom} 
-            max={availableTo}   
+            min={availableFrom}
+            max={availableTo}
             required
           />
         </div>
@@ -78,22 +80,33 @@ const BookingForm: React.FC<BookingFormProps> = ({ dailyRate, id, availableFrom,
             className="border rounded px-3 py-1 w-1/2"
             value={checkOutDate}
             onChange={(e) => setCheckOutDate(e.target.value)}
-            min={checkInDate} 
+            min={checkInDate}
             max={availableTo}
             required
           />
         </div>
       </div>
 
-      <div className="flex justify-between">
-        <p className="text-lg font-semibold">Total: {totalPrice} USD</p> 
-      </div>
-
       <button type="submit" className="w-full bg-red-500 text-white font-semibold py-2 rounded-lg">
         Reserve
       </button>
-
       <p className="text-gray-500 text-center">You won’t be charged yet</p>
+
+      <div className="flex justify-between">
+          <p className="text-md text-gray-500 font-semibold underline">{dailyRate} USD x {nights} nights</p>
+          <p className="text-md text-gray-500 font-semibold">{totalPrice} USD</p>
+        </div>
+        <div className="flex justify-between">
+          <p className="text-md text-gray-500 font-semibold underline">Service Fee</p>
+          <p className="text-md text-gray-500 font-semibold">Free</p>
+        </div>
+
+      <div className="border-t py-4 space-y-2">
+        <div className="flex justify-between">
+          <p className="text-lg font-semibold">Total:</p>
+          <p className="text-lg font-semibold">{totalPrice} USD</p>
+        </div>
+      </div>
     </form>
   );
 };
