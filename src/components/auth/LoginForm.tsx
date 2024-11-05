@@ -36,8 +36,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose, onLoginSuccess }) => {
 
   return (
     <div className="flex flex-col">
-      <h2 className="py-4 text-lg font-semibold border-b text-center">Sign in</h2>
-
       {error && <p className="text-red-500 text-center">{error}</p>}
       <form onSubmit={onSubmit} className="flex flex-col w-full max-w-lg mx-auto px-10 pb-10 gap-5">
         <div className="flex flex-col">

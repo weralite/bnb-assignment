@@ -2,14 +2,13 @@
 
 import React from "react";
 
-const RegisterForm = () => {
+interface LoginFormProps {
+  onClose: () => void;
+}
+
+const RegisterForm: React.FC<LoginFormProps> = ({ onClose }) => {
   return (
     <div className="flex flex-col">
-      <h2 className="py-4 text-lg font-semibold border-b text-center">Register</h2>
-
-
-
-
       <form className="flex flex-col w-full max-w-lg mx-auto px-10 pb-10 gap-5">
         <div className="flex flex-col">
           <h3 className="text-2xl font-semibold py-5">Welcome to Taskbnb</h3>
@@ -42,7 +41,7 @@ const RegisterForm = () => {
           </div>
         </div>
         <button type="submit" className="w-full py-3 bg-[#ff5a5f] text-white rounded-md">
-          Login
+          Register
         </button>
       </form>
     </div>

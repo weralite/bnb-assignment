@@ -58,7 +58,6 @@ const BookingRegister: React.FC<BookingRegisterProps> = ({ listing, availableFro
       {openAuthModal && (
         <AuthModal
           open={openAuthModal}
-          modalContent="login" 
           toggleButtonRef={toggleButtonRef} 
           onClose={() => setOpenAuthModal(false)}
           onLoginSuccess={handleLoginSuccess} 

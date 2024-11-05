@@ -9,8 +9,14 @@ const config: Config = {
     "./node_modules/react-tailwindcss-datepicker/dist/index.esm.{js,ts}",
   ],
   theme: {
-    
     extend: {
+      fontSize: {
+        'xxl': '1.75rem',
+        '3xl': '2rem',
+        '4xl': '2.25rem',
+        '5xl': '2.5rem',
+        '6xl': '2.75rem',
+      },
       screens: {
         'xxs': '360px',
         '1-xs': '530px',
