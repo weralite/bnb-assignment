@@ -22,6 +22,19 @@ export async function POST(request: NextRequest, options: APIOptions) {
     try {
         const body: BookingData = await request.json();
 
+        const listing = await prisma.listing.findUnique({
+            where: { id: body.listingId },
+        
+        });
+        
+        if (!listing) {
+            return NextResponse.json(
+                { message: "Listing not found" },
+                { status: 404 }
+            );
+        }
+
+
         const booking = await prisma.booking.create({
             data: {
                 totalPrice: body.totalPrice,

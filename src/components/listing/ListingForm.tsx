@@ -12,6 +12,16 @@ interface ListingFormProps {
 const ListingForm: React.FC<ListingFormProps> = ({ listing, onInputChange }) => {
   if (!listing) return null;
 
+
+  const formatAvailableDate = (date: string | Date): string => {
+    if (typeof date === 'string') {
+      return date.split('T')[0];
+    } else if (date instanceof Date) {
+      return date.toISOString().split('T')[0];
+    }
+    return '';
+  };
+
   return (
     <div>
       <InputField
@@ -67,17 +77,17 @@ const ListingForm: React.FC<ListingFormProps> = ({ listing, onInputChange }) => 
         label="Available From"
         type="date"
         name="availableFrom"
-        value={new Date(listing.availableFrom).toISOString().slice(0, 10)}
+        value={formatAvailableDate(listing.availableFrom)} // Use the formatting function here
         onChange={onInputChange}
       />
       <InputField
         label="Available To"
         type="date"
         name="availableTo"
-        value={new Date(listing.availableTo).toISOString().slice(0, 10)}
+        value={formatAvailableDate(listing.availableTo)} // Use the formatting function here
         onChange={onInputChange}
       />
-      
+
     </div>
   );
 };
