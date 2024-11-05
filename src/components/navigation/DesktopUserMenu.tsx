@@ -8,6 +8,7 @@ import RegisterForm from "../auth/RegisterForm";
 import { useUser } from "@/context/user";
 import ListingModal from "@/components/listing/ListingModal";
 import AuthModal from "@/components/auth/AuthModal";
+import BookingModal from "@/components/booking/BookingModal";
 
 export default function DesktopMenu() {
   const user = useUser();
@@ -36,10 +37,16 @@ export default function DesktopMenu() {
     setModalContent("register");
   };
 
-  // Open login modal
-  const openAddListingModal = () => {
+  // Open Lising modal
+  const openListingModal = () => {
     setModal(true);
     setModalContent(<ListingModal onClose={onClose} />);
+  };
+
+  // Open Booking modal
+  const openBookingModal = () => {
+    setModal(true);
+    setModalContent(<BookingModal onClose={onClose} />);
   };
 
   // Menu content with login and register options
@@ -48,12 +55,13 @@ export default function DesktopMenu() {
     <div>
       <h1 className="text-sm font-light text-gray-400 text-center border-b p-2">{user.user?.firstName} {user.user?.lastName}</h1>
       <ul className="text-sm font-medium text-gray-700">
-        <li className="pl-5 pr-15 py-4 border-b border-custom-grey hover:bg-custom-grey hover:rounded-md block cursor-pointer">
+        <li className="pl-5 pr-15 py-4 border-b border-custom-grey hover:bg-custom-grey hover:rounded-md block cursor-pointer"
+        onClick={openBookingModal}>
           Bookings
         </li>
 
         <li className="pl-5 pr-15 py-4 border-b border-custom-grey hover:bg-custom-grey hover:rounded-md block cursor-pointer"
-          onClick={openAddListingModal}
+          onClick={openListingModal}
         >
           Listings
         </li>
