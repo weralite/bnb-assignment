@@ -7,12 +7,13 @@ import LoginForm from "../auth/LoginForm";
 import RegisterForm from "../auth/RegisterForm";
 import { useUser } from "@/context/user";
 import ListingModal from "@/components/listing/ListingModal";
+import AuthModal from "@/components/auth/AuthModal";
 
 export default function DesktopMenu() {
   const user = useUser();
   const [openModal, setModal] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<string | React.ReactNode | null>(null); // For determining which content to show
-  const toggleButtonRef = useRef<HTMLDivElement | null>(null);
+  const toggleButtonRef = useRef<HTMLDivElement>(null);
 
   const handleModal = () => {
     setModal((prev) => !prev);
@@ -103,16 +104,12 @@ export default function DesktopMenu() {
       </div>
 
       {/* Login or Register Modal */}
-      {modalContent && (
-        <Modal
-          open={!!modalContent}
-          onClose={() => setModalContent(null)}
-          size="lg"
-          content={modalContent === "login" ? <LoginForm onClose={onClose} /> : modalContent === "register" ? <RegisterForm /> : modalContent}
-          toggleButtonRef={toggleButtonRef}
-          className="absolute w-full h-[100vh] top-0 right-0 bg-black bg-opacity-50 z-50 flex justify-center items-center"
-        />
-      )}
+      <AuthModal
+        open={!!modalContent}
+        onClose={() => setModalContent(null)}
+        modalContent={modalContent}
+        toggleButtonRef={toggleButtonRef} // Pass the reference here
+      />
     </>
   );
 }

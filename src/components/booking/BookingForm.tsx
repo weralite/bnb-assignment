@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import BookingSubmitHandler from "./BookingRegister";
 
 interface BookingFormProps {
   dailyRate: number;

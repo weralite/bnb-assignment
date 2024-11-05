@@ -72,6 +72,7 @@ export default function ListingDetails({ listing }: { listing: ListingWithAdvert
           availableFrom={availableFromString} // Ensure this is an ISO date string
           availableTo={availableToString}     // Ensure this is an ISO date string
         />
+        
       </div>
 
 
