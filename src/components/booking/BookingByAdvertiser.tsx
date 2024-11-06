@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { getBookings } from "@/actions/bookings/getBookings";
 import { BookingWithListingAndGuest } from "@/types/booking";
-import BookingCard from "./BookingCard";
+import BookingCard from "./BookingCardAdvertiser";
 
 const BookingByUser: React.FC = () => {
   const [guestBookings, setGuestBookings] = useState<BookingWithListingAndGuest[]>([]);
@@ -12,6 +12,7 @@ const BookingByUser: React.FC = () => {
     try {
       const data = await getBookings();
       setGuestBookings(data.guestBookings); // Only set guestBookings here
+      console.log("Fetched bookings:", data.guestBookings);
     } catch (error) {
       console.error("Failed to fetch bookings:", error);
     }

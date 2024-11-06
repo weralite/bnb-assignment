@@ -3,6 +3,7 @@
 import { useState, ReactNode } from "react";
 import ListingRegister from "./ListingRegister";
 import ListingByUser from "./ListingByUser";
+import BookingByAdvertiser from "../booking/BookingByAdvertiser";
 
 interface Tab {
   label: string;
@@ -12,6 +13,7 @@ interface Tab {
 export default function ListingModal({ onClose }: { onClose: () => void }) {
   const tabs: Tab[] = [
     { label: "Active Listings", content: <ListingByUser /> },
+    { label: "Pending Approval", content: <BookingByAdvertiser /> },
     { label: "Add Listing", content: <ListingRegister onClose={onClose} /> },
   ];
 

@@ -83,6 +83,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
                 advertiserBookings: advertiserListings.map(listing => ({
                     listingId: listing.id,
                     title: listing.title,
+                    imageUrl: listing.imageUrl,
                     bookings: listing.Booking,
                 })),
             },

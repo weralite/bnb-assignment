@@ -13,10 +13,10 @@ export default function ListingCard({ booking }: BookingCardProps) {
     return (
         <div className="w-full flex flex-row justify-evenly rounded shadow-md transition-all duration-150">
             <div>
-                <img 
-                    className="hidden sm:block w-24 h-24 object-cover" 
-                    src={booking.listing.imageUrl} 
-                    alt={booking.listing.title} 
+                <img
+                    className="hidden sm:block w-24 h-24 object-cover"
+                    src={booking.listing.imageUrl}
+                    alt={booking.listing.title}
                 />
             </div>
 
@@ -29,11 +29,17 @@ export default function ListingCard({ booking }: BookingCardProps) {
                     {booking.status}
                 </p>
             </div>
-
-            <div className="flex flex-col justify-center items-center bg-red-800 hover:bg-gray-700 ">
+            <div className="flex flex-col">
+                <div className="flex flex-col justify-center items-center h-full bg-green-500 hover:bg-gray-700 ">
+                    <p className=" text-white font-bold py-2 px-4 rounded-full">
+                        Accept
+                    </p>
+                </div>
+                <div className="flex flex-col justify-center items-center h-full bg-red-500 hover:bg-gray-700 ">
                     <p className=" text-white font-bold py-2 px-4 rounded-full">
                         Cancel
                     </p>
+                </div>
             </div>
         </div>
     );
