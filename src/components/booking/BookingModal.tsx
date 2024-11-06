@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, ReactNode } from "react";
+import BookingByUser from "./BookingByUser";
 // import ListingRegister from "./ListingRegister";
 // import ListingByUser from "./ListingByUser";
 
@@ -11,7 +12,7 @@ interface Tab {
 
 export default function ListingModal({ onClose }: { onClose: () => void }) {
   const tabs: Tab[] = [
-    { label: "Active Listings", content: <><h2>Hello</h2></> },
+    { label: "My Bookings", content: <BookingByUser/> },
     // { label: "Add Listing", content: <><h2>Hello</h2></> },
   ];
 

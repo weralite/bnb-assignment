@@ -12,6 +12,7 @@ export async function createBooking(formData: FormData): Promise<boolean> {
         console.warn("No authentication token found.");
         return false;
     }
+    
     const listingData = {
         totalPrice: parseFloat(formData.get("totalPrice")as string),
         listingId: formData.get("listingId"),

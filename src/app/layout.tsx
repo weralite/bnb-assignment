@@ -7,6 +7,7 @@ import Container from "@/components/header/Container";
 import MobileUserMenu from "@/components/navigation/MobileUserMenu"
 import { FilterProvider } from "@/context/FilterContext";
 import { ListingProvider } from "@/context/ListingContext";
+import { BookingProvider } from "@/context/BookingContext";
 import { UserProvider } from "@/context/user";
 
 
@@ -37,15 +38,17 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <UserProvider>
-          <ListingProvider>
-          <FilterProvider>
-            <Header />
-            <Container>
-              {children}
-            </Container>
-            <MobileUserMenu />
-          </FilterProvider>
-          </ListingProvider>
+          <BookingProvider>
+            <ListingProvider>
+              <FilterProvider>
+                <Header />
+                <Container>
+                  {children}
+                </Container>
+                <MobileUserMenu />
+              </FilterProvider>
+            </ListingProvider>
+          </BookingProvider>
         </UserProvider>
       </body>
     </html >
