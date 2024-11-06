@@ -35,12 +35,12 @@ const BookingByUser: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-5">
+    <div className="flex flex-col items-center gap-5 pt-5">
       {advertiserBookings && advertiserBookings.length > 0 ? (
         advertiserBookings.map((listing) => (
-          <div key={listing.id} className="w-full flex flex-col gap-2">
-
-            <h4 className="font-semibold text-center text-lg underline">{listing.title}</h4>
+          <div key={listing.id} className="w-full flex flex-col gap-5">
+            <div>
+            <h4 className="font-semibold text-left pl-5 text-lg underline">{listing.title}</h4>
             {listing.bookings.map((booking) => (
               <BookingCard
                 key={booking.id}
@@ -48,6 +48,7 @@ const BookingByUser: React.FC = () => {
                 handleDelete={() => handleDelete(booking.id)} // Pass the booking.id here
               />
             ))}
+            </div>
           </div>
         ))
       ) : (
