@@ -1,7 +1,19 @@
-import { Booking } from "@prisma/client";
+import { Booking, Listing } from "@prisma/client";
 
 
-type BookingData = Omit<Booking, "id">;
+type BookingData = Omit<Booking, "id"> & {
+    id: string;
+    guest: {
+      id: string;
+      isAdmin: boolean;
+    };
+    listing: {
+      advertiser: {
+        id: string;
+        isAdmin: boolean;
+      };
+    };
+  };
 
 type BookingWithListingAndGuest = Booking & {
     listing: {
@@ -18,12 +30,12 @@ type BookingWithListingAndGuest = Booking & {
     };
 };
 
+type AdvertiserBooking = Listing & {
+  bookings: BookingWithListingAndGuest[];
+};
+
+
 type BookingResponse = {
     guestBookings: BookingWithListingAndGuest[];
-    advertiserBookings: {
-        listingId: number;
-        title: string;
-        imageUrl: string;
-        bookings: BookingWithListingAndGuest[];
-    }[];
+    advertiserBookings: AdvertiserBooking[];
 };

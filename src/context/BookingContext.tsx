@@ -1,13 +1,13 @@
 "use client";
 
 import { createContext, useContext, useState, Dispatch, SetStateAction } from 'react';
-import { BookingWithListingAndGuest } from '@/types/booking';
+import { BookingWithListingAndGuest, AdvertiserBooking } from '@/types/booking';
 
 type BookingContextType = {
   guestBookings: BookingWithListingAndGuest[];
-  advertiserBookings: BookingWithListingAndGuest[];
+  advertiserBookings: AdvertiserBooking[];
   setGuestBookings: Dispatch<SetStateAction<BookingWithListingAndGuest[]>>;
-  setAdvertiserBookings: Dispatch<SetStateAction<BookingWithListingAndGuest[]>>;
+  setAdvertiserBookings: Dispatch<SetStateAction<AdvertiserBooking[]>>;
 };
 
 const BookingContext = createContext<BookingContextType | undefined>(undefined);
@@ -18,7 +18,7 @@ interface BookingProviderProps {
 
 export const BookingProvider: React.FC<BookingProviderProps> = ({ children }) => {
   const [guestBookings, setGuestBookings] = useState<BookingWithListingAndGuest[]>([]);
-  const [advertiserBookings, setAdvertiserBookings] = useState<BookingWithListingAndGuest[]>([]);
+  const [advertiserBookings, setAdvertiserBookings] = useState<AdvertiserBooking[]>([]);
 
   return (
     <BookingContext.Provider value={{ guestBookings, advertiserBookings, setGuestBookings, setAdvertiserBookings }}>

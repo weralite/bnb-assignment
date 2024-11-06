@@ -1,27 +1,25 @@
+"use client";
+
 import { BookingWithListingAndGuest } from "@/types/booking";
 import Link from "next/link";
 
 
 type BookingCardProps = {
     booking: BookingWithListingAndGuest
+    handleDelete: () => void;
 }
-export default function ListingCard({ booking }: BookingCardProps) {
+export default function ListingCard({ booking, handleDelete }: BookingCardProps) {
     // Ensure check-in and check-out dates are valid Date objects
     const checkInDate = new Date(booking.checkInDate);
     const checkOutDate = new Date(booking.checkOutDate);
+    
 
     return (
-        <div className="w-full flex flex-row justify-evenly rounded shadow-md transition-all duration-150">
-            <div>
-                <img
-                    className="hidden sm:block w-24 h-24 object-cover"
-                    src={booking.listing.imageUrl}
-                    alt={booking.listing.title}
-                />
-            </div>
+        <div className="w-full flex flex-row justify-between rounded shadow-md transition-all duration-150">
+
 
             <div className="px-6 py-4">
-                <h4 className="font-semibold text-sm 1-sm:text-md">{booking.listing.title}</h4>
+                <h4 className="font-semibold text-sm 1-sm:text-md">{booking.guest.firstName} {booking.guest.lastName}</h4>
                 <p className="text-gray-700 text-base truncate">
                     {checkInDate.toDateString()} - {checkOutDate.toDateString()}
                 </p>
@@ -30,16 +28,12 @@ export default function ListingCard({ booking }: BookingCardProps) {
                 </p>
             </div>
             <div className="flex flex-col">
-                <div className="flex flex-col justify-center items-center h-full bg-green-500 hover:bg-gray-700 ">
-                    <p className=" text-white font-bold py-2 px-4 rounded-full">
-                        Accept
-                    </p>
-                </div>
-                <div className="flex flex-col justify-center items-center h-full bg-red-500 hover:bg-gray-700 ">
-                    <p className=" text-white font-bold py-2 px-4 rounded-full">
-                        Cancel
-                    </p>
-                </div>
+                <button className="flex flex-col justify-center items-center  text-white font-bold h-full px-10 bg-green-600 hover:bg-gray-700 ">
+                    Accept
+                </button>
+                <button onClick={handleDelete} className="flex flex-col justify-center items-center  text-white font-bold h-full bg-red-800 hover:bg-gray-700 ">
+                    Reject
+                </button>
             </div>
         </div>
     );

@@ -166,7 +166,6 @@ export async function DELETE(request: NextRequest, options: APIOptions) {
             );
         }
 
-        // Find and delete all bookings associated with the listing
         await prisma.booking.deleteMany({
             where: { listingId: id },
         });

@@ -1,20 +1,32 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from 'react';
 import { getBookings } from "@/actions/bookings/getBookings";
-import { BookingWithListingAndGuest } from "@/types/booking";
+import { AdvertiserBooking } from "@/types/booking";
 import BookingCard from "./BookingCardAdvertiser";
+import { deleteBooking } from "@/actions/bookings/deleteBooking";
 
 const BookingByUser: React.FC = () => {
-  const [guestBookings, setGuestBookings] = useState<BookingWithListingAndGuest[]>([]);
+  const [advertiserBookings, setAdvertiserBookings] = useState<AdvertiserBooking[]>([]);
+
+  console.log("Advertiser Bookings:", advertiserBookings);
 
   const fetchBookings = async () => {
     try {
       const data = await getBookings();
-      setGuestBookings(data.guestBookings); // Only set guestBookings here
-      console.log("Fetched bookings:", data.guestBookings);
+      setAdvertiserBookings(data.advertiserBookings);
+      console.log("Fetched bookings:", data.advertiserBookings);
     } catch (error) {
       console.error("Failed to fetch bookings:", error);
+    }
+  };
+
+  const handleDelete = async (bookingId: string) => {
+    try {
+      await deleteBooking(bookingId);
+      fetchBookings();
+    } catch (error) {
+      console.error("Failed to delete booking:", error);
     }
   };
 
@@ -24,9 +36,19 @@ const BookingByUser: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center gap-5">
-      {guestBookings && guestBookings.length > 0 ? (
-        guestBookings.map((booking) => (
-          <BookingCard booking={booking} key={booking.id} />
+      {advertiserBookings && advertiserBookings.length > 0 ? (
+        advertiserBookings.map((listing) => (
+          <div key={listing.id} className="w-full flex flex-col gap-2">
+
+            <h4 className="font-semibold text-center text-lg underline">{listing.title}</h4>
+            {listing.bookings.map((booking) => (
+              <BookingCard
+                key={booking.id}
+                booking={booking}
+                handleDelete={() => handleDelete(booking.id)} // Pass the booking.id here
+              />
+            ))}
+          </div>
         ))
       ) : (
         <p>No bookings found.</p>
