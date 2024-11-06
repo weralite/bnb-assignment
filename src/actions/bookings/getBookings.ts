@@ -23,6 +23,6 @@ export async function getBookings(): Promise<BookingResponse> {
         return bookings;
     } catch (error: any) {
         console.warn("Error fetching bookings (action)", error);
-        return { guestBookings: [], advertiserBookings: [] }; // Return empty arrays on failure
+        return { guestBookings: [], advertiserBookings: [] }; 
     }
 }
