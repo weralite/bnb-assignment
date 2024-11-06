@@ -22,7 +22,7 @@ const BookingByUser: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-5">
+    <div className="flex flex-col items-center gap-5 overflow-y-scroll h-120 relative">
       {guestBookings && guestBookings.length > 0 ? (
         guestBookings.map((booking) => (
           <BookingCard booking={booking} key={booking.id} />

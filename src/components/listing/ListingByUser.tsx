@@ -66,10 +66,11 @@ const ListingByUser: React.FC = () => {
   }, []);
 
   return (
-    <div className="my-auto h-full flex flex-col px-10 pb-10">
+    <div className="my-auto flex flex-col">
       {selectedListing ? (
-        <div>
+        <div className='px-10 pb-10'>
           <div className="p-2 text-lg font-semibold text-center">Edit Listing</div>
+         
           <ListingForm
             listing={selectedListing}
             onInputChange={(e) => {
@@ -84,9 +85,6 @@ const ListingByUser: React.FC = () => {
         </div>
       ) : (
         <div className='h-full'>
-          <div className="text-lg font-semibold p-2 text-center">
-            Total Listings: {userListings.length}
-          </div>
           <div className="overflow-y-scroll h-120 relative">
             {userListings.map((listing) => (
               <div className="w-full p-2" key={listing.id} onClick={() => handleListingClick(listing)}>

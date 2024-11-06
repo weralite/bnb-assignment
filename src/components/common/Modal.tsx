@@ -53,7 +53,7 @@ export default function Modal({ open, onClose, size, content, toggleButtonRef, c
           transition={{ type: "spring", stiffness: 500, damping: 40 }}
         >
           <div
-            className={`${sizeClasses[size]} w-full h-full bg-white shadow-modal rounded-lg max-h-175 overflow-hidden`}
+            className={`${sizeClasses[size]} w-full bg-white shadow-modal rounded-lg max-h-175 overflow-hidden`}
             ref={modalRef}
           >
             {content}

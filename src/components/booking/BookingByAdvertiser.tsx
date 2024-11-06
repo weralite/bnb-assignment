@@ -35,12 +35,16 @@ const BookingByUser: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-5 pt-5">
-      {advertiserBookings && advertiserBookings.length > 0 ? (
-        advertiserBookings.map((listing) => (
-          <div key={listing.id} className="w-full flex flex-col gap-5">
-            <div>
-            <h4 className="font-semibold text-left pl-5 text-lg underline">{listing.title}</h4>
+    <div className="flex flex-col items-center gap-5 overflow-y-scroll h-120 relative">
+  {advertiserBookings && advertiserBookings.filter((listing) => listing.bookings.length > 0).length > 0 ? (
+    advertiserBookings
+      .filter((listing) => listing.bookings.length > 0) // Only include listings with bookings
+      .map((listing) => (
+        <div key={listing.id} className="w-full flex flex-col gap-5">
+          <div>
+            <h4 className="font-semibold text-left pl-5 text-lg underline">
+              {listing.title}
+            </h4>
             {listing.bookings.map((booking) => (
               <BookingCard
                 key={booking.id}
@@ -48,13 +52,13 @@ const BookingByUser: React.FC = () => {
                 handleDelete={() => handleDelete(booking.id)} // Pass the booking.id here
               />
             ))}
-            </div>
           </div>
-        ))
-      ) : (
-        <p>No bookings found.</p>
-      )}
-    </div>
+        </div>
+      ))
+  ) : (
+    <p>No bookings found.</p> // Message when no listings with bookings exist
+  )}
+</div>
   );
 };
 
