@@ -1,15 +1,29 @@
 // components/auth/LoginForm.tsx
-
+import { createUser } from "@/actions/auth/createUser";
 import React from "react";
 
 interface LoginFormProps {
   onClose: () => void;
 }
 
+
 const RegisterForm: React.FC<LoginFormProps> = ({ onClose }) => {
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget as HTMLFormElement;
+    const formData = new FormData(form);
+    try {
+      await createUser(formData);
+      onClose();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="flex flex-col">
-      <form className="flex flex-col w-full max-w-lg mx-auto px-10 pb-10 gap-5">
+      <form onSubmit={handleSubmit} className="flex flex-col w-full max-w-lg mx-auto px-10 pb-10 gap-5">
         <div className="flex flex-col">
           <h3 className="text-2xl font-semibold py-5">Welcome to Taskbnb</h3>
           <div className="border border-gray-300 rounded-lg p-2 flex flex-col space-y-2">

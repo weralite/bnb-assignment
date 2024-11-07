@@ -1,6 +1,6 @@
 // app/page.tsx
 import ListingGrid from "@/components/listing/ListingGrid";
-import { getListings } from "@/actions/getListings";
+import { getListings } from "@/actions/listings/getListings";
 
 export default async function Home() {
   const listings = await getListings();

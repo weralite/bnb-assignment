@@ -4,8 +4,8 @@ import { createContext, PropsWithChildren, useContext, useEffect, useState } fro
 
 import { SafeUser } from "@/types/user";
 
-import { login as loginAction } from "@/actions/login"
-import { getUser as getUserAction } from "@/actions/getUser"
+import { login as loginAction } from "@/actions/auth/login"
+import { getUser as getUserAction } from "@/actions/auth/getUser"
 import CookieKit from "@/utils/cookieKit";
 
 type OnComplete = (response?: any) => void;

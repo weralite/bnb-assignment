@@ -1,14 +1,14 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { getUserListings } from "@/actions/getUserListings";
-import { updateListing } from '@/actions/updateListing';
-import { deleteListing } from '@/actions/deleteListing'
+import { getUserListings } from "@/actions/listings/getUserListings";
+import { updateListing } from '@/actions/listings/updateListing';
+import { deleteListing } from '@/actions/listings/deleteListing'
 import ListingList from "./ListingList";
 import { Listing } from "@/types/listing";
 import ListingForm from "./ListingForm";
 import { useListings } from "@/context/ListingContext";
-import { getListings } from "@/actions/getListings";
+import { getListings } from "@/actions/listings/getListings";
 
 const ListingByUser: React.FC = () => {
   const [userListings, setUserListings] = useState<Listing[]>([]);

@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { createListing } from "@/actions/createListing";
+import { createListing } from "@/actions/listings/createListing";
 import ListingForm from "./ListingForm";
 import { ListingData } from "@/types/listing";
 import { useListings } from "@/context/ListingContext";
-import { getListings } from "@/actions/getListings";
+import { getListings } from "@/actions/listings/getListings";
 
 interface AddListingFormProps {
     onClose: () => void;

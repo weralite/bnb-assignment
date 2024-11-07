@@ -1,4 +1,4 @@
-import { getListingById } from "@/actions/getListingById";
+import { getListingById } from "@/actions/listings/getListingById";
 import ListingDetails from "@/components/listing/ListingDetails";
 
 export default async function ListingPage({ params }: { params: { id: string } }) {

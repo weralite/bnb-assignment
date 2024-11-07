@@ -77,7 +77,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       },
     });
 
-    // Conditional response based on user role (guest or advertiser)
     if (guestBookings.length > 0) {
       return NextResponse.json(
         { guestBookings },

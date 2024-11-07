@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { ListingWithAdvertiser } from "@/types/listing";
 import { useListings } from "@/context/ListingContext";
 import ListingCard from "./ListingCard";
-import { getListings } from "@/actions/getListings";
+import { getListings } from "@/actions/listings/getListings";
 
 const ListingGrid: React.FC = () => {
   const { listings, setListings } = useListings();
