@@ -4,7 +4,6 @@ import { verifyJWT } from "@/utils/jwt";
 const UNSAFE_METHODS = ['POST', 'PUT', 'PATCH', 'DELETE', 'GET'];
 
 export async function middleware(request: NextRequest) {
-    console.log('middleware called');
     if (UNSAFE_METHODS.includes(request.method)) {
         const authorization = request.headers.get('Authorization');
         if (!authorization) {

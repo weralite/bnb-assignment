@@ -41,7 +41,6 @@ export async function acceptBooking(
             data: { status: BookingStatus.Confirmed },
         });
 
-        console.log(`Booking ${bookingId} successfully confirmed`);
         return updatedBooking;
 
     } catch (error) {

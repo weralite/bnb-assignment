@@ -36,7 +36,6 @@ export async function PUT(request: NextRequest, options: APIOptions): Promise<Ne
 export async function DELETE(request: NextRequest, options: APIOptions): Promise<NextResponse> {
     const bookingId = options.params.id;
     const userId = request.headers.get("userId");
-    console.log("userId: ", userId);
   
     if (!userId) {
       return NextResponse.json(

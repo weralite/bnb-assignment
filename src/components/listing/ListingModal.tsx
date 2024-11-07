@@ -17,9 +17,8 @@ export default function ListingModal({ onClose }: { onClose: () => void }) {
     { label: "Add Listing", content: <ListingRegister onClose={onClose} /> },
   ];
 
-  const [activeTab, setActiveTab] = useState(0); 
+  const [activeTab, setActiveTab] = useState(0);
 
-  console.log("ListingModal rendered");
   return (
     <div className="modal">
       <ul className="flex flex-row justify-evenly border-b p-4">
@@ -33,7 +32,7 @@ export default function ListingModal({ onClose }: { onClose: () => void }) {
           </li>
         ))}
       </ul>
-        {tabs[activeTab].content}
+      {tabs[activeTab].content}
     </div>
   );
 }

@@ -173,7 +173,6 @@ export async function POST(request: NextRequest, options: APIOptions): Promise<N
             include: { Booking: true }, // Include bookings in the result
         });
 
-        console.log("Updated Listing:", updatedListing);
 
 
         return NextResponse.json(booking, { status: 200 });

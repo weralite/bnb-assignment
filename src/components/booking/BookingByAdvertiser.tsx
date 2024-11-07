@@ -11,13 +11,10 @@ import { rejectBooking } from "@/actions/bookings/rejectBooking";
 const BookingByUser: React.FC = () => {
   const [advertiserBookings, setAdvertiserBookings] = useState<AdvertiserBooking[]>([]);
 
-  console.log("Advertiser Bookings:", advertiserBookings);
-
   const fetchBookings = async () => {
     try {
       const data = await getBookings();
       setAdvertiserBookings(data.advertiserBookings);
-      console.log("Fetched bookings:", data.advertiserBookings);
     } catch (error) {
       console.error("Failed to fetch bookings:", error);
     }
@@ -46,7 +43,7 @@ const BookingByUser: React.FC = () => {
       await rejectBooking(bookingId);
       fetchBookings();
     } catch (error) {
-      console.error("Failed to cancel booking:", error);  
+      console.error("Failed to cancel booking:", error);
     }
   };
 
@@ -56,33 +53,33 @@ const BookingByUser: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center gap-5 overflow-y-scroll h-120 relative">
-  {advertiserBookings && advertiserBookings.filter((listing) => listing.bookings.length > 0).length > 0 ? (
-    advertiserBookings
-      .filter((listing) => listing.bookings.length > 0) // Filter out listings with no bookings
-      .map((listing) => (
-        <div key={listing.id} className="w-full flex flex-col gap-5">
-          <div>
-            <h4 className="font-semibold text-left pl-5 text-lg underline">
-              {listing.title}
-            </h4>
-            <div className='flex flex-col gap-6'>
-            {listing.bookings.map((booking) => (
-              <BookingCard
-                key={booking.id}
-                booking={booking}
-                handleDelete={() => handleDelete(booking.id)} 
-                handleAccept={() => handleAccept(booking.id)}
-                handleReject={() => handleReject(booking.id)}
-              />
-            ))}
+      {advertiserBookings && advertiserBookings.filter((listing) => listing.bookings.length > 0).length > 0 ? (
+        advertiserBookings
+          .filter((listing) => listing.bookings.length > 0) // Filter out listings with no bookings
+          .map((listing) => (
+            <div key={listing.id} className="w-full flex flex-col gap-5">
+              <div>
+                <h4 className="font-semibold text-left pl-5 text-lg underline">
+                  {listing.title}
+                </h4>
+                <div className='flex flex-col gap-6'>
+                  {listing.bookings.map((booking) => (
+                    <BookingCard
+                      key={booking.id}
+                      booking={booking}
+                      handleDelete={() => handleDelete(booking.id)}
+                      handleAccept={() => handleAccept(booking.id)}
+                      handleReject={() => handleReject(booking.id)}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      ))
-  ) : (
-    <p>No bookings found.</p> 
-  )}
-</div>
+          ))
+      ) : (
+        <p>No bookings found.</p>
+      )}
+    </div>
   );
 };
 

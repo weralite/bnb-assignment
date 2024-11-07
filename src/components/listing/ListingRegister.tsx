@@ -47,8 +47,6 @@ const AddListingForm: React.FC<AddListingFormProps> = ({ onClose }) => {
         await createListing(listingData);
 
         const updatedListings = await getListings();
-        console.log(updatedListings);
-
         setListings(updatedListings);
 
         onClose();
