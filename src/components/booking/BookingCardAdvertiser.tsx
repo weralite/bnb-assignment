@@ -7,10 +7,10 @@ type BookingCardProps = {
     booking: BookingWithListingAndGuest;
     handleDelete: () => void;
     handleAccept: () => void;
-    handleCancel: () => void;
+    handleReject: () => void;
 };
 
-export default function ListingCard({ booking, handleDelete, handleAccept, handleCancel }: BookingCardProps) {
+export default function ListingCard({ booking, handleDelete, handleAccept, handleReject }: BookingCardProps) {
     const checkInDate = new Date(booking.checkInDate);
     const checkOutDate = new Date(booking.checkOutDate);
 
@@ -33,7 +33,7 @@ export default function ListingCard({ booking, handleDelete, handleAccept, handl
                         <button onClick={handleAccept} className="flex justify-center items-center text-white font-bold h-full px-10 bg-green-600 hover:bg-gray-700">
                             Accept
                         </button>
-                        <button onClick={handleCancel} className="flex justify-center items-center text-white font-bold h-full bg-red-800 hover:bg-gray-700">
+                        <button onClick={handleReject} className="flex justify-center items-center text-white font-bold h-full bg-red-800 hover:bg-gray-700">
                             Reject
                         </button>
                     </>

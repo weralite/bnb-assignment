@@ -11,7 +11,6 @@ import CookieKit from "@/utils/cookieKit";
 type OnComplete = (response?: any) => void;
 type OnError = (error?: any) => void;
 
-// default state
 type UserContextState = {
   token: string | null;
   user: SafeUser | null;
@@ -35,10 +34,9 @@ const defaultState: UserContextState = {
   },
 };
 
-// context initator constructor
 const UserContext = createContext<Partial<UserContextState>>(defaultState);
 
-// provider
+
 function UserProvider({ children }: PropsWithChildren) {
   const [token, setToken] = useState<typeof defaultState.token>(
     defaultState.token

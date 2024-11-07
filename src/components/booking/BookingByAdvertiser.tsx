@@ -6,7 +6,7 @@ import { AdvertiserBooking } from "@/types/booking";
 import BookingCard from "./BookingCardAdvertiser";
 import { deleteBooking } from "@/actions/bookings/deleteBooking";
 import { acceptBooking } from "@/actions/bookings/acceptBooking";
-import { cancelBooking } from "@/actions/bookings/cancelBooking";
+import { rejectBooking } from "@/actions/bookings/rejectBooking";
 
 const BookingByUser: React.FC = () => {
   const [advertiserBookings, setAdvertiserBookings] = useState<AdvertiserBooking[]>([]);
@@ -41,9 +41,9 @@ const BookingByUser: React.FC = () => {
     }
   };
 
-  const handleCancel = async (bookingId: string) => {
+  const handleReject = async (bookingId: string) => {
     try {
-      await cancelBooking(bookingId);
+      await rejectBooking(bookingId);
       fetchBookings();
     } catch (error) {
       console.error("Failed to cancel booking:", error);  
@@ -58,7 +58,7 @@ const BookingByUser: React.FC = () => {
     <div className="flex flex-col items-center gap-5 overflow-y-scroll h-120 relative">
   {advertiserBookings && advertiserBookings.filter((listing) => listing.bookings.length > 0).length > 0 ? (
     advertiserBookings
-      .filter((listing) => listing.bookings.length > 0) // Only include listings with bookings
+      .filter((listing) => listing.bookings.length > 0) // Filter out listings with no bookings
       .map((listing) => (
         <div key={listing.id} className="w-full flex flex-col gap-5">
           <div>
@@ -72,8 +72,7 @@ const BookingByUser: React.FC = () => {
                 booking={booking}
                 handleDelete={() => handleDelete(booking.id)} 
                 handleAccept={() => handleAccept(booking.id)}
-                handleCancel={() => handleCancel(booking.id)}
-                // Pass the booking.id here
+                handleReject={() => handleReject(booking.id)}
               />
             ))}
             </div>
@@ -81,7 +80,7 @@ const BookingByUser: React.FC = () => {
         </div>
       ))
   ) : (
-    <p>No bookings found.</p> // Message when no listings with bookings exist
+    <p>No bookings found.</p> 
   )}
 </div>
   );

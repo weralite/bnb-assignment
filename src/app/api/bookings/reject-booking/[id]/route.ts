@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { cancelBooking } from "@/services/bookingService"; // Import the service
+import { rejectBooking } from "@/services/bookingService"; // Import the service
 import { Booking } from "@prisma/client";
 
 
@@ -17,7 +17,7 @@ export async function PUT(request: NextRequest, options: APIOptions): Promise<Ne
     }
 
     try {
-        const updatedBooking = await cancelBooking(bookingId, userId);
+        const updatedBooking = await rejectBooking(bookingId, userId);
 
         return NextResponse.json(updatedBooking, { status: 200 });
     } catch (error) {

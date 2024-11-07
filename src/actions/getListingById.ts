@@ -3,7 +3,7 @@ import { ListingWithAdvertiser } from "@/types/listing";
 
 const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
-export async function getListingById(id: string): Promise<ListingWithAdvertiser | boolean> {
+export async function getListingById(id: string): Promise<ListingWithAdvertiser | null> {
     const url = new URL(`${BASE_URL}/api/listings/${id}`);
 
     try {
@@ -18,6 +18,6 @@ export async function getListingById(id: string): Promise<ListingWithAdvertiser 
         return listing;
     } catch (error: any) {
         console.warn("Error fetching listing (action)", error);
-        return false;
+        return null;
     }
 }

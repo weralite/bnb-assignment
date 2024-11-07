@@ -49,7 +49,6 @@ export default function DesktopMenu() {
     setModalContent(<BookingModal onClose={onClose} />);
   };
 
-  // Menu content with login and register options
 
   const menuContent = user.token ? (
     <div>
@@ -107,7 +106,7 @@ export default function DesktopMenu() {
           onClose={handleModal}
           size="sm"
           content={menuContent}
-          toggleButtonRef={toggleButtonRef} // Passing the reference here
+          toggleButtonRef={toggleButtonRef} 
           className="absolute top-full right-0 z-50 py-2"
         />
       </div>

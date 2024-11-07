@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 enum BookingStatus {
     Pending = "Pending",
     Confirmed = "Confirmed",
-    Canceled = "Canceled"
+    Rejected = "Rejected",
   }
 
 export async function acceptBooking(
@@ -57,7 +57,7 @@ export async function acceptBooking(
 }
 
 
-export async function cancelBooking(
+export async function rejectBooking(
     bookingId: string,
     userId: string
   ): Promise<Booking> {
@@ -70,12 +70,12 @@ export async function cancelBooking(
       throw new Error("Booking not found");
     }
   
-    if (booking.status === BookingStatus.Confirmed) {
+    if (booking.status === BookingStatus.Rejected) {
       throw new Error("Booking is already confirmed");
     }
   
-    if (booking.status === BookingStatus.Canceled) {
-      throw new Error("Booking is already canceled");
+    if (booking.status === BookingStatus.Rejected) {
+      throw new Error("Booking is already rejected");
     }
   
     if (booking.listing.advertiserId !== userId) {
@@ -85,7 +85,7 @@ export async function cancelBooking(
     // Update the booking status to Denied
     const updatedBooking: Booking = await prisma.booking.update({
       where: { id: bookingId },
-      data: { status: BookingStatus.Canceled },
+      data: { status: BookingStatus.Rejected },
     });
   
     return updatedBooking;

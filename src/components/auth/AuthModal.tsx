@@ -1,5 +1,5 @@
 import React, { useState, ReactNode } from "react";
-import Modal from "../common/Modal"; // Adjust the import path as needed
+import Modal from "../common/Modal"; 
 import LoginForm from "../auth/LoginForm";
 import RegisterForm from "../auth/RegisterForm";
 

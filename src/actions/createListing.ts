@@ -35,7 +35,7 @@ export async function createListing(formData: FormData): Promise<boolean> {
 
         if (!response.ok) {
             console.error(`Error creating listing: Status ${response.status}`);
-            return false; // Return false if response is not ok
+            return false; 
         }
 
         return true;

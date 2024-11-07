@@ -2,8 +2,8 @@ import CookieKit from "@/utils/cookieKit";
 
 const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
-export async function cancelBooking(id: string): Promise<boolean> {
-    const url = new URL(`${BASE_URL}/api/bookings/cancel-booking/${id}`);  
+export async function rejectBooking(id: string): Promise<boolean> {
+    const url = new URL(`${BASE_URL}/api/bookings/reject-booking/${id}`);  
     const token = CookieKit.get("token");
 
     if (!token) {

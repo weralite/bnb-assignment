@@ -38,7 +38,7 @@ export default function Modal({ open, onClose, size, content, toggleButtonRef, c
     sm: "max-w-[160px]",
     md: "max-w-[320px]",
     lg: "max-w-[480px]",
-    full: "min-w-full max-w-none", // Full screen modal
+    full: "min-w-full max-w-none", 
 
   };
 

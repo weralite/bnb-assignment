@@ -13,7 +13,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose, onLoginSuccess }) => {
   const [password, setPassword] = useState("hejsan");
   const [email, setEmail] = useState("test@testor.test");
   const [error, setError] = useState("");
-  const [isLogin, setIsLogin] = useState(true);
 
   const login = () => {
     user.actions.login(

@@ -4,9 +4,9 @@ import Link from "next/link";
 
 type BookingCardProps = {
     booking: BookingWithListingAndGuest
+    handleDelete: () => void
 }
-export default function ListingCard({ booking }: BookingCardProps) {
-    // Ensure check-in and check-out dates are valid Date objects
+export default function ListingCard({ booking, handleDelete }: BookingCardProps) {
     const checkInDate = new Date(booking.checkInDate);
     const checkOutDate = new Date(booking.checkOutDate);
 
@@ -30,11 +30,11 @@ export default function ListingCard({ booking }: BookingCardProps) {
                 </p>
             </div>
 
-            <div className="flex flex-col justify-center items-center bg-red-800 hover:bg-gray-700 ">
+            <button onClick={handleDelete} className="flex flex-col justify-center items-center bg-red-800 hover:bg-gray-700 ">
                     <p className=" text-white font-bold py-2 px-4 rounded-full">
-                        Cancel
+                        Delete
                     </p>
-            </div>
+            </button>
         </div>
     );
 }
