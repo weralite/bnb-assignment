@@ -33,7 +33,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   }
 
   try {
-    // Check if the user is a guest and fetch their bookings
     const guestBookings = await prisma.booking.findMany({
       where: {
         guestId: userId,
@@ -58,7 +57,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       },
     });
 
-    // Check if the user is an advertiser and fetch their listings and bookings
     const advertiserListings = await prisma.listing.findMany({
       where: {
         advertiserId: userId,

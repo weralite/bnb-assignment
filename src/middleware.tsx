@@ -52,6 +52,8 @@ export const config = {
   matcher: [
     "/api/bookings/",
     "/api/bookings/:id*",
+    "/api/bookings/accept-booking/:id*",
+    "/api/bookings/cancel-booking/:id*",
     "/api/listings/",
     "/api/listings/:id*",
     "/api/users/me",

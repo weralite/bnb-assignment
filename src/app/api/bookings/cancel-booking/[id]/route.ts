@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cancelBooking } from "@/services/bookingService"; // Import the service
+import { Booking } from "@prisma/client";
 
 
 export async function PUT(request: NextRequest, options: APIOptions): Promise<NextResponse> {
