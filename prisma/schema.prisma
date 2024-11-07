@@ -38,7 +38,7 @@ model Listing {
   availableTo   DateTime
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  advertiser    User      @relation(fields: [advertiserId], references: [id])
+  advertiser    User      @relation(fields: [advertiserId], references: [id], onDelete: Cascade)
   advertiserId  String    @db.ObjectId
   Booking       Booking[]
   imageUrl      String
@@ -46,9 +46,9 @@ model Listing {
 
 model Booking {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  guest        User     @relation(fields: [guestId], references: [id])
+  guest        User     @relation(fields: [guestId], references: [id], onDelete: Cascade)
   guestId      String   @db.ObjectId
-  listing      Listing  @relation(fields: [listingId], references: [id])
+  listing      Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
   listingId    String   @db.ObjectId
   totalPrice   Float
   status       String   @default("Pending")
