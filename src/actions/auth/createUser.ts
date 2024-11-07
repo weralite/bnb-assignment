@@ -1,9 +1,8 @@
-import CookieKit from "@/utils/cookieKit";
 import { UserRegistrationData } from "@/types/user";
 
 const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
-export async function createUser(formData: FormData): Promise<boolean> {
+export async function createUser(formData: FormData): Promise<UserRegistrationData> {
     const url = new URL(`${BASE_URL}/api/auth/register`);
 
     
@@ -23,13 +22,14 @@ export async function createUser(formData: FormData): Promise<boolean> {
 
         if (!response.ok) {
             console.error(`Error creating listing: Status ${response.status}`);
-            return false; 
+            throw new Error("Unable to create listing"); 
         }
 
-        return true;
+        const createdUser: UserRegistrationData = await response.json();
+        return createdUser;
 
     } catch (error: any) {
         console.warn("Error creating listing (action)", error);
-        return false;
+        throw new Error("Unable to create listing");
     }
 }

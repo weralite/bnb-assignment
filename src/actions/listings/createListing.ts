@@ -1,16 +1,17 @@
 import CookieKit from "@/utils/cookieKit";
 import { toISODateTime } from "@/utils/dateConverter";
+import { Listing } from "@prisma/client";
 
 const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
-export async function createListing(formData: FormData): Promise<boolean> {
+export async function createListing(formData: FormData): Promise<Listing> {
     const url = new URL(`${BASE_URL}/api/listings`);
 
     const token = CookieKit.get('token');
 
     if (!token) {
         console.warn("No authentication token found.");
-        return false;
+        throw new Error("No authentication token found.");
     }
     const listingData = {
         title: formData.get("title"),
@@ -35,13 +36,14 @@ export async function createListing(formData: FormData): Promise<boolean> {
 
         if (!response.ok) {
             console.error(`Error creating listing: Status ${response.status}`);
-            return false; 
+            throw new Error(`Error creating listing: Status ${response.status}`);
         }
 
-        return true;
+        const listing: Listing = await response.json();
+        return listing;
 
     } catch (error: any) {
         console.warn("Error creating listing (action)", error);
-        return false;
+        throw new Error("Error creating listing (action)");
     }
 }
